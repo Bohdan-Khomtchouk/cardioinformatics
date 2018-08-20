@@ -9,6 +9,24 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(magrittr)
 library(ontologyIndex)
+library(RSQLite)
+library(ggplot2)
+library(plotly)
+DATADIR = Sys.getenv('DBDIR')
+
+jaccard <- function(a, b) {
+    return(length(intersect(a,b))/ length( union(a,b) ))
+}
+
+plot.heatmap <- function(X) {
+    mm = reshape2::melt(X)
+    p = ggplot(mm) +
+        geom_tile(aes(x=Var1,y=Var2,fill=value)) +
+        scale_fill_gradient2(low='red', mid='white', high='steelblue') +
+        theme(axis.text.x = element_text(angle=60,hjust=1,size = 2)) +
+        coord_fixed() 
+    return(p)   
+}
 ```
 
 The Human Phenotype Ontology can be downloaded (here)[https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/master/hp.obo] or loaded from the package `ontologyIndex`. The format of `phenotype_annotation.tab` is described (here)[https://hpo.jax.org/app/help/annotations].
@@ -82,4 +100,93 @@ for (name in names(queryResults)) {
     q[['phenotypeAnnotation']] <- phenotypeAnnotation[HPO_ID %in% q$relevantTermIds]
     queryResults[[name]] <- q
 }
+```
+
+## Explore OMIM associations
+
+### Phenotype similarity
+
+```{r}
+m = matrix(0, nrow=length(commonNames), ncol = length(commonNames)) %>%
+    `colnames<-`(commonNames) %>%
+    `rownames<-`(commonNames)
+
+for (i in 1:(length(commonNames)-1)) {
+    qi = queryResults[[i]]$phenotypeAnnotation
+    phe_i = paste(qi$DB, qi$DB_Object_ID, sep=':')
+    for (j in (i+1):length(commonNames)) {
+        qj <- queryResults[[j]]$phenotypeAnnotation
+        phe_j = paste(qj$DB, qj$DB_Object_ID, sep=':')
+        m[i,j] = jaccard(phe_i, phe_j)
+    }
+}
+
+plot.heatmap(m) %>% ggplotly()
+```
+
+### Gene association similarity
+
+```{r}
+m = matrix(0, nrow=length(commonNames), ncol = length(commonNames)) %>%
+    `colnames<-`(commonNames) %>%
+    `rownames<-`(commonNames)
+
+con <- dbConnect(SQLite(), paste0(DATADIR, '/OMIMdb.sqlite'))
+
+for (i in 1:(length(commonNames)-1)) {
+    qi = queryResults[[i]]$phenotypeAnnotation
+    qi = qi[(DB) == 'OMIM',]
+    map_i <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol',
+                              ' FROM gene_phenotype m',
+                              ' JOIN genes g ON g.MIMNumber = m.GeneMIMNumber',
+                              ' JOIN mappings on mappings.MappingNumber = m.MappingNumber',
+                              ' WHERE m.PhenotypeMIMNumber IN ', paste0('(', paste(qi$DB_Object_ID, collapse = ','), ')')
+                              )) %>%
+    dbFetch()
+
+    for (j in (i+1):length(commonNames)) {
+        qj <- queryResults[[j]]$phenotypeAnnotation
+        qj <- qj[(DB) == 'OMIM',]
+        map_j <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol',
+                              ' FROM gene_phenotype m',
+                              ' JOIN genes g ON g.MIMNumber = m.GeneMIMNumber',
+                              ' JOIN mappings on mappings.MappingNumber = m.MappingNumber',
+                              ' WHERE m.PhenotypeMIMNumber IN ', paste0('(', paste(qj$DB_Object_ID, collapse = ','), ')')
+                              )) %>%
+            dbFetch()
+
+        m[i,j] = jaccard(map_i$ApprovedSymbol, map_j$ApprovedSymbol)
+    }
+}
+
+plot.heatmap(m) %>% ggplotly()
+```
+
+```{r}
+getAnnotations <- function(queryResults, annot) {
+    lapply(queryResults, function(q) { return(q$phenotypeAnnotation[,annot, with=FALSE]) }) %>%
+        Reduce(rbind, .) %>%
+        return()
+}
+phenotypes <- getAnnotations(queryResults, c('DB', 'DB_Object_ID'))
+phenotypes <- phenotypes[(DB) == 'OMIM',]
+
+```
+
+```{r}
+res <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol, g.GeneName, mappings.MappingDescription',
+                              ' FROM gene_phenotype m',
+                              ' JOIN genes g ON g.MIMNumber = m.GeneMIMNumber',
+                              ' JOIN mappings on mappings.MappingNumber = m.MappingNumber',
+                              ' WHERE m.PhenotypeMIMNumber IN ', paste0('(', paste(phenotypes$DB_Object_ID, collapse = ','), ')')
+                              )) %>%
+    dbFetch()
+
+
+```
+
+```{r}
+getAnnotations(queryResults, 'DB') %>%
+ table(phenotypes) %>%
+    set_names( . , hpo$name[names(.)])   
 ```
