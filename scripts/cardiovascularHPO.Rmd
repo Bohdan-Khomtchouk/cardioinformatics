@@ -23,7 +23,7 @@ plot.heatmap <- function(X) {
     p = ggplot(mm) +
         geom_tile(aes(x=Var1,y=Var2,fill=value)) +
         scale_fill_gradient2(low='red', mid='white', high='steelblue') +
-        theme(axis.text.x = element_text(angle=60,hjust=1,size = 2)) +
+        theme(axis.text.x = element_text(angle=30,hjust=1), axis.title.x = element_blank(), axis.title.y = element_blank()) +
         coord_fixed() 
     return(p)   
 }
@@ -117,11 +117,11 @@ for (i in 1:(length(commonNames)-1)) {
     for (j in (i+1):length(commonNames)) {
         qj <- queryResults[[j]]$phenotypeAnnotation
         phe_j = paste(qj$DB, qj$DB_Object_ID, sep=':')
-        m[i,j] = jaccard(phe_i, phe_j)
+        m[i,j] = m[j,i] = jaccard(phe_i, phe_j)
     }
 }
 
-plot.heatmap(m) %>% ggplotly()
+plot.heatmap(m) + ggtitle('OMIM phenotype similarity')
 ```
 
 ### Gene association similarity
@@ -155,11 +155,11 @@ for (i in 1:(length(commonNames)-1)) {
                               )) %>%
             dbFetch()
 
-        m[i,j] = jaccard(map_i$ApprovedSymbol, map_j$ApprovedSymbol)
+        m[i,j] = m[j,i] = jaccard(map_i$ApprovedSymbol, map_j$ApprovedSymbol)
     }
 }
 
-plot.heatmap(m) %>% ggplotly()
+plot.heatmap(m) + ggtitle('OMIM gene association similarity')
 ```
 
 ```{r}
