@@ -1,0 +1,85 @@
+---
+title: "Exploration of Cardiovascular Abnormality in the Human Phenotype Ontology"
+author: "Trang Tran"
+date: "8/19/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(magrittr)
+library(ontologyIndex)
+```
+
+The Human Phenotype Ontology can be downloaded (here)[https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/master/hp.obo] or loaded from the package `ontologyIndex`. The format of `phenotype_annotation.tab` is described (here)[https://hpo.jax.org/app/help/annotations].
+
+```{r}
+# Human Phenotype Ontology https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/master/hp.obo
+# curl::curl_download('https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/master/hp.obo',destfile = 'hpo.obo')
+# curl::curl_download('http://compbio.charite.de/jenkins/job/hpo.annotations/lastStableBuild/artifact/misc/phenotype_annotation.tab', destfile = 'phenotype_annotation.tab')
+hpo = get_ontology('hpo.obo', extract_tags = 'everything')
+phenotypeAnnotation = data.table::fread('phenotype_annotation.tab', sep='\t',header = FALSE, quote = "",
+                                        col.names = c('DB', 'DB_Object_ID', 'DB_Name', 'Qualifier', 'HPO_ID', 'DB_Reference', 'Evidence_Code', 'Onset_Modifier', 'Frequency', 'Sex', 'Modifier', 'Aspect', 'Date_Created', 'Assigned_By'))
+```
+
+The classes of interest are those related to _cardiovascular system_
+
+```{r}
+hpo$name[grep(x=hpo$name, pattern='cardiovascular system',ignore.case = TRUE)]
+```
+
+Since the most inclusive term is _Abnormality of the cardiovascular system_, we'll use it as the filter for relevant term.
+
+```{r}
+filterPredicate = function(x) {
+    return('HP:0001626' %in% get_term_property(hpo,property_name='ancestors',term=x)) 
+}
+```
+
+Now query for the conditions of interests, and filter for those that are descendants to _Abnormality of the cardiovascular system_
+
+```{r,echo=FALSE}
+traverse <- function(ontology, rootId, FUN = function(x) {return(x)}) {
+    children = get_term_property(ontology, property_name = 'children', rootId)
+    if (length(children) == 0) {
+        return(FUN(rootId))
+    } else {
+        for (child in children) {
+            return(traverse(ontology, child, FUN))
+        }
+    }
+}
+```
+
+```{r}
+commonNames = c('coronary artery disease',
+                'congestive heart failure',
+                'congenital heart defect',
+                'hypertension',
+                'cardiomyopathy',
+                'stroke',
+                'myocardial infarction',
+                'angina',
+                'arrhythmia')
+
+queryResults = list()
+for (name in commonNames) {
+    q = list()
+    q[['searchResults']] =
+        c(hpo$id[grep(x=hpo$synonym, pattern=name,ignore.case = TRUE)],
+          hpo$id[grep(x=hpo$name, pattern=name,ignore.case = TRUE)]) %>%
+        unique() %>%
+        minimal_set(hpo, .)
+    q[['relevantTermIds']] = Filter(f = filterPredicate, x = q[['searchResults']])
+    queryResults[[name]] = q
+}
+```
+
+
+```{r}
+for (name in names(queryResults)) {
+    q <- queryResults[[name]]
+    q[['phenotypeAnnotation']] <- phenotypeAnnotation[HPO_ID %in% q$relevantTermIds]
+    queryResults[[name]] <- q
+}
+```
