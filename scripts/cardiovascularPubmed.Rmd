@@ -1,0 +1,28 @@
+---
+title: "Pubmed"
+author: "Trang Tran"
+date: "8/21/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(rentrez)
+heartConditions = read.table('../data/conditionList.tsv', sep='\t', header = TRUE)
+```
+
+
+```{r}
+heartConditions$PubmedCount = 0
+for (i in 1:nrow(heartConditions)) {
+    tmp <- entrez_search(db='pubmed', term=heartConditions[i,'HPOTermName'])
+    heartConditions[i, 'PubmedCount'] <- tmp$count
+}
+```
+
+```{r}
+ggplot(heartConditions) +
+    geom_bar(aes(x=HPOTermName,y=PubmedCount), stat='identity') +
+    theme(axis.text.x = element_text(angle=30,hjust=1))
+```
