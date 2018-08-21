@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+options(stringsAsFactors = FALSE)
 library(magrittr)
 library(ontologyIndex)
 library(RSQLite)
@@ -69,6 +70,8 @@ traverse <- function(ontology, rootId, FUN = function(x) {return(x)}) {
 }
 ```
 
+Querying for terms and phenotype annotations using regular terms
+
 ```{r}
 commonNames = c('coronary artery disease',
                 'congestive heart failure',
@@ -92,8 +95,6 @@ for (name in commonNames) {
     queryResults[[name]] = q
 }
 ```
-
-
 ```{r}
 for (name in names(queryResults)) {
     q <- queryResults[[name]]
@@ -102,10 +103,33 @@ for (name in names(queryResults)) {
 }
 ```
 
+Querying for phenotype annotations using standard HPO terms
+
+```{r}
+standardNames <-
+    names(queryResults) %>%
+    lapply(function(q) {
+        x = data.frame('HPOTermId' = queryResults[[q]]$relevantTermIds,
+                       'HPOTermName' = hpo$name[queryResults[[q]]$relevantTermIds])
+        x$query = q 
+        return(x)
+    }) %>%
+    Reduce(rbind, .)
+str(standardNames)
+
+lookupResults <- list()
+for (i in 1:nrow(standardNames)) {
+    x = standardNames[i,'HPOTermId']
+    lookupResults[[x]]$phenotypeAnnotation <-  phenotypeAnnotation[HPO_ID == standardNames[i,'HPOTermId']]
+}
+```
+
+
 ## Explore OMIM associations
 
 ### Phenotype similarity
 
+#### Common names
 ```{r}
 m = matrix(0, nrow=length(commonNames), ncol = length(commonNames)) %>%
     `colnames<-`(commonNames) %>%
@@ -124,16 +148,39 @@ for (i in 1:(length(commonNames)-1)) {
 plot.heatmap(m) + ggtitle('OMIM phenotype similarity')
 ```
 
+#### Standard terms
+
+```{r}
+m = matrix(0, nrow=nrow(standardNames), ncol = nrow(standardNames)) %>%
+    `colnames<-`(standardNames$HPOTermName) %>%
+    `rownames<-`(standardNames$HPOTermName)
+
+for (i in 1:(nrow(standardNames)-1)) {
+    qi = lookupResults[[i]]$phenotypeAnnotation
+    phe_i = paste(qi$DB, qi$DB_Object_ID, sep=':')
+    for (j in (i+1):nrow(standardNames)) {
+        qj <- lookupResults[[j]]$phenotypeAnnotation
+        phe_j = paste(qj$DB, qj$DB_Object_ID, sep=':')
+        m[i,j] = m[j,i] = jaccard(phe_i, phe_j)
+    }
+}
+
+(plot.heatmap(m) + ggtitle('OMIM phenotype similarity')) %>%
+    ggplotly()
+```
+
 ### Gene association similarity
+
+#### Common names
 
 ```{r}
 m = matrix(0, nrow=length(commonNames), ncol = length(commonNames)) %>%
     `colnames<-`(commonNames) %>%
     `rownames<-`(commonNames)
-
+m.commonGenes = m
 con <- dbConnect(SQLite(), paste0(DATADIR, '/OMIMdb.sqlite'))
 
-for (i in 1:(length(commonNames)-1)) {
+for (i in 1:(length(commonNames))) {
     qi = queryResults[[i]]$phenotypeAnnotation
     qi = qi[(DB) == 'OMIM',]
     map_i <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol',
@@ -143,7 +190,9 @@ for (i in 1:(length(commonNames)-1)) {
                               ' WHERE m.PhenotypeMIMNumber IN ', paste0('(', paste(qi$DB_Object_ID, collapse = ','), ')')
                               )) %>%
     dbFetch()
-
+    m[i,i] = 1
+    m.commonGenes[i,i] = length(map_i$ApprovedSymbol)
+    if (i == length(commonNames)) break
     for (j in (i+1):length(commonNames)) {
         qj <- queryResults[[j]]$phenotypeAnnotation
         qj <- qj[(DB) == 'OMIM',]
@@ -156,11 +205,59 @@ for (i in 1:(length(commonNames)-1)) {
             dbFetch()
 
         m[i,j] = m[j,i] = jaccard(map_i$ApprovedSymbol, map_j$ApprovedSymbol)
+        m.commonGenes[i,j] = m.commonGenes[j,i] = length(intersect(map_i$ApprovedSymbol, map_j$ApprovedSymbol))
     }
 }
 
 plot.heatmap(m) + ggtitle('OMIM gene association similarity')
+plot.heatmap(m.commonGenes) + ggtitle('OMIM common gene associations')
+
 ```
+
+#### Standard terms
+
+```{r, message=FALSE}
+m = matrix(0, nrow=nrow(standardNames), ncol = nrow(standardNames)) %>%
+    `colnames<-`(standardNames$HPOTermName) %>%
+    `rownames<-`(standardNames$HPOTermName)
+
+m.commonGenes = m
+con <- dbConnect(SQLite(), paste0(DATADIR, '/OMIMdb.sqlite'))
+
+for (i in 1:(nrow(standardNames))) {
+    qi = lookupResults[[i]]$phenotypeAnnotation
+    qi = qi[(DB) == 'OMIM',]
+    map_i <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol',
+                              ' FROM gene_phenotype m',
+                              ' JOIN genes g ON g.MIMNumber = m.GeneMIMNumber',
+                              ' JOIN mappings on mappings.MappingNumber = m.MappingNumber',
+                              ' WHERE m.PhenotypeMIMNumber IN ', paste0('(', paste(qi$DB_Object_ID, collapse = ','), ')')
+                              )) %>%
+    dbFetch()
+    m[i,i] = 1
+    m.commonGenes[i,i] = length(map_i$ApprovedSymbol)
+    if (i == nrow(standardNames)) break
+    for (j in (i+1):nrow(standardNames)) {
+        qj <- lookupResults[[j]]$phenotypeAnnotation
+        qj <- qj[(DB) == 'OMIM',]
+        map_j <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol',
+                              ' FROM gene_phenotype m',
+                              ' JOIN genes g ON g.MIMNumber = m.GeneMIMNumber',
+                              ' JOIN mappings on mappings.MappingNumber = m.MappingNumber',
+                              ' WHERE m.PhenotypeMIMNumber IN ', paste0('(', paste(qj$DB_Object_ID, collapse = ','), ')')
+                              )) %>%
+            dbFetch()
+
+        m[i,j] = m[j,i] = jaccard(map_i$ApprovedSymbol, map_j$ApprovedSymbol)
+        m.commonGenes[i,j] = m.commonGenes[j,i] = length(intersect(map_i$ApprovedSymbol, map_j$ApprovedSymbol))
+    }
+}
+
+plot.heatmap(m) + ggtitle('OMIM gene association similarity')
+(plot.heatmap(m.commonGenes) + ggtitle('OMIM common gene associations')) %>% ggplotly()
+
+```
+
 
 ```{r}
 getAnnotations <- function(queryResults, annot) {
