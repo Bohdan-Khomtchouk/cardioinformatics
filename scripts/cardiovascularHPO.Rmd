@@ -30,6 +30,8 @@ plot.heatmap <- function(X) {
 }
 ```
 
+## Retrieve the standard terms for each abnormality of interest
+
 The Human Phenotype Ontology can be downloaded (here)[https://raw.githubusercontent.com/obophenotype/human-phenotype-ontology/master/hp.obo] or loaded from the package `ontologyIndex`. The format of `phenotype_annotation.tab` is described (here)[https://hpo.jax.org/app/help/annotations].
 
 ```{r}
@@ -116,7 +118,17 @@ standardNames <-
     }) %>%
     Reduce(rbind, .)
 str(standardNames)
+```
 
+Write out the standard terms for later use
+
+```{r,eval=FALSE}
+write.table(standardNames, '../data/conditionList.tsv', sep='\t', quote=FALSE, row.names = FALSE)
+```
+
+Look up the phenotype annotations for gene/phenotype analysis below
+
+```{r}
 lookupResults <- list()
 for (i in 1:nrow(standardNames)) {
     x = standardNames[i,'HPOTermId']
@@ -130,6 +142,7 @@ for (i in 1:nrow(standardNames)) {
 ### Phenotype similarity
 
 #### Common names
+
 ```{r}
 m = matrix(0, nrow=length(commonNames), ncol = length(commonNames)) %>%
     `colnames<-`(commonNames) %>%
@@ -258,6 +271,17 @@ plot.heatmap(m) + ggtitle('OMIM gene association similarity')
 
 ```
 
+#### The number of genes associated with each abnormality
+
+```{r}
+p <- diag(m.commonGenes) %>%
+    reshape2::melt() %>%
+    `$<-`('HPOTerm', rownames(.)) %>%
+    ggplot() +
+    geom_bar(aes(x=HPOTerm,y=value),stat = 'identity') +
+    theme(axis.text.x = element_text(angle=30,hjust=1), axis.title.x = element_blank())
+ggplotly(p)
+```
 
 ```{r}
 getAnnotations <- function(queryResults, annot) {

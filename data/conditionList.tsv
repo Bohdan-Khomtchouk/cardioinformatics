@@ -1,0 +1,35 @@
+HPOTermId	HPOTermName	query
+HP:0005181	Premature coronary artery atherosclerosis	coronary artery disease
+HP:0012436	Nonocclusive coronary artery atherosclerosis	coronary artery disease
+HP:0001722	High-output congestive heart failure	congestive heart failure
+HP:0009805	Low-output congestive heart failure	congestive heart failure
+HP:0001627	Abnormal heart morphology	congenital heart defect
+HP:0002092	Pulmonary arterial hypertension	hypertension
+HP:0031015	Intrahepatic portal vein sclerosis	hypertension
+HP:0100817	Renovascular hypertension	hypertension
+HP:0000875	Episodic hypertension	hypertension
+HP:0002640	Hypertension associated with pheochromocytoma	hypertension
+HP:0004941	Extrahepatic portal hypertension	hypertension
+HP:0030950	Pulmonary venous hypertension	hypertension
+HP:0500106	Isolated systolic hypertension	hypertension
+HP:0001644	Dilated cardiomyopathy	cardiomyopathy
+HP:0005152	Histiocytoid cardiomyopathy	cardiomyopathy
+HP:0005157	Concentric hypertrophic cardiomyopathy	cardiomyopathy
+HP:0011663	Right ventricular cardiomyopathy	cardiomyopathy
+HP:0011664	Left ventricular noncompaction cardiomyopathy	cardiomyopathy
+HP:0030843	Cardiac amyloidosis	cardiomyopathy
+HP:0001723	Restrictive cardiomyopathy	cardiomyopathy
+HP:0011665	Takotsubo cardiomyopathy	cardiomyopathy
+HP:0012816	Right ventricular noncompaction cardiomyopathy	cardiomyopathy
+HP:0012818	Biventricular noncompaction cardiomyopathy	cardiomyopathy
+HP:0031992	Apical hypertrophic cardiomyopathy	cardiomyopathy
+HP:0200127	Atrial cardiomyopathy	cardiomyopathy
+HP:0002326	Transient ischemic attack	stroke
+HP:0002401	Stroke-like episode	stroke
+HP:0004968	Recurrent cerebral hemorrhage	stroke
+HP:0002140	Ischemic stroke	stroke
+HP:0001658	Myocardial infarction	myocardial infarction
+HP:0001681	Angina pectoris	angina
+HP:0001692	Atrial arrhythmia	arrhythmia
+HP:0004308	Ventricular arrhythmia	arrhythmia
+HP:0004755	Supraventricular tachycardia	arrhythmia
