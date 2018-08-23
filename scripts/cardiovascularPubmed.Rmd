@@ -9,20 +9,155 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(rentrez)
-heartConditions = read.table('../data/conditionList.tsv', sep='\t', header = TRUE)
+library(GEOmetadb)
+library(RSQLite)
+library(magrittr)
+
+count_year <- function(year, term) {
+    query <- paste(term, "AND (", year, "[PDAT])")
+    return(entrez_search(db="pubmed", term=query)$count)
+}
 ```
 
+```{r readData}
+heartConditions = read.table('../data/conditionList.tsv', sep='\t', header = TRUE)
+heartPubmed = list()
+```
+
+## Pubmed
+
+### Publication on Cardiovascular diseases over the years
+
+```{r}
+relativePubmed <- data.frame('year' = c(1990:2018)) %>%
+    `$<-`('cardiovascular', sapply(.[['year']], function(x) { return(count_year(x, '"cardiovascular diseases"[MeSH Major Topic]'))})) %>%
+    `$<-`('all', sapply(.[['year']], function(x) { return(count_year(x, ''))})) %>%
+    `$<-`('bioinformatics', sapply(.[['year']], function(x) {return(count_year(x, 'bioinformatics[Other Term] OR genomics[MeSH Terms]'))})) %>%
+    `$<-`('cardio.bioinf',  sapply(.[['year']], function(x) {return(count_year(x, '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND ("cardiovascular diseases"[MeSH Major Topic])'))}))
+```
+
+#### Cardiovascular disease vs bioinformatics/genomics research since 2000 (when bioinformatics research starts to gather enough publication to be visible)
+
+```{r}
+relativePubmed %>%
+    reshape2::melt(id.vars='year') %>%
+    subset(variable %in% c('cardiovascular', 'bioinformatics', 'cardio.bioinf') & year >= 2000) %>%
+    ggplot() +
+        geom_bar(aes(x=year,y=value,group=variable, fill=variable), stat='identity', alpha=0.5, position='identity')
+        # geom_area(aes(x=year,y=value,group=variable, fill=variable), stat='identity', alpha=0.5) 
+
+```
+
+#### The laggging of cardiovascular research in adopting bioinformatics/genomics technique
+
+```{r}
+relativePubmed %>%
+    reshape2::melt(id.vars='year') %>%
+    subset(variable %in% c('bioinformatics', 'cardio.bioinf') & year >= 2000) %>%
+    ggplot() +
+        geom_bar(aes(x=year,y=value,group=variable, fill=variable), stat='identity', alpha=0.5, position='identity')
+        # geom_area(aes(x=year,y=value,group=variable, fill=variable), stat='identity', alpha=0.5) 
+
+```
+
+#### Just curious, how is it with cancer research?
+
+```{r}
+relativePubmed <- relativePubmed %>%
+    `$<-`('cancer.bioinf',  sapply(.[['year']], function(x) {return(count_year(x, '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND (*cancer[MeSH Terms])'))})) %>%
+    `$<-`('cancer',  sapply(.[['year']], function(x) {return(count_year(x, '(*cancer[MeSH Terms])'))}))
+
+```
+
+```{r}
+relativePubmed %>%
+    reshape2::melt(id.vars='year') %>%
+    subset(variable %in% c('bioinformatics', 'cancer.bioinf', 'cardio.bioinf') & year >= 2000) %>%
+    ggplot() +
+        geom_bar(aes(x=year,y=value,group=variable, fill=variable), stat='identity', alpha=0.5, position='identity')
+        # geom_area(aes(x=year,y=value,group=variable, fill=variable), stat='identity', alpha=0.5) 
+
+```
+
+### Standard terms
 
 ```{r}
 heartConditions$PubmedCount = 0
+heartConditions$PubmedCount.MeSH = 0
 for (i in 1:nrow(heartConditions)) {
-    tmp <- entrez_search(db='pubmed', term=heartConditions[i,'HPOTermName'])
-    heartConditions[i, 'PubmedCount'] <- tmp$count
+    # tmp <- entrez_search(db='pubmed', term=paste0("(", heartConditions[i,'HPOTermName'], ")[MeSH]"))
+    # heartConditions[i, 'PubmedCount.MeSH'] <- tmp$count
+    heartPubmed[[i]] <- entrez_search(db='pubmed', term=paste0('("', heartConditions[i,'HPOTermName'], '")'))
 }
 ```
 
 ```{r}
+heartPubmed.Year <- list()
+for (i in 1:nrow(heartConditions)) {
+    cnts = sapply(c(1990:2017), function(y) { return(count_year(y, heartConditions[i, 'HPOTermName']))})
+    heartPubmed.Year[[i]] = data.frame(year=c(1990:2017),
+                                       count=cnts)
+}
+```
+
+```{r}
+for (i in 1:length(heartPubmed.Year)) {
+    heartPubmed.Year[[i]]$HPOTermName = heartConditions[i,'HPOTermName']
+}
+p <- Reduce(rbind,heartPubmed.Year) %>%
+    ggplot() +
+    geom_line(aes(x=year, y=count, group=HPOTermName,color=HPOTermName))
+ggplotly(p)
+    
+```
+
+```{r}
 ggplot(heartConditions) +
-    geom_bar(aes(x=HPOTermName,y=PubmedCount), stat='identity') +
-    theme(axis.text.x = element_text(angle=30,hjust=1))
+    geom_bar(aes(x=HPOTermName,y=PubmedCount), stat='identity', alpha=0.5) +
+    geom_bar(aes(x=HPOTermName,y=PubmedCount.MeSH), stat='identity', alpha=0.5, color=2) +
+    theme(axis.text.x = element_text(angle=30,hjust=1)) +
+    scale_y_log10()
+```
+
+```{r}
+lapply(heartPubmed, function(x) { return(x$count)})
+```
+```{r}
+p <- ggplot(heartConditions) +
+    geom_point(aes(x=PubmedCount, y=PubmedCount.MeSH)) 
+ggplotly(p)
+```
+
+### Common names
+
+```{r}
+heartRegularPubmed <- 
+    heartConditions$query %>%
+    unique() %>%
+    lapply( function(x) {
+        return(entrez_search(db='pubmed', term=paste0('("', x, '")')))  
+    })
+```
+
+```{r}
+heartConditions$query %>%
+    unique() %>%
+    data.frame() %>%
+    `$<-`('PubmedCount', sapply(heartRegularPubmed, function(x) {return(x$count)})) %>%
+    `names<-`(c('Query', 'PubmedCount')) %>%
+    ggplot() +
+        geom_bar(aes(x=Query,y=PubmedCount), stat='identity') +
+        theme(axis.text.x = element_text(angle=45,hjust=1))
+```
+
+## GEO
+
+```{r}
+if(!file.exists('GEOmetadb.sqlite')) getSQLiteFile()
+con <- dbConnect(SQLite(), 'GEOmetadb.sqlite')
+cardiovascular_gse <- dbGetQuery(con,paste("select gse,pubmed_id,summary,title from gse where",
+                                           "summary like '%cardiovascular%'", sep=" "))
+cardiovascular_gds <- dbGetQuery(con,paste("select gds,pubmed_id,gse,platform_organism,sample_organism,description,title from gds where",
+                                            "description like '%cardiovascular%'", sep=" "))
+str(cardiovascular_gds)
 ```
