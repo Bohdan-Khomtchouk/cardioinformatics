@@ -18,6 +18,12 @@ count_year <- function(year, term) {
     return(entrez_search(db="pubmed", term=query, retmax =0)$count)
 }
 
+get_pmids <- function(query) {
+    entrez_search(db="pubmed", term=query, retmax =0)$count %>%
+        entrez_search(db="pubmed", term=query, retmax = .) %>%
+        `$`('ids') %>%
+        return()
+}
 
 ```
 
@@ -28,6 +34,36 @@ heartPubmed = list()
 ```
 
 ## Pubmed
+
+### Queries
+
+```{r, include=FALSE, eval=TRUE}
+queries <- c('cardiovascular diseases' = '"cardiovascular diseases"[MeSH Major Topic]',
+             'bioinformatics' = 'bioinformatics[Other Term] OR genomics[MeSH Terms]',
+             'cardioinformatics' = '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND ("cardiovascular diseases"[MeSH Major Topic])',
+             'cancer informatics' = '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND (*cancer[MeSH Terms])',
+             'cancer' = '(*cancer[MeSH Terms])'
+              )
+```
+
+Random check if query results are expected
+
+```{r,eval=FALSE}
+queryPMIDs <- lapply(queries, get_pmids)
+saveRDS(queryPMIDs,file='../data/pmids_by_query.RDS')
+randomSubsetQueries <- lapply(queryPMIDs, function(q) {
+    sample(q,20,replace = FALSE) %>%
+        sapply(function(x) {return(paste0(x,"[uid]"))}) %>%
+        paste(collapse =" OR ") %>%
+        return()
+        })
+data.frame('sector' = names(queries),
+           'query' = queries,
+           'random20' = randomSubsetQueries %>% as.character(),
+           'random20url' = randomSubsetQueries %>% as.character() %>% URLencode() %>% paste0('https://www.ncbi.nlm.nih.gov/pubmed/?term=', .),
+           stringsAsFactors = FALSE) %>%
+    write.csv('../data/random20pubmed.csv')
+```
 
 ### Publication on Cardiovascular diseases over the years
 
@@ -118,10 +154,13 @@ for (i in 1:nrow(heartConditions)) {
 for (i in 1:length(heartPubmed.Year)) {
     heartPubmed.Year[[i]]$HPOTermName = heartConditions[i,'HPOTermName']
 }
-p <- Reduce(rbind,heartPubmed.Year) %>%
+p <- do.call('rbind',heartPubmed.Year) %>%
     ggplot() +
-    geom_line(aes(x=year, y=count, group=HPOTermName,color=HPOTermName))
-ggplotly(p)
+    geom_area(aes(x=year, y=count, group=HPOTermName,fill=HPOTermName,postion='stack')) +
+    theme(legend.position = 'bottom')
+
+p
+plotly::ggplotly(p)
     
 ```
 
