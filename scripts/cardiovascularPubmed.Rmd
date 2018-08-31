@@ -17,22 +17,7 @@ count_year <- function(year, term) {
     query <- paste(term, "AND (", year, "[PDAT])")
     return(entrez_search(db="pubmed", term=query, retmax =0)$count)
 }
-sector.colors = c('cardiovascular diseases' = 'firebrick', 'cancer' = 'firebrick', 'bioinformatics' = 'gold4', 'cardioinformatics' = 'green', 'cancer.bioinf' = 'deepskyblue2' )
-plot_pubcount <- function(data, yearsToPlot, varsToPlot) {
-    p <- data %>%
-        reshape2::melt(id.vars='year') %>%
-        subset(variable %in% varsToPlot & year %in% yearsToPlot) %>%
-        ggplot() +
-            geom_bar(aes(x=year,y=value,group=variable, fill=variable), stat='identity', alpha=0.5, position='identity') +
-            ylab('Number of publications on Pubmed') +
-            scale_x_continuous(breaks = yearsToPlot, labels=as.character(yearsToPlot)) +
-            scale_fill_manual(values=sector.colors) +
-            theme(axis.text.x = element_text(hjust=1, angle=45)) +
-            guides(fill=guide_legend(title=""))
-    if (2018 %in% yearsToPlot)
-        p <- p + annotate("text", x=2018, y=max(subset(data, year == 2018, varsToPlot))*1.1, label="*", size=7)
-    return(p)    
-}
+
 
 ```
 
@@ -40,46 +25,62 @@ plot_pubcount <- function(data, yearsToPlot, varsToPlot) {
 heartConditions = read.table('../data/conditionList.tsv', sep='\t', header = TRUE)
 heartPubmed = list()
 
-
 ```
 
 ## Pubmed
 
 ### Publication on Cardiovascular diseases over the years
 
-```{r}
+```{r,eval=FALSE}
 relativePubmed <- data.frame('year' = c(1990:2018)) %>%
-    `$<-`('CVD', sapply(.[['year']], function(x) { return(count_year(x, '"cardiovascular diseases"[MeSH Major Topic]'))})) %>%
+    `$<-`('cardiovascular diseases', sapply(.[['year']], function(x) { return(count_year(x, '"cardiovascular diseases"[MeSH Major Topic]'))})) %>%
     `$<-`('all', sapply(.[['year']], function(x) { return(count_year(x, ''))})) %>%
     `$<-`('bioinformatics', sapply(.[['year']], function(x) {return(count_year(x, 'bioinformatics[Other Term] OR genomics[MeSH Terms]'))})) %>%
     `$<-`('cardioinformatics',  sapply(.[['year']], function(x) {return(count_year(x, '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND ("cardiovascular diseases"[MeSH Major Topic])'))}))
 ```
 
+
+```{r}
+sector.colors = c('cardiovascular diseases' = '#fbb4ae', 'cancer' = '#fbb4ae', 'bioinformatics' = '#fed9a6', 'cardioinformatics' = '#b3cde3', 'cancer.bioinf' = '#ccebc5' )
+sector.orders = relativePubmed[relativePubmed$year == 2016, -1] %>% as.numeric() %>% order(decreasing = T) %>% `[`(names(relativePubmed)[-1], .)
+plot_pubcount <- function(data, yearsToPlot, varsToPlot) {
+    p <- data %>%
+        reshape2::melt(id.vars='year') %>%
+        subset(variable %in% varsToPlot & year %in% yearsToPlot) %>%
+        `$<-`('variable', factor(.[['variable']], levels=sector.orders)) %>%
+        plyr::arrange(variable) %>%
+        ggplot() +
+            geom_bar(aes(x=year,y=value,group=variable, fill=variable),stat='identity', position='identity') +
+            ylab('Number of publications on Pubmed') +
+            scale_x_continuous(breaks = yearsToPlot, labels=as.character(yearsToPlot)) +
+            scale_fill_manual(values=sector.colors) +
+            theme(axis.text.x = element_text(hjust=1, angle=45), legend.position = c(0.15, 0.85)) +
+            guides(fill=guide_legend(title=""))
+    if (2018 %in% yearsToPlot)
+        p <- p + annotate("text", x=2018, y=max(subset(data, year == 2018, varsToPlot))*1.1, label="*", size=7)
+    return(p)    
+}
+```
+
+
 #### Cardiovascular disease vs bioinformatics/genomics research since 2000 (when bioinformatics research starts to gather enough publication to be visible)
 
 ```{r}
 yearsToPlot = 2000:2018
-plot_pubcount(relativePubmed, yearsToPlot, varsToPlot = c('bioinformatics', 'cardioinformatics', 'cardiovascular diseases') ) 
+plot_pubcount(relativePubmed, yearsToPlot, varsToPlot = c('bioinformatics', 'cardioinformatics', 'cardiovascular diseases') )
+ggsave('../figures/pubmed-cardio.png', device = 'png', width = 7, height=5)
 ```
 
 #### The laggging of cardiovascular research in adopting bioinformatics/genomics technique
 
 ```{r}
-plot_pubcount(relativePubmed, yearsToPlot = yearsToPlot, varsToPlot = c('bioinformatics', 'cardioinformatics') )
-# relativePubmed %>%
-#     reshape2::melt(id.vars='year') %>%
-#     subset(variable %in% c('bioinformatics', 'cardio.bioinf') & year >= 2000) %>%
-#     ggplot() +
-#         geom_bar(aes(x=year,y=value,group=variable, fill=variable), stat='identity', alpha=0.5, position='identity') +
-#         ylab('Number of publications on Pubmed') +
-#         scale_x_discrete(labels=2000:2008)
-        # geom_area(aes(x=year,y=value,group=variable, fill=variable), stat='identity', alpha=0.5) 
-
+plot_pubcount(relativePubmed, yearsToPlot = yearsToPlot, varsToPlot = c('bioinformatics', 'cancer.bioinf', 'cardioinformatics') )
+ggsave('../figures/pubmed-cardioinfo-vs-cancerinfo.png', device = 'png', width = 7, height=5)
 ```
 
 #### Just curious, how is it with cancer research?
 
-```{r}
+```{r,eval=FALSE}
 relativePubmed <- relativePubmed %>%
     `$<-`('cancer.bioinf',  sapply(.[['year']], function(x) {return(count_year(x, '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND (*cancer[MeSH Terms])'))})) %>%
     `$<-`('cancer',  sapply(.[['year']], function(x) {return(count_year(x, '(*cancer[MeSH Terms])'))}))
@@ -89,11 +90,7 @@ relativePubmed <- relativePubmed %>%
 ```{r}
 plot_pubcount(relativePubmed, yearsToPlot = yearsToPlot, varsToPlot = c('cancer', 'bioinformatics', 'cancer.bioinf') ) +
     guides(fill=guide_legend(title=""))
-```
-
-```{r}
-plot_pubcount(relativePubmed, yearsToPlot = yearsToPlot, varsToPlot = c('bioinformatics', 'cancer.bioinf', 'cardioinformatics') ) +
-    guides(fill=guide_legend(title=""))
+ggsave('../figures/pubmed-cancer.png', device = 'png', width = 7, height=5)
 ```
 
 ### Standard terms
