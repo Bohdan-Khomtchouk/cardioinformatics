@@ -29,4 +29,6 @@ ggplot(mapping = aes_string(x='Year', y="Total", group='Causes', color='Causes')
               aes(y=Total + 40000, label=Causes, color=Causes, x = Year ),hjust =1)  +
     ylab('Number of deaths') +
     guides(color=FALSE)
+
+ggsave('../figures/who-deathcause-usa.png', device='png')
 ```
