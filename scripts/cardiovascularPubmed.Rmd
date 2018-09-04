@@ -219,7 +219,7 @@ GDS is a curated version of GSE, yet becoming deprecated (Sean Davis (NIH)'s ans
 if(!file.exists('GEOmetadb.sqlite')) getSQLiteFile()
 con <- dbConnect(SQLite(), 'GEOmetadb.sqlite')
 
-cardio_gsm <- dbGetQuery(con, paste('SELECT gsm.gsm, gsm.source_name_ch1, gsm.organism_ch1, organism_ch2, gpl.gpl, gpl.title as platform, technology, gse.submission_date, gse.pubmed_id, gse.title, gse.summary',
+cardio_gsm <- dbGetQuery(con, paste('SELECT gsm.gsm, gsm.source_name_ch1, gsm.organism_ch1, organism_ch2, gpl.gpl, gpl.title as platform, gpl.description as platform_description, technology, gse.gse, gse.submission_date, gse.pubmed_id, gse.title, gse.summary',
                       'FROM gse ',
                       'JOIN gse_gsm ON gse.gse = gse_gsm.gse',
                       'JOIN gse_gpl ON gse.gse = gse_gpl.gse',
@@ -241,9 +241,12 @@ cardio_gsm %>%
 GEO Data from human samples over the year
 
 ```{r}
-cardio_gsm %>%
+cardio_gsm_human <- cardio_gsm %>%
     `$<-`('year', as.numeric(gsub('^(\\d{4})(.+)$','\\1', .$submission_date))) %>%
-    subset(grepl('Homo sapiens', .$organism_ch1),c('year', 'organism_ch1', 'gsm')) %>%
+    subset(grepl('Homo sapiens', .$organism_ch1))
+data.table::fwrite(cardio_gsm_human, file='../data/cardio_gsm_human.tsv',sep='\t')
+cardio_gsm_human %>%
+    subset(TRUE,c('year', 'organism_ch1', 'gsm')) %>%
     ggplot() +
         geom_line(aes(x=year,group=organism_ch1,color=organism_ch1), stat='count',alpha=0.5)
 ```
