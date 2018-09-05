@@ -38,9 +38,9 @@ heartPubmed = list()
 ### Queries
 
 ```{r, include=FALSE, eval=TRUE}
-queries <- c('cardiovascular diseases' = '"cardiovascular diseases"[MeSH Major Topic]',
+queries <- c('cardiovascular diseases' = '"cardiovascular diseases"[MeSH Terms]',
              'bioinformatics' = 'bioinformatics[Other Term] OR genomics[MeSH Terms]',
-             'cardioinformatics' = '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND ("cardiovascular diseases"[MeSH Major Topic])',
+             'cardioinformatics' = '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND ("cardiovascular diseases"[MeSH Terms])',
              'cancer informatics' = '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND (*cancer[MeSH Terms])',
              'cancer' = '(*cancer[MeSH Terms])'
               )
@@ -69,10 +69,10 @@ data.frame('sector' = names(queries),
 
 ```{r,eval=FALSE}
 relativePubmed <- data.frame('year' = c(1990:2018)) %>%
-    `$<-`('cardiovascular diseases', sapply(.[['year']], function(x) { return(count_year(x, '"cardiovascular diseases"[MeSH Major Topic]'))})) %>%
     `$<-`('all', sapply(.[['year']], function(x) { return(count_year(x, ''))})) %>%
-    `$<-`('bioinformatics', sapply(.[['year']], function(x) {return(count_year(x, 'bioinformatics[Other Term] OR genomics[MeSH Terms]'))})) %>%
-    `$<-`('cardioinformatics',  sapply(.[['year']], function(x) {return(count_year(x, '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND ("cardiovascular diseases"[MeSH Major Topic])'))}))
+    `$<-`('cardiovascular diseases', sapply(.[['year']], function(x) { return(count_year(x, queries['cardiovascular diseases']))})) %>%
+    `$<-`('bioinformatics', sapply(.[['year']], function(x) {return(count_year(x, queries['bioinformatics']))})) %>%
+    `$<-`('cardioinformatics',  sapply(.[['year']], function(x) {return(count_year(x, queries['cardioinformatics']))}))
 ```
 
 
@@ -107,19 +107,12 @@ plot_pubcount(relativePubmed, yearsToPlot, varsToPlot = c('bioinformatics', 'car
 ggsave('../figures/pubmed-cardio.png', device = 'png', width = 7, height=5)
 ```
 
-#### The laggging of cardiovascular research in adopting bioinformatics/genomics technique
-
-```{r}
-plot_pubcount(relativePubmed, yearsToPlot = yearsToPlot, varsToPlot = c('bioinformatics', 'cancer.bioinf', 'cardioinformatics') )
-ggsave('../figures/pubmed-cardioinfo-vs-cancerinfo.png', device = 'png', width = 7, height=5)
-```
-
 #### Just curious, how is it with cancer research?
 
 ```{r,eval=FALSE}
 relativePubmed <- relativePubmed %>%
-    `$<-`('cancer.bioinf',  sapply(.[['year']], function(x) {return(count_year(x, '(bioinformatics[Other Term] OR genomics[MeSH Terms]) AND (*cancer[MeSH Terms])'))})) %>%
-    `$<-`('cancer',  sapply(.[['year']], function(x) {return(count_year(x, '(*cancer[MeSH Terms])'))}))
+    `$<-`('cancer.bioinf',  sapply(.[['year']], function(x) {return(count_year(x, queries['cancer informatics']))})) %>%
+    `$<-`('cancer',  sapply(.[['year']], function(x) {return(count_year(x, queries['cancer']))}))
 
 ```
 
@@ -127,6 +120,13 @@ relativePubmed <- relativePubmed %>%
 plot_pubcount(relativePubmed, yearsToPlot = yearsToPlot, varsToPlot = c('cancer', 'bioinformatics', 'cancer.bioinf') ) +
     guides(fill=guide_legend(title=""))
 ggsave('../figures/pubmed-cancer.png', device = 'png', width = 7, height=5)
+```
+
+#### The laggging of cardiovascular research in adopting bioinformatics/genomics technique
+
+```{r}
+plot_pubcount(relativePubmed, yearsToPlot = yearsToPlot, varsToPlot = c('bioinformatics', 'cancer.bioinf', 'cardioinformatics') )
+ggsave('../figures/pubmed-cardioinfo-vs-cancerinfo.png', device = 'png', width = 7, height=5)
 ```
 
 ### Standard terms
@@ -209,8 +209,8 @@ heartConditions$query %>%
 
 ```{r}
 cardioPubmed <-
-    entrez_search(db='pubmed', term='"cardiovascular diseases"[MeSH Terms]', retmax=0)$count %>%
-    entrez_search(db='pubmed', term='"cardiovascular diseases"[MeSH Terms]', retmax=.)
+    entrez_search(db='pubmed', term=queries['cardiovascular diseases'], retmax=0)$count %>%
+    entrez_search(db='pubmed', term=queries['cardiovascular diseases'], retmax=.)
 ```
 
 GDS is a curated version of GSE, yet becoming deprecated (Sean Davis (NIH)'s answer on Biostar). So we'll stick to GSE.
