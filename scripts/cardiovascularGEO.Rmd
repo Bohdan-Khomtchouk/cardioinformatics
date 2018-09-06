@@ -66,12 +66,10 @@ cardio_gsm$year <- as.numeric(gsub('^(\\d{4})(.+)$','\\1', cardio_gsm$submission
 
 ```
 
-Technology over the years
+Technology over the years, count by number of samples
 
 ```{r}
-
 tech_counts <- cardio_gsm %>%
-    `$<-`('year', as.numeric(gsub('^(\\d{4})(.+)$','\\1', .$submission_date))) %>%
     subset(TRUE,c('year', 'technology', 'gsm')) %>%
     group_by(year, technology) %>%
     summarize(count = length(year)) %>%
@@ -82,6 +80,24 @@ tech_counts$count[is.na(tech_counts$count)] = 0
 ggplot(tech_counts) +
     # geom_line(aes(x=year,group=technology,color=technology, y=count),alpha=0.5)
     geom_area(aes(x=year,y=count,fill=technology), alpha=0.5, position='stack')
+```
+Technology over the years, count by number of data sets
+
+```{r}
+tech_gse_counts <- cardio_gsm %>%
+    subset(TRUE,c('year', 'technology', 'gse')) %>% unique() %>%
+    group_by(year, technology) %>%
+    summarize(count = length(year)) %>%
+    spread(technology, count) %>%
+    reshape2::melt(id.vars='year') %>%
+    set_names(c('year', 'technology', 'count'))
+tech_gse_counts$count[is.na(tech_gse_counts$count)] = 0
+ggplot(tech_gse_counts) +
+    # geom_line(aes(x=year,group=technology,color=technology, y=count),alpha=0.5)
+    # geom_bar(aes(x=year,y=count,fill=technology), stat='identity',alpha=0.9, position='stack', width=1)
+    geom_area(aes(x=year,y=count,fill=technology), stat='identity',alpha=0.9, position='stack') +
+    ylab('Number of data sets') +
+    ggsave(filename = '../figures/gse_count_by_tech.png', device='png', width=7, height=3)
 ```
 
 GEO Data from human samples over the year
