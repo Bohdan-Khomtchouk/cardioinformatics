@@ -27,6 +27,10 @@ get_pmids <- function(query) {
         return()
 }
 
+get_year <- function(submission_date) {
+    return(as.numeric(gsub('^(\\d{4})(.+)$','\\1', submission_date)))
+}
+
 ```
 
 ## GEO
@@ -45,7 +49,7 @@ GDS is a curated version of GSE, yet becoming deprecated (Sean Davis (NIH)'s ans
 if(!file.exists('GEOmetadb.sqlite')) getSQLiteFile()
 con <- dbConnect(SQLite(), 'GEOmetadb.sqlite')
 
-cardio_gsm <- dbGetQuery(con, paste('SELECT gsm.gsm, gsm.source_name_ch1, gsm.organism_ch1, organism_ch2, gpl.gpl, gpl.title as platform, gpl.description as platform_description, technology, gse.gse, gse.submission_date, gse.pubmed_id, gse.title, gse.summary, gse.type',
+cardio_gsm <- dbGetQuery(con, paste('SELECT gsm.gsm, gsm.source_name_ch1, gsm.organism_ch1, organism_ch2, gpl.gpl, gpl.title as platform, gpl.description as platform_description, technology, gse.gse, gse.submission_date, gse.pubmed_id, gse.title, gse.summary, gse.type as study_type, gsm.type as sample_type, gsm.molecule_ch1',
                       'FROM gse ',
                       'JOIN gse_gsm ON gse.gse = gse_gsm.gse',
                       'JOIN gse_gpl ON gse.gse = gse_gpl.gse',
@@ -54,7 +58,7 @@ cardio_gsm <- dbGetQuery(con, paste('SELECT gsm.gsm, gsm.source_name_ch1, gsm.or
                       'WHERE pubmed_id IN (', paste(cardioPubmed$ids,collapse=','), ')'))
 ```
 
-### Study types
+#### Study types
 
 ```{r}
 types = cardio_gsm$type %>% 
@@ -64,6 +68,30 @@ types = cardio_gsm$type %>%
 technologies = cardio_gsm$technology %>% unique()
 cardio_gsm$year <- as.numeric(gsub('^(\\d{4})(.+)$','\\1', cardio_gsm$submission_date))
 
+```
+
+#### Technology
+
+Distribution of the number of rows in a platform by technology
+
+```{r}
+all_gpl = dbGetQuery(con, paste('SELECT gpl, technology, data_row_count, organism, title, status, submission_date',
+                                'FROM gpl'))
+all_gpl$submission_date <- as.Date(all_gpl$submission_date)
+ggplot(all_gpl) +
+    geom_boxplot(aes(x=technology,y=data_row_count,group=technology)) +
+    # geom_point(aes(x=technology,y=data_row_count, color = submission_date), position = 'jitter', alpha=0.3) +
+    scale_y_log10() +
+    theme(axis.text.x = element_text(angle=30, hjust=1))
+```
+
+Time line of submission of samples in CVD research
+
+```{r}
+ggplot(cardio_gsm) +
+    facet_grid(technology ~ .) +
+    geom_histogram(aes(x=as.Date(submission_date)))
+ 
 ```
 
 Technology over the years, count by number of samples
@@ -76,10 +104,12 @@ tech_gsm_counts <- cardio_gsm %>%
     spread(technology, count) %>%
     reshape2::melt(id.vars='year') %>%
     set_names(c('year', 'technology', 'count'))
+   
 tech_gsm_counts$count[is.na(tech_gsm_counts$count)] = 0
 ggplot(tech_gsm_counts) +
     # geom_line(aes(x=year,group=technology,color=technology, y=count),alpha=0.5)
     geom_area(aes(x=year,y=count,fill=technology), alpha=0.5, position='stack')
+
 ```
 
 Cummulative number of samples
@@ -87,7 +117,7 @@ Cummulative number of samples
 ```{r}
 tech_gsm_counts %>% group_by(technology) %>% arrange(year) %>% mutate(cumcount = cumsum(count)) %>%
     ggplot() +
-    geom_area(aes(x=year,y=cumcount,fill=technology), alpha=0.5, position='stack') +
+    geom_area(aes(x=year,y=cumcount,fill=technology), alpha=0.9, position='stack') +
     ylab('Cumulative number of samples')
 ggsave(filename = '../figures/gsm_count_by_tech.png', device='png', width=7, height=3)
 ```
@@ -133,4 +163,52 @@ cardiovascular_gse <- dbGetQuery(con,paste("select gse,type,pubmed_id,summary,ti
 cardiovascular_gds <- dbGetQuery(con,paste("select gds,pubmed_id,gse,platform_organism,sample_organism,description,title from gds where",
                                             "description like '%cardiovascular%'", sep=" "))
 str(cardiovascular_gds)
+```
+
+### Data sets from studies not originally targeted for CVD
+
+Samples from studies not specifically targeted to cardiovascular diseases can be re-purposed for CVD research, for example tissue samples from heart, vein, blood vessels, etc.
+
+```{r}
+all_gsm = dbGetQuery(con, paste('SELECT gsm, gsm.source_name_ch1, gsm.source_name_ch2, gsm.type as sample_type, gsm.organism_ch1, gsm.organism_ch2, gsm.title, gsm.submission_date, gsm.status, gpl.gpl, gpl.title as platform, gpl.technology, gsm.molecule_ch1',
+                                'FROM gsm',
+                                'INNER JOIN gpl ON gsm.gpl = gpl.gpl'))
+all_gsm$year <- get_year(all_gsm$submission_date)
+```
+
+```{r}
+heart_related_idx <- ((grepl(pattern = '[Hh]eart', x = all_gsm$source_name_ch1) |
+                          grepl(pattern = '[Aa]rtery', x = all_gsm$source_name_ch1)) &
+                          grepl(pattern = 'Homo sapiens', x = all_gsm$organism_ch1)) %>%
+    which()
+```
+
+The number of samples in non-CVD studies but can be of interest `r all_gsm[heart_related_idx, 'gsm'] %>% setdiff(cardio_gsm$gsm) %>% length()`
+
+```{r}
+all_gsm[heart_related_idx,] %>% `$`('sample_type') %>% table()
+```
+
+```{r}
+all_gsm[heart_related_idx, ] %>% `$`('molecule_ch1') %>% table() %>% data.frame() %>% set_names(c('molecule', 'non-CVD studies')) %>%
+    merge(cardio_gsm %>% `$`('molecule_ch1') %>% table() %>% data.frame() %>% set_names(c('molecule', 'CVD studies')), by = 'molecule', all = TRUE)
+```
+
+```{r}
+cardio_gsm %>% `$`('sample_type') %>% table()
+```
+
+```{r}
+all_gsm %>%
+    `[`(heart_related_idx,TRUE) %>% group_by(technology) %>% arrange(year) %>% mutate(cumcount = cumsum(count))
+    ggplot() +
+    geom_area(aes(x=year,y=cumcount,fill=technology), alpha=0.9, position='stack') +
+    ylab('Cumulative number of samples')
+ggsave(filename = '../figures/gsm_count_by_tech.png', device='png', width=7, height=3)
+```
+
+## SRA
+
+```{r}
+
 ```
