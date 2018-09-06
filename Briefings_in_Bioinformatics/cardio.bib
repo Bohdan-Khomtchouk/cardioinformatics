@@ -852,7 +852,90 @@ A wealth of gene expression data is publicly available, yet is little use withou
   year = {2016},
   pmid = {27667448},
   pmcid = {PMC5052684},
-  annote = {[object Object]}
+  annote = {\subsection{Summary}
+
+Crowdsourcing task: participants were asked to
+
+1. identify GEO studies belonging to 1 of these types
+
+* single-gene perturbation on mammalian cells
+
+* single-drug perturbation on mammalian cells
+
+* normal vs diseased tissues
+
+2. extract metadata from the studies
+
+3. compute differential expression using GEO2Enrichr (chrome extension)
+
+Although not stated explicitly, it seemed the selected data sets are limited to microarray assays, so they can be processed uniformly (batch correction, then DEG calling).
+
+Signatures were then sanitized by automated filters and manual inspection.
+
+\subsection{Trang:}
+
+1. From the manuscript, it sounds they have created a large data sets with quality annotation. The design of the microtask is a decent idea. However, the web app is disappointing. Given a query for "signature", for example "myocardial infarction", it will result in a list of signatures, each associated with a single GSE id, having their own list of up- and down-regulated genes. These lists do not seem to have resulted from an integrative analysis as described in the manuscript.
+
+The list of up- and down-regulated genes are available upon clicking on the ‘Enrichr‘ icon. There are numerous design problems on this part, and in the Enrichr links that they lead to. On the Enrichr interface, multiple sources of other experiments are presented, each showing the top genes overlapping with the gene set under investigation. It takes some time to figure out what they're showing, and these plots do not give much insight, because very different types of assays are included here (for example ENCODE Histone modification, Co-expression with some specific TFs, etc.).
+
+2. This platform gives me an idea on organizing GEO data sets. A critical requirement for exact retrieval is the consistency of data annotations. GEO has little requirement on standardizing data annotations, resulting in loosely structured metadata. For GEO to be exploited properly and effectively, it can be curated with controlled vocabulary, like ENCODE. These tasks may be designed for crowd-sourcing and/or scaled up with machine learning. There have been many ontologies developed for such purposes in biological research, for example the assay types (ChIP-seq, RNA-seq, etc.) can be annotated with OBI, UBERON for tissue sites, the biological sources can be annotated with CL for primary cell lines, etc.}
+}
+
+@article{Rouillard:2016:harmonizome,
+  title = {The Harmonizome: A Collection of Processed Datasets Gathered to Serve and Mine Knowledge about Genes and Proteins},
+  volume = {2016},
+  shorttitle = {The Harmonizome},
+  doi = {10.1093/database/baw100},
+  abstract = {Abstract.  Genomics, epigenomics, transcriptomics, proteomics and metabolomics efforts rapidly
+          generate a plethora of data on the activity and levels},
+  language = {en},
+  journal = {Database},
+  author = {Rouillard, Andrew D. and Gundersen, Gregory W. and Fernandez, Nicolas F. and Wang, Zichen and Monteiro, Caroline D. and McDermott, Michael G. and Ma'ayan, Avi},
+  month = jan,
+  year = {2016}
+}
+
+@article{Strait:2012:AgingAssociated,
+  title = {Aging-{{Associated Cardiovascular Changes}} and {{Their Relationship}} to {{Heart Failure}}},
+  volume = {8},
+  issn = {15517136},
+  doi = {10.1016/j.hfc.2011.08.011},
+  language = {en},
+  number = {1},
+  journal = {Heart Failure Clinics},
+  author = {Strait, James B. and Lakatta, Edward G.},
+  month = jan,
+  year = {2012},
+  pages = {143-164}
+}
+
+@article{Lakatta:2015:What,
+  title = {So! {{What}}'s Aging? {{Is}} Cardiovascular Aging a Disease?},
+  volume = {83},
+  issn = {00222828},
+  shorttitle = {So! {{What}}'s Aging?},
+  doi = {10.1016/j.yjmcc.2015.04.005},
+  language = {en},
+  journal = {Journal of Molecular and Cellular Cardiology},
+  author = {Lakatta, Edward G.},
+  month = jun,
+  year = {2015},
+  pages = {1-13}
+}
+
+@article{North:2012:Intersection,
+  title = {The {{Intersection Between Aging}} and {{Cardiovascular Disease}}},
+  volume = {110},
+  issn = {0009-7330, 1524-4571},
+  doi = {10.1161/CIRCRESAHA.111.246876},
+  abstract = {The average lifespan of humans is increasing, and with it the percentage of people entering the 65 and older age group is growing rapidly and will continue to do so in the next 20 years. Within this age group, cardiovascular disease will remain the leading cause of death, and the cost associated with treatment will continue to increase. Aging is an inevitable part of life and unfortunately poses the largest risk factor for cardiovascular disease. Although numerous studies in the cardiovascular field have considered both young and aged humans, there are still many unanswered questions as to how the genetic pathways that regulate aging in model organisms influence cardiovascular aging. Likewise, in the molecular biology of aging field, few studies fully assess the role of these aging pathways in cardiovascular health. Fortunately, this gap is beginning to close, and these two fields are merging together. We provide an overview of some of the key genes involved in regulating lifespan and health span, including sirtuins, AMP-activated protein kinase, mammalian target of rapamycin, and insulin-like growth factor 1 and their roles regulating cardiovascular health. We then discuss a series of review articles that will appear in succession and provide a more comprehensive analysis of studies carried out linking genes of aging and cardiovascular health, and perspectives of future directions of these two intimately linked fields.},
+  language = {en},
+  number = {8},
+  journal = {Circulation Research},
+  author = {North, B. J. and Sinclair, D. A.},
+  month = apr,
+  year = {2012},
+  pages = {1097-1108}
 }
 
 
