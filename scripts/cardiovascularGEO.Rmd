@@ -69,18 +69,29 @@ cardio_gsm$year <- as.numeric(gsub('^(\\d{4})(.+)$','\\1', cardio_gsm$submission
 Technology over the years, count by number of samples
 
 ```{r}
-tech_counts <- cardio_gsm %>%
+tech_gsm_counts <- cardio_gsm %>%
     subset(TRUE,c('year', 'technology', 'gsm')) %>%
     group_by(year, technology) %>%
     summarize(count = length(year)) %>%
     spread(technology, count) %>%
     reshape2::melt(id.vars='year') %>%
     set_names(c('year', 'technology', 'count'))
-tech_counts$count[is.na(tech_counts$count)] = 0
-ggplot(tech_counts) +
+tech_gsm_counts$count[is.na(tech_gsm_counts$count)] = 0
+ggplot(tech_gsm_counts) +
     # geom_line(aes(x=year,group=technology,color=technology, y=count),alpha=0.5)
     geom_area(aes(x=year,y=count,fill=technology), alpha=0.5, position='stack')
 ```
+
+Cummulative number of samples
+
+```{r}
+tech_gsm_counts %>% group_by(technology) %>% arrange(year) %>% mutate(cumcount = cumsum(count)) %>%
+    ggplot() +
+    geom_area(aes(x=year,y=cumcount,fill=technology), alpha=0.5, position='stack') +
+    ylab('Cumulative number of samples')
+ggsave(filename = '../figures/gsm_count_by_tech.png', device='png', width=7, height=3)
+```
+
 Technology over the years, count by number of data sets
 
 ```{r}
@@ -99,6 +110,8 @@ ggplot(tech_gse_counts) +
     ylab('Number of data sets') +
     ggsave(filename = '../figures/gse_count_by_tech.png', device='png', width=7, height=3)
 ```
+
+
 
 GEO Data from human samples over the year
 
