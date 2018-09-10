@@ -16,6 +16,7 @@ ncd.deaths = data.table::fread('../data/WHO-NCDDEATHCAUSE.csv', sep=',', header=
 ncd.deaths$Causes <- trimws(ncd.deaths$Causes)
 ncd.deaths$Year <- trimws(ncd.deaths$Year) %>% as.numeric()
 ncd.deaths$Total = ncd.deaths$` Both sexes`
+ncd.deaths[ncd.deaths$Causes == 'Malignant neoplasms','Causes'] <- 'Malignant neoplasms (cancer)'
 ```
 
 Deaths over year
