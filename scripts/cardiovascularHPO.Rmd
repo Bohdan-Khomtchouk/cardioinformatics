@@ -191,7 +191,7 @@ m = matrix(0, nrow=length(commonNames), ncol = length(commonNames)) %>%
     `colnames<-`(commonNames) %>%
     `rownames<-`(commonNames)
 m.commonGenes = m
-con <- dbConnect(SQLite(), paste0(DATADIR, '/OMIMdb.sqlite'))
+con <- dbConnect(SQLite(), paste0(DATADIR, '/OMIM/OMIMdb.sqlite'))
 
 for (i in 1:(length(commonNames))) {
     qi = queryResults[[i]]$phenotypeAnnotation
@@ -209,19 +209,18 @@ for (i in 1:(length(commonNames))) {
     for (j in (i+1):length(commonNames)) {
         qj <- queryResults[[j]]$phenotypeAnnotation
         qj <- qj[(DB) == 'OMIM',]
-        map_j <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol',
+        map_j <- dbGetQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol',
                               ' FROM gene_phenotype m',
                               ' JOIN genes g ON g.MIMNumber = m.GeneMIMNumber',
                               ' JOIN mappings on mappings.MappingNumber = m.MappingNumber',
                               ' WHERE m.PhenotypeMIMNumber IN ', paste0('(', paste(qj$DB_Object_ID, collapse = ','), ')')
-                              )) %>%
-            dbFetch()
+                              ))
 
         m[i,j] = m[j,i] = jaccard(map_i$ApprovedSymbol, map_j$ApprovedSymbol)
         m.commonGenes[i,j] = m.commonGenes[j,i] = length(intersect(map_i$ApprovedSymbol, map_j$ApprovedSymbol))
     }
 }
-
+dbDisconnect(conn = con)
 plot.heatmap(m) + ggtitle('OMIM gene association similarity')
 plot.heatmap(m.commonGenes) + ggtitle('OMIM common gene associations')
 
@@ -235,18 +234,17 @@ m = matrix(0, nrow=nrow(standardNames), ncol = nrow(standardNames)) %>%
     `rownames<-`(standardNames$HPOTermName)
 
 m.commonGenes = m
-con <- dbConnect(SQLite(), paste0(DATADIR, '/OMIMdb.sqlite'))
 
+con <- dbConnect(SQLite(), paste0(DATADIR, '/OMIM/OMIMdb.sqlite'))
 for (i in 1:(nrow(standardNames))) {
     qi = lookupResults[[i]]$phenotypeAnnotation
     qi = qi[(DB) == 'OMIM',]
-    map_i <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol',
+    map_i <- dbGetQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.MappingNumber, g.ApprovedSymbol',
                               ' FROM gene_phenotype m',
                               ' JOIN genes g ON g.MIMNumber = m.GeneMIMNumber',
                               ' JOIN mappings on mappings.MappingNumber = m.MappingNumber',
                               ' WHERE m.PhenotypeMIMNumber IN ', paste0('(', paste(qi$DB_Object_ID, collapse = ','), ')')
-                              )) %>%
-    dbFetch()
+                              ))
     m[i,i] = 1
     m.commonGenes[i,i] = length(map_i$ApprovedSymbol)
     if (i == nrow(standardNames)) break
@@ -266,6 +264,7 @@ for (i in 1:(nrow(standardNames))) {
     }
 }
 
+dbDisconnect(conn = con)
 plot.heatmap(m) + ggtitle('OMIM gene association similarity')
 (plot.heatmap(m.commonGenes) + ggtitle('OMIM common gene associations')) %>% ggplotly()
 
@@ -274,13 +273,25 @@ plot.heatmap(m) + ggtitle('OMIM gene association similarity')
 #### The number of genes associated with each abnormality
 
 ```{r}
-p <- diag(m.commonGenes) %>%
+# groupColors = c( '#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9')
+groupColors = c('#a6cee3', '#1f78b4', '#4daf4a', 'darkgreen', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6')
+tmp <- diag(m.commonGenes) %>%
     reshape2::melt() %>%
     `$<-`('HPOTerm', rownames(.)) %>%
-    ggplot() +
-    geom_bar(aes(x=HPOTerm,y=value),stat = 'identity') +
-    theme(axis.text.x = element_text(angle=30,hjust=1), axis.title.x = element_blank())
+    merge(standardNames, by.x='HPOTerm', by.y='HPOTermName', all.x = TRUE, all.y= FALSE, sort=FALSE)
+tmp$color <- factor(tmp$query) %>% `levels<-`(groupColors) %>% as.character()
+p <- ggplot(tmp) +
+    geom_bar(aes(x=factor(HPOTerm, levels=HPOTerm),y=value, fill=query),stat = 'identity') +
+    theme_bw() +
+    theme(axis.text.y = element_text(color = tmp$color)) +
+    scale_fill_manual(values = groupColors) +
+    guides(fill=guide_legend(title='Group')) +
+    ylab('Number of genes on OMIM') +
+    xlab('Phenotype') +
+    coord_flip()
 ggplotly(p)
+p
+ggsave('../figures/hpo-omim-gene-count.png', device = 'png', width = 10, height=4.5)
 ```
 
 ```{r}
@@ -291,7 +302,6 @@ getAnnotations <- function(queryResults, annot) {
 }
 phenotypes <- getAnnotations(queryResults, c('DB', 'DB_Object_ID'))
 phenotypes <- phenotypes[(DB) == 'OMIM',]
-
 ```
 
 ```{r}
@@ -306,8 +316,4 @@ res <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.M
 
 ```
 
-```{r}
-getAnnotations(queryResults, 'DB') %>%
- table(phenotypes) %>%
-    set_names( . , hpo$name[names(.)])   
-```
+
