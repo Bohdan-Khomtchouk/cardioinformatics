@@ -1483,7 +1483,8 @@ Wellcome Trust.},
   author = {Walsh, Roddy and Thomson, Kate L. and Ware, James S. and Funke, Birgit H. and Woodley, Jessica and McGuire, Karen J. and Mazzarotto, Francesco and Blair, Edward and Seller, Anneke and Taylor, Jenny C. and Minikel, Eric V. and Consortium, Exome Aggregation and MacArthur, Daniel G. and Farrall, Martin and Cook, Stuart A. and Watkins, Hugh},
   month = feb,
   year = {2017},
-  pages = {192-203}
+  pages = {192-203},
+  annote = {[object Object]}
 }
 
 @article{Richards:2015:Standards,
@@ -1535,6 +1536,53 @@ The authors compared the pedigrees of families with the same mutation on beta ca
   month = aug,
   year = {2017},
   pages = {988-994}
+}
+
+@article{vanderVelde:2017:GAVIN,
+  title = {{{GAVIN}}: {{Gene}}-{{Aware Variant INterpretation}} for Medical Sequencing},
+  volume = {18},
+  issn = {1474-760X},
+  shorttitle = {{{GAVIN}}},
+  doi = {10.1186/s13059-016-1141-7},
+  abstract = {We present Gene-Aware Variant INterpretation (GAVIN), a new method that accurately classifies variants for clinical diagnostic purposes. Classifications are based on gene-specific calibrations of allele frequencies from the ExAC database, likely variant impact using SnpEff, and estimated deleteriousness based on CADD scores for $>$3000 genes. In a benchmark on 18 clinical gene sets, we achieve a sensitivity of 91.4\% and a specificity of 76.9\%. This accuracy is unmatched by 12 other tools. We provide GAVIN as an online MOLGENIS service to annotate VCF files and as an open source executable for use in bioinformatic pipelines. It can be found at http://molgenis.org/gavin.},
+  number = {1},
+  journal = {Genome Biology},
+  author = {{van der Velde}, K. Joeri and {de Boer}, Eddy N. and {van Diemen}, Cleo C. and {Sikkema-Raddatz}, Birgit and Abbott, Kristin M. and Knopperts, Alain and Franke, Lude and Sijmons, Rolf H. and {de Koning}, Tom J. and Wijmenga, Cisca and Sinke, Richard J. and Swertz, Morris A.},
+  month = jan,
+  year = {2017},
+  pages = {6}
+}
+
+@article{Kircher:2014:general,
+  title = {A General Framework for Estimating the Relative Pathogenicity of Human Genetic Variants},
+  volume = {46},
+  copyright = {2014 Nature Publishing Group},
+  issn = {1546-1718},
+  doi = {10.1038/ng.2892},
+  abstract = {Current methods for annotating and interpreting human genetic variation tend to exploit a single information type (for example, conservation) and/or are restricted in scope (for example, to missense changes). Here we describe Combined Annotation\textendash{}Dependent Depletion (CADD), a method for objectively integrating many diverse annotations into a single measure (C score) for each variant. We implement CADD as a support vector machine trained to differentiate 14.7 million high-frequency human-derived alleles from 14.7 million simulated variants. We precompute C scores for all 8.6 billion possible human single-nucleotide variants and enable scoring of short insertions-deletions. C scores correlate with allelic diversity, annotations of functionality, pathogenicity, disease severity, experimentally measured regulatory effects and complex trait associations, and they highly rank known pathogenic variants within individual genomes. The ability of CADD to prioritize functional, deleterious and pathogenic variants across many functional categories, effect sizes and genetic architectures is unmatched by any current single-annotation method.},
+  language = {en},
+  number = {3},
+  journal = {Nature Genetics},
+  author = {Kircher, Martin and Witten, Daniela M. and Jain, Preti and O'Roak, Brian J. and Cooper, Gregory M. and Shendure, Jay},
+  month = mar,
+  year = {2014},
+  pages = {310-315}
+}
+
+@article{Lek:2016:Analysis,
+  title = {Analysis of Protein-Coding Genetic Variation in 60,706 Humans},
+  volume = {536},
+  copyright = {2016 Nature Publishing Group},
+  issn = {1476-4687},
+  doi = {10.1038/nature19057},
+  abstract = {Large-scale reference data sets of human genetic variation are critical for the medical and functional interpretation of DNA sequence changes. Here we describe the aggregation and analysis of high-quality exome (protein-coding region) DNA sequence data for 60,706 individuals of diverse ancestries generated as part of the Exome Aggregation Consortium (ExAC). This catalogue of human genetic diversity contains an average of one variant every eight bases of the exome, and provides direct evidence for the presence of widespread mutational recurrence. We have used this catalogue to calculate objective metrics of pathogenicity for sequence variants, and to identify genes subject to strong selection against various classes of mutation; identifying 3,230 genes with near-complete depletion of predicted protein-truncating variants, with 72\% of these genes having no currently established human disease phenotype. Finally, we demonstrate that these data can be used for the efficient filtering of candidate disease-causing variants, and for the discovery of human `knockout' variants in protein-coding genes.},
+  language = {en},
+  number = {7616},
+  journal = {Nature},
+  author = {Lek, Monkol and Karczewski, Konrad J. and Minikel, Eric V. and Samocha, Kaitlin E. and Banks, Eric and Fennell, Timothy and {O'Donnell-Luria}, Anne H. and Ware, James S. and Hill, Andrew J. and Cummings, Beryl B. and Tukiainen, Taru and Birnbaum, Daniel P. and Kosmicki, Jack A. and Duncan, Laramie E. and Estrada, Karol and Zhao, Fengmei and Zou, James and {Pierce-Hoffman}, Emma and Berghout, Joanne and Cooper, David N. and Deflaux, Nicole and DePristo, Mark and Do, Ron and Flannick, Jason and Fromer, Menachem and Gauthier, Laura and Goldstein, Jackie and Gupta, Namrata and Howrigan, Daniel and Kiezun, Adam and Kurki, Mitja I. and Moonshine, Ami Levy and Natarajan, Pradeep and Orozco, Lorena and Peloso, Gina M. and Poplin, Ryan and Rivas, Manuel A. and {Ruano-Rubio}, Valentin and Rose, Samuel A. and Ruderfer, Douglas M. and Shakir, Khalid and Stenson, Peter D. and Stevens, Christine and Thomas, Brett P. and Tiao, Grace and {Tusie-Luna}, Maria T. and Weisburd, Ben and Won, Hong-Hee and Yu, Dongmei and Altshuler, David M. and Ardissino, Diego and Boehnke, Michael and Danesh, John and Donnelly, Stacey and Elosua, Roberto and Florez, Jose C. and Gabriel, Stacey B. and Getz, Gad and Glatt, Stephen J. and Hultman, Christina M. and Kathiresan, Sekar and Laakso, Markku and McCarroll, Steven and McCarthy, Mark I. and McGovern, Dermot and McPherson, Ruth and Neale, Benjamin M. and Palotie, Aarno and Purcell, Shaun M. and Saleheen, Danish and Scharf, Jeremiah M. and Sklar, Pamela and Sullivan, Patrick F. and Tuomilehto, Jaakko and Tsuang, Ming T. and Watkins, Hugh C. and Wilson, James G. and Daly, Mark J. and MacArthur, Daniel G. and Consortium, Exome Aggregation},
+  month = aug,
+  year = {2016},
+  pages = {285-291}
 }
 
 
