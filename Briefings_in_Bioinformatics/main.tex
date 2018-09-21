@@ -6,7 +6,7 @@
 \graphicspath{{../figures/}}
 
 \newcommand{\comment}[1]{\textcolor{red}{#1}}
-\newcommand{\todo}[1]{\colorbox{yellow}{#1}}
+\newcommand{\todo}[1]{\colorbox{yellow}{\parbox{1\linewidth}{#1}}}
 
 \begin{document}
 \firstpage{1}
@@ -53,17 +53,40 @@ online.}
 The queries are based on indexing with Medical Subject Heading (MeSH) Terms to avoid counting irrelevant publications. (The MeSH Database entry for \textit{cardiovascular diseases} includes many types of cardiovascular abnormalities which may occur in organs other than the circulatory system.)
 %{https://www.ncbi.nlm.nih.gov/mesh/68002318} 
 
-\todo{Remove review papers from the count}
 
-\section{The available data}
+\section{Complexity of CVD}
+
+\todo{Elaborate on these aspects: polygenic diseases, missing heritability, gene-environment interactions... Some may be overlapping.}
+
+Some quantity showing the associations of CVD with genes...
+
+\section{Profusion of data}
 
 \begin{figure}[!tpb]%figure1
 \includegraphics[width=1\linewidth]{gsm_count_by_tech.png}
 	\caption{The cumulative number of samples deposited on GEO.}\label{fig:01}
 \end{figure}
 
-\section{The possible solutions from bioinformatics}
+
+\section{Solutions from bioinformatics}
+
+\subsection{The multi-layered paths from genome to phenotype}
+
+
+\todo{Tentative: A figure/table enlisting layers of modifications that contribute to determine a phenotype, with the corresponding experimental techniques}
+%
+%\begin{itemize}
+%	\item genome
+%	\item epigenome
+%	\item transcriptome: mRNA, non-coding RNA: microRNA, long non-coding RNA
+%	\item 	proteome
+%	\item	metabolome
+%\end{itemize}
+%environmental factors
+
+
 \subsection{Bioinformatics as a tool-kit}
+
 \subsubsection{Basic research}
 for data management, computational analysis, visual representation, etc.
 
