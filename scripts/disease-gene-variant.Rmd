@@ -112,7 +112,8 @@ p = plot.heatmap(m[cl$order, cl$order]) +
           axis.text.x = element_text(size = 16),
           legend.title = element_text(size = 18),
           legend.text = element_text(size = 18)) +
-    guides(fill = guide_legend('Number of genes'))
-plotly::ggplotly(p)
+    guides(fill = guide_legend('Number of genes')) +
+    scale_fill_gradient(low='lightblue', high='darkblue')
+p
 ggsave(filename = '../figures/disgenet-intersection.png', device = 'png', width = 18, height = 18)
 ```
