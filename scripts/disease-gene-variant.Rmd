@@ -1,6 +1,6 @@
 ---
-title: "GWAS variants"
-output: html_notebook
+title: "Gene - Disease associations"
+output: html_document
 ---
 
 
