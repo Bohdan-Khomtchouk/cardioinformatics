@@ -16,31 +16,64 @@ library(tidyr)
 devtools::load_all('../')
 ```
 
+## Exploratory analysis of GWAS
+
+### Data files and structures
+
+The GWAS-provided table of `studies` contains the association of a given phenotype in a given study (represented by Pubmed ID). Thus a single pubmed id (a publication) may  have multiple rows in this table, if it reports associations with multiple phenotypes.
+
+
 ```{r}
-quilted.arrhythmia = data.table::fread('../data/CVDs/arrhythmia.tsv', sep='\t')
-quilted.cm = data.table::fread('../data/CVDs/cardiomyopathy.tsv', sep='\t')
+gwas = data.table::fread('../data/gwas/gwas_catalog_v1.0.2-associations_e93_r2018-08-28.tsv', sep='\t')
+gwas.studies = data.table::fread('../data/gwas/gwas_catalog_v1.0.2-studies_r2018-09-15.tsv', sep='\t')
+test.pmid = gwas.studies %>% count(PUBMEDID) %>% filter(n > 1) %>% `[[`(1,'PUBMEDID')
+```
+
+For example the study `r test.pmid` has `r nrow(filter(gwas.studies, PUBMEDID == test.pmid))`, each has a different `MAPPED_TRAIT`,
+
+```{r}
+filter(gwas.studies, PUBMEDID == test.pmid)
+```
+
+Each of such unique pair (PMID - MAPPED_TRAIT) is given a study accession uniquely identify the record within GWAS database.
+
+```{r}
+nrow(gwas.studies) == gwas.studies$`STUDY ACCESSION` %>% unique() %>% length()
+```
+
+The `associations` table supposedly report one variant per row. However, there are quite a number of row in which variants (SNPs) are concatenated together. There are `r gwas[grepl(pattern = ";", gwas$SNPS),] %>% nrow()` rows of such concatenated values. Below are some examples
+
+```{r}
+gwas[grepl(pattern = ";", gwas$SNPS), 'SNPS']
+```
+
+Let's check if there are enough information to split these variants into their own rows
+
+```{r}
+cols.studies = colnames(gwas.studies)
+cols.assoc = colnames(gwas)
 ```
 
 ```{r}
-testVar = 'rs74315379' # multiple conflicting clinical significance
-variations = quilted.cm$Variation %>% unique()
-quilted.cm%>%
-    `[`(.$Variation == testVar)
+strsplit(gwas$SNPS,split = ';')
 ```
 
 ```{r}
-
-quilted.cm[quilted.cm$Variation == 'rs1064792925',]
-gwas = data.table::fread('../data/gwas_catalog_v1.0.2-associations_e93_r2018-08-28.tsv', sep='\t')
+count(gwas, CONTEXT)
+gwas[gwas$CONTEXT == "3_prime_UTR_variant; intron_variant; intergenic_variant",]
+setdiff(gwas.studies$PUBMEDID %>% unique(),gwas$PUBMEDID %>% unique())
 gwas$`DISEASE/TRAIT` %>% unique() %>% length()
+gwas$CONTEXT %>%  unique()  %>% length()
 ```
 
 ```{r}
 gwas.mi = gwas[grep('[mM]yocardial infarction', gwas$`DISEASE/TRAIT`),] %>%
-    `$<-`('DATE', as.Date(.$DATE))
+    `$<-`('DATE', as.Date(.$DATE)) %>%
+    `$<-`('RISK_ALLELE_FREQUENCY', as.numeric(.$`RISK ALLELE FREQUENCY`))
 ggplot(gwas.mi) +
-    geom_point(aes(x=DATE,y=PVALUE_MLOG, color=SNPS)) +
+    geom_point(mapping = aes_string(x='PVALUE_MLOG',y='RISK_ALLELE_FREQUENCY', color='DATE')) +
     theme(legend.position = 'none')
+
 ```
 
 ## Dilated myocardiopathy
@@ -68,7 +101,7 @@ The number of genes associated with
 * _Dilated cardiomyopathy, recessive is `r dcm.recessive[['Reported gene(s)']] %>% trimws() %>% sapply(strsplit, split = '\r') %>% do.call(c,.) %>% as.character() %>% unique() %>% length()`
 * _Dilated cardiomyopathy (both) is `r dcm.loci[['Reported gene(s)']] %>% trimws() %>% sapply(strsplit, split = '\r') %>% do.call(c,.) %>% as.character() %>% unique() %>% length()`
 
-### disgenet
+## disgenet
 
 ```{r}
 dgn.mappings = data.table::fread('../data/disgenet/disease_mappings.tsv', sep='\t')
@@ -88,7 +121,7 @@ dgn.CVDs = data.table::fread('../data/disgenet/all_gene_disease_associations.tsv
     subset(diseaseId %in% dgn.cvdIds$diseaseId)
 ```
 
-#### Gene association similarity among the diseases
+### Gene association similarity among the diseases
 
 ```{r}
 m = matrix(0, nrow=nrow(dgn.cvdIds),  ncol=nrow(dgn.cvdIds)) %>%
