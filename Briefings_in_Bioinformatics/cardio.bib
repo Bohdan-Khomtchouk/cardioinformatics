@@ -534,8 +534,7 @@ More than 50,000 exomes, coupled with electronic health records, inform on medic
   publisher = {{Elsevier}},
   editor = {Zipes, Douglas P. and Libby, Peter and Bonow, Robert O. and Mann, Douglas L. and Tomaselli, Gordon F. and Braunwald, Eugene},
   year = {2019},
-  note = {OCLC: 1048373751},
-  annote = {[object Object]}
+  note = {OCLC: 1048373751}
 }
 
 @article{:2013:Largescale,
@@ -1944,6 +1943,200 @@ Human health is dependent upon environmental exposures, yet the diversity and va
   year = {2018},
   keywords = {exposome,omics,new tech},
   pages = {277-291.e31},
+  annote = {\section{Summary}
+
+\subsection{Data collection}
+
+Wearable device designed to capture biotic and abiotic exposure within 2 meter of the participants.
+
+\begin{itemize}
+
+\item Abiotic airbone particles were collected and measured in real time using RTI MicroPEM
+
+\item Biotic samples were collected by the filters before moving to MicroPEM unit
+
+\item Each sampling and monitoring periodlasting for 1-14 days. At the end of such period, filters and cartridges were removed and stored at -80oC. For biotic samples, DNA and RNA were extracted and libraries were prepared for next-gen sequencing.
+
+\end{itemize}
+
+Each sample gave a median of 62.2M (DNA) and 45.8M (RNA) paired-end reads. In total, the data set has 43B DNA and 30B RNA reads. The study covered 15 individuals, sampled over the period of 890 days.
+
+\section{Notes}
+
+A vivid example of how new technologies enable massive data collection and thus create immense challenges for management and analysis.
+
+~}
+}
+
+@article{Yun:2016:3CDB,
+  title = {{{3CDB}}: A Manually Curated Database of Chromosome Conformation Capture Data},
+  volume = {2016},
+  shorttitle = {{{3CDB}}},
+  doi = {10.1093/database/baw044},
+  abstract = {Abstract.  Chromosome conformation capture (3C) is a biochemical technology to analyse contact frequencies between selected genomic sites in a cell population.},
+  language = {en},
+  journal = {Database},
+  author = {Yun, Xiaoxiao and Xia, Lili and Tang, Bixia and Zhang, Hui and Li, Feifei and Zhang, Zhihua},
+  month = jan,
+  year = {2016},
+  keywords = {3C,chromatin interaction,Database}
+}
+
+@article{Teng:2015:4DGenome,
+  title = {{{4DGenome}}: A Comprehensive Database of Chromatin Interactions},
+  volume = {31},
+  issn = {1367-4803},
+  shorttitle = {{{4DGenome}}},
+  doi = {10.1093/bioinformatics/btv158},
+  abstract = {Abstract.  Motivation: The 3D structure of the genome plays a critical role in regulating gene expression. Recent progress in mapping technologies for chromatin},
+  language = {en},
+  number = {15},
+  journal = {Bioinformatics},
+  author = {Teng, Li and He, Bing and Wang, Jiahui and Tan, Kai},
+  month = aug,
+  year = {2015},
+  keywords = {Database,3C,chromatin interaction,5C,ChIA-PET,Capture-C,Hi-C,IM-PET,4C},
+  pages = {2560-2564},
+  annote = {Summary
+
+\begin{itemize}
+
+\item URL \href{http://4dgenome.int-med.uiowa.edu/}{http://4dgenome.int-med.uiowa.edu/}, got time out
+
+\item New URL (googled) \href{https://4dgenome.research.chop.edu/}{https://4dgenome.research.chop.edu/}
+
+\item Data format
+
+\begin{itemize}
+
+\item ~~~ Each record contains 15-tab delimited columns
+
+\begin{itemize}
+
+\item Columns 1-6 describe the genomic coordinates of the interacting regions
+
+\item Column 7-8 describe genes (or intergenic region) located in the interacting regions
+
+\item Column 9-10 describe the organism and cell/tissue types
+
+\item Column 11-14 describe the detection method, confidenc scoers, contact frequency for the interaction
+
+\item Column 15 provides the Pubmed ID that reports the interaction
+
+\end{itemize}
+
+\item Format recognized by BioGrid and Cytoscape
+
+\end{itemize}
+
+\end{itemize}
+
+~}
+}
+
+@article{Ziebarth:2013:CTCFBSDB,
+  title = {{{CTCFBSDB}} 2.0: A Database for {{CTCF}}-Binding Sites and Genome Organization},
+  volume = {41},
+  issn = {0305-1048},
+  shorttitle = {{{CTCFBSDB}} 2.0},
+  doi = {10.1093/nar/gks1165},
+  abstract = {Abstract.  CTCF is a highly conserved transcriptional regulator protein that performs diverse functions such as regulating gene expression and organizing the 3D},
+  language = {en},
+  number = {D1},
+  journal = {Nucleic Acids Research},
+  author = {Ziebarth, Jesse D. and Bhattacharya, Anindya and Cui, Yan},
+  month = jan,
+  year = {2013},
+  keywords = {chromatin interaction,CTCF,Database},
+  pages = {D188-D194}
+}
+
+@article{Mei:2017:Cistrome,
+  title = {Cistrome {{Data Browser}}: A Data Portal for {{ChIP}}-{{Seq}} and Chromatin Accessibility Data in Human and Mouse},
+  volume = {45},
+  issn = {0305-1048},
+  shorttitle = {Cistrome {{Data Browser}}},
+  doi = {10.1093/nar/gkw983},
+  abstract = {Abstract.  Chromatin immunoprecipitation, DNase I hypersensitivity and transposase-accessibility assays combined with high-throughput sequencing enable the geno},
+  language = {en},
+  number = {D1},
+  journal = {Nucleic Acids Research},
+  author = {Mei, Shenglin and Qin, Qian and Wu, Qiu and Sun, Hanfei and Zheng, Rongbin and Zang, Chongzhi and Zhu, Muyuan and Wu, Jiaxin and Shi, Xiaohui and Taing, Len and Liu, Tao and Brown, Myles and Meyer, Clifford A. and Liu, X. Shirley},
+  month = jan,
+  year = {2017},
+  keywords = {ATAC-Seq,Brain,ChIP-Seq,Database,DNase-Seq,human,mouse},
+  pages = {D658-D662},
+  annote = {\section{Summary}
+
+\begin{itemize}
+
+\item Available at http://cistrome.org/db
+
+\item Data sources
+
+\begin{itemize}
+
+\item ~~~ GEO
+
+\item ~~~ ENCODE
+
+\item ~~~ Roadmap Epigenomics project
+
+\end{itemize}
+
+\item Metadata annotated for each sample: species, biological sources (cell line/population, cell type, tissue origin, strain, disease state), factor name (what is it?), PubmedId, citation.
+
+\end{itemize}}
+}
+
+@article{Yang:2015:CLIPdb,
+  title = {{{CLIPdb}}: A {{CLIP}}-Seq Database for Protein-{{RNA}} Interactions},
+  volume = {16},
+  issn = {1471-2164},
+  shorttitle = {{{CLIPdb}}},
+  doi = {10.1186/s12864-015-1273-2},
+  abstract = {RNA-binding proteins (RBPs) play essential roles in gene expression regulation through their interactions with RNA transcripts, including coding, canonical non-coding and long non-coding RNAs. Large amounts of crosslinking immunoprecipitation (CLIP)-seq data (including HITS-CLIP, PAR-CLIP, and iCLIP) have been recently produced to reveal transcriptome-wide binding sites of RBPs at the single-nucleotide level.},
+  number = {1},
+  journal = {BMC Genomics},
+  author = {Yang, Yu-Cheng T. and Di, Chao and Hu, Boqin and Zhou, Meifeng and Liu, Yifang and Song, Nanxi and Li, Yang and Umetsu, Jumpei and Lu, Zhi John},
+  month = feb,
+  year = {2015},
+  keywords = {CLIP-seq,Database,human,mouse,RNA-Binding Proteins,worm,yeast},
+  pages = {51},
+  annote = {\section{Summary}
+
+\begin{itemize}
+
+\item 
+
+URL: \href{http://clipdb.ncrnalab.org,}{http://clipdb.ncrnalab.org,}
+
+\item 
+
+New (redirected URL) \href{http://lulab.life.tsinghua.edu.cn/postar2/rbp2.php}{http://lulab.life.tsinghua.edu.cn/postar2/rbp2.php}
+
+\item 
+
+includes 395 CLIP-seq data sets for 111 RNA-binding proteins from human, mouse, worm and yeast.
+
+\end{itemize}}
+}
+
+@article{Zheng:2018:dreamBase,
+  title = {{{dreamBase}}: {{DNA}} Modification, {{RNA}} Regulation and Protein Binding of Expressed Pseudogenes in Human Health and Disease},
+  volume = {46},
+  issn = {0305-1048},
+  shorttitle = {{{dreamBase}}},
+  doi = {10.1093/nar/gkx972},
+  abstract = {Abstract.  Although thousands of pseudogenes have been annotated in the human genome, their transcriptional regulation, expression profiles and functional mecha},
+  language = {en},
+  number = {D1},
+  journal = {Nucleic Acids Research},
+  author = {Zheng, Ling-Ling and Zhou, Ke-Ren and Liu, Shun and Zhang, Ding-Yao and Wang, Ze-Lin and Chen, Zhi-Rong and Yang, Jian-Hua and Qu, Liang-Hu},
+  month = jan,
+  year = {2018},
+  keywords = {Database,pseudogenes},
+  pages = {D85-D91},
   annote = {[object Object]}
 }
 
