@@ -28,6 +28,17 @@ plot.heatmap <- function(X) {
         coord_fixed() 
     return(p)   
 }
+
+commonNames = c('coronary artery disease',
+                'congestive heart failure',
+                'congenital heart defect',
+                'hypertension',
+                'cardiomyopathy',
+                'stroke',
+                'myocardial infarction',
+                'angina',
+                'arrhythmia')
+
 ```
 
 ## Retrieve the standard terms for each abnormality of interest
@@ -75,15 +86,6 @@ traverse <- function(ontology, rootId, FUN = function(x) {return(x)}) {
 Querying for terms and phenotype annotations using regular terms
 
 ```{r}
-commonNames = c('coronary artery disease',
-                'congestive heart failure',
-                'congenital heart defect',
-                'hypertension',
-                'cardiomyopathy',
-                'stroke',
-                'myocardial infarction',
-                'angina',
-                'arrhythmia')
 
 queryResults = list()
 for (name in commonNames) {
@@ -315,5 +317,3 @@ res <- dbSendQuery(con, paste('SELECT m.PhenotypeMIMNumber, m.GeneMIMNumber, m.M
 
 
 ```
-
-
