@@ -41,21 +41,58 @@ Each of such unique pair (PMID - MAPPED_TRAIT) is given a study accession unique
 nrow(gwas.studies) == gwas.studies$`STUDY ACCESSION` %>% unique() %>% length()
 ```
 
-The `associations` table supposedly report one variant per row. However, there are quite a number of row in which variants (SNPs) are concatenated together. There are `r gwas[grepl(pattern = ";", gwas$SNPS),] %>% nrow()` rows of such concatenated values. Below are some examples
+The `associations` table report one _association_ per row. There are three types of associations.
+1. The single SNP - trait association
+2. The multiple-SNP haplotype - trait association, in which SNPs are separated by `;`
+3. The SNP-SNP interaction, in which the pairs are described as `snp1 x snp2`
+
+Some examples of multiple-SNP haplotypes
 
 ```{r}
-gwas[grepl(pattern = ";", gwas$SNPS), 'SNPS']
+gwas[grepl(pattern = ";", gwas$SNPS), c('SNPS', 'MAPPED_TRAIT', 'PVALUE_MLOG')]
+```
+Some examples of SNP interaction studies
+
+```{r}
+gwas[grepl(pattern = " x ", gwas$SNPS), c('SNPS', 'MAPPED_TRAIT', 'PVALUE_MLOG') ]
 ```
 
-Let's check if there are enough information to split these variants into their own rows
+There are some SNPs that are not given a name with the pattern `rsXXXXX`, for example
 
 ```{r}
-cols.studies = colnames(gwas.studies)
-cols.assoc = colnames(gwas)
+gwas[!grepl(pattern = 'rs\\d+', gwas$SNPS, perl=TRUE), 'SNPS']
+```
+
+### SNPs reported both as single SNP and in the haplotypes
+
+There are SNPs associated with traits both as an individual variant and in linkage with other variants. The fact that a single SNP is associated with a trait does not exclude it from the linkage with other SNPs, but it is simply the result of single-SNP focused analyses.
+
+```{r}
+# start = proc.time()
+type1 = gwas[(!grepl(pattern = ';', gwas$SNPS) & !grepl(pattern = ' x ', gwas$SNPS)),]$SNPS %>% unique()
+type2 = gwas[grepl(pattern = ';', gwas$SNPS),]$SNPS %>% unique()
+type3 = gwas[grepl(pattern = ' x ', gwas$SNPS),]$SNPS %>% unique()
+singleInMulti = sapply(type1, FUN = function(y) {return(grep(pattern = paste0('\\b', y, '\\b'), x = type2, value = TRUE, perl = TRUE))})
+# singleInInter = sapply(type1, FUN = function(y) {return(grep(pattern = paste0('\\b', y, '\\b'), x = type3, value = TRUE, perl = TRUE))})
+# dt = proc.time() - start
+# print(dt)
+cnt.singleInMulti = sapply(singleInMulti, FUN = length)
+tmp<-singleInMulti[which(cnt.singleInMulti > 1)] %>%
+    do.call(c,.) %>%
+    c(names(singleInMulti[which(cnt.singleInMulti > 1)])) %>%
+    as.character()
+dplyr::filter(gwas, SNPS %in% tmp)[c('SNPS', 'DISEASE/TRAIT')]
+```
+
+
+### Case study: `rs10454444`
+
+```{r}
+gwas[grepl(pattern = '\\brs10454444\\b', gwas$SNPS), c('SNPS', 'STRONGEST SNP-RISK ALLELE', 'RISK ALLELE FREQUENCY', 'PUBMEDID', 'STUDY', 'DISEASE/TRAIT', 'INITIAL SAMPLE SIZE', 'REPLICATION SAMPLE SIZE', 'REPORTED GENE(S)', 'MAPPED_GENE', 'PVALUE_MLOG')]
 ```
 
 ```{r}
-strsplit(gwas$SNPS,split = ';')
+gwas[gwas$PUBMEDID == '25948407',c('SNPS', 'STRONGEST SNP-RISK ALLELE', 'RISK ALLELE FREQUENCY', 'DISEASE/TRAIT', 'INITIAL SAMPLE SIZE', 'REPLICATION SAMPLE SIZE', 'REPORTED GENE(S)', 'MAPPED_GENE', 'PVALUE_MLOG') ]
 ```
 
 ```{r}
@@ -73,7 +110,13 @@ gwas.mi = gwas[grep('[mM]yocardial infarction', gwas$`DISEASE/TRAIT`),] %>%
 ggplot(gwas.mi) +
     geom_point(mapping = aes_string(x='PVALUE_MLOG',y='RISK_ALLELE_FREQUENCY', color='DATE')) +
     theme(legend.position = 'none')
+count(gwas.mi, CONTEXT)
+```
 
+```{r}
+dgn.mappings = data.table::fread('../data/disgenet/disease_mappings.tsv', sep='\t')
+standardNames = data.table::fread('../data/conditionList.tsv', sep='\t') %>%
+    merge(dgn.mappings[,c('diseaseId', 'code', 'name')], by.x = 'HPOTermId', by.y= 'code', all.x = TRUE, all.y = FALSE, sort = FALSE)
 ```
 
 ## Dilated myocardiopathy
