@@ -84,6 +84,46 @@ tmp<-singleInMulti[which(cnt.singleInMulti > 1)] %>%
 dplyr::filter(gwas, SNPS %in% tmp)[c('SNPS', 'DISEASE/TRAIT')]
 ```
 
+### Contexts of the variants
+
+```{r}
+split_records <- function(x, cols, split = ';') {
+    lapply(1:nrow(x), FUN = function(i) {
+        lapply(cols, function(j) {
+            return(strsplit(x[[j]], split = split) %>% unlist() %>% trimws())
+        }) %>%
+            do.call(cbind, .) %>%
+            return()
+    }) %>%
+        do.call(rbind, .) %>%
+        data.frame() %>%
+        set_names(cols) %>%
+        dplyr::distinct() %>%
+        return()
+}
+
+type1 = gwas[(!grepl(pattern = ';', gwas$SNPS) & !grepl(pattern = ' x ', gwas$SNPS)),c('SNPS', 'CONTEXT')]
+type2 = gwas[grepl(pattern = ';', gwas$SNPS),c('SNPS', 'CONTEXT')]
+type3 = gwas[grepl(pattern = ' x ', gwas$SNPS),c('SNPS', 'CONTEXT')]
+
+variant.contexts = split_records(type2, cols = c('SNPS', 'CONTEXT'), split = ';') %>%
+    rbind(split_records(type3, cols = c('SNPS', 'CONTEXT'), split = ' x ')) %>%
+    rbind(type1) %>%
+    dplyr::distinct()
+
+# sanity check -- one variant, multiple contexts
+dplyr::count(variant.contexts, SNPS)
+
+dplyr::count(variant.contexts, CONTEXT) %>%
+    ggplot(mapping =  aes(x = CONTEXT, y = n)) +
+    geom_bar(stat='identity') + coord_flip()
+
+count(gwas, CONTEXT)
+gwas[gwas$CONTEXT == "3_prime_UTR_variant; intron_variant; intergenic_variant",]
+setdiff(gwas.studies$PUBMEDID %>% unique(),gwas$PUBMEDID %>% unique())
+gwas$`DISEASE/TRAIT` %>% unique() %>% length()
+gwas$CONTEXT %>%  unique()  %>% length()
+```
 
 ### Case study: `rs10454444`
 
@@ -95,13 +135,7 @@ gwas[grepl(pattern = '\\brs10454444\\b', gwas$SNPS), c('SNPS', 'STRONGEST SNP-RI
 gwas[gwas$PUBMEDID == '25948407',c('SNPS', 'STRONGEST SNP-RISK ALLELE', 'RISK ALLELE FREQUENCY', 'DISEASE/TRAIT', 'INITIAL SAMPLE SIZE', 'REPLICATION SAMPLE SIZE', 'REPORTED GENE(S)', 'MAPPED_GENE', 'PVALUE_MLOG') ]
 ```
 
-```{r}
-count(gwas, CONTEXT)
-gwas[gwas$CONTEXT == "3_prime_UTR_variant; intron_variant; intergenic_variant",]
-setdiff(gwas.studies$PUBMEDID %>% unique(),gwas$PUBMEDID %>% unique())
-gwas$`DISEASE/TRAIT` %>% unique() %>% length()
-gwas$CONTEXT %>%  unique()  %>% length()
-```
+
 
 ```{r}
 gwas.mi = gwas[grep('[mM]yocardial infarction', gwas$`DISEASE/TRAIT`),] %>%
@@ -144,7 +178,58 @@ The number of genes associated with
 * _Dilated cardiomyopathy, recessive is `r dcm.recessive[['Reported gene(s)']] %>% trimws() %>% sapply(strsplit, split = '\r') %>% do.call(c,.) %>% as.character() %>% unique() %>% length()`
 * _Dilated cardiomyopathy (both) is `r dcm.loci[['Reported gene(s)']] %>% trimws() %>% sapply(strsplit, split = '\r') %>% do.call(c,.) %>% as.character() %>% unique() %>% length()`
 
+## GWAS
+
+### Mapping disease names
+
+```{r}
+gwas.queries <- data.table::fread('../data/conditionList.tsv', sep='\t')$query %>% unique() %>%
+    sapply(FUN = function(y) {
+        gwas[grepl(pattern = y, x = gwas$MAPPED_TRAIT, ignore.case = TRUE) | grepl(pattern = y, x = gwas$`DISEASE/TRAIT`, ignore.case = TRUE), 'MAPPED_TRAIT'] %>%
+            return()
+    })
+
+dgn.mappings = data.table::fread('../data/disgenet/disease_mappings.tsv', sep='\t')
+standardNames = data.table::fread('../data/conditionList.tsv', sep='\t') %>%
+    merge(dgn.mappings[,c('diseaseId', 'code', 'name')], by.x = 'HPOTermId', by.y= 'code', all.x = TRUE, all.y = FALSE, sort = FALSE)
+```
+
+### All the associations with CVDs
+
+
+### Gene association similarity among the diseases
+
+```{r}
+m = matrix(0, nrow=nrow(dgn.cvdIds),  ncol=nrow(dgn.cvdIds)) %>%
+    set_rownames(dgn.cvdIds$name) %>%
+    set_colnames(dgn.cvdIds$name)
+for (i in 1:nrow(m)) {
+    for (j in i:ncol(m)) {
+        associations_i = subset(dgn.CVDs, diseaseId %in% dgn.cvdIds[i,'diseaseId']) %>% `$`('geneId') %>% unique()
+        if (i == j) m[i,j] = length(associations_i)
+        else {
+            associations_j = subset(dgn.CVDs, diseaseId %in% dgn.cvdIds[j, 'diseaseId']) %>% `$`('geneId') %>% unique()
+            m[i,j] = m[j,i] = intersect(associations_i, associations_j) %>% length()
+        }
+    }
+}
+
+cl = hclust(as.dist(-m))
+cl$order
+p = plot.heatmap(m[cl$order, cl$order]) +
+    theme(axis.text.y = element_text(size = 18),
+          axis.text.x = element_text(size = 16),
+          legend.title = element_text(size = 18),
+          legend.text = element_text(size = 18)) +
+    guides(fill = guide_legend('Number of genes')) +
+    scale_fill_gradient(low='lightblue', high='darkblue')
+p
+ggsave(filename = '../figures/disgenet-intersection.png', device = 'png', width = 18, height = 18)
+```
+
 ## disgenet
+
+### Mapping disease names to database unique index
 
 ```{r}
 dgn.mappings = data.table::fread('../data/disgenet/disease_mappings.tsv', sep='\t')
@@ -152,7 +237,7 @@ standardNames = data.table::fread('../data/conditionList.tsv', sep='\t') %>%
     merge(dgn.mappings[,c('diseaseId', 'code', 'name')], by.x = 'HPOTermId', by.y= 'code', all.x = TRUE, all.y = FALSE, sort = FALSE)
 ```
 
-All the associations with CVDs found in Disgenet
+### All the associations with CVDs found in Disgenet
 
 ```{r}
 dgn.cvdIds = standardNames %>%
