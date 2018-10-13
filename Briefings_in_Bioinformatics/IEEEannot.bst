@@ -101,7 +101,7 @@ FUNCTION {default.is.use.paper} { #1 }
 
 % #0 turns off the forced use of "et al."
 % #1 enables
-FUNCTION {default.is.forced.et.al} { #0 }
+FUNCTION {default.is.forced.et.al} { #1 }
 
 % The maximum number of names that can be present beyond which an "et al."
 % usage is forced. Be sure that num.names.shown.with.forced.et.al (below)
