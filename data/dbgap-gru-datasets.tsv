@@ -1,0 +1,118 @@
+Study Name	Study Accession	Topic	16s rRNA (NGS)	CNV Genotypes	Chromatin (NGS)	Genomic Sequence Amplicon (NGS)	Methylation (CpG)	Methylome sequencing	QTL Results	RNA Seq (NGS)	SNP Genotypes (Array)	SNP Genotypes (NGS)	SNP Genotypes (PCR)	SNP Genotypes (imputed)	SNP/CNV Genotypes (NGS)	SNP/CNV Genotypes (imputed)	SNV (.MAF)	SNV Aggregate (.MAF)	Targeted Genome (NGS)	Whole Exome (NGS)	Whole Genome (NGS)	mRNA Expression (Array)	miRNA (NGS)
+Genome-Wide Association Study of Amyotrophic Lateral Sclerosis	phs000101.v5.p1		0	0	0	0	0	0	0	0	15401	247	0	0	0	0	0	0	0	247	0	0	0
+Ischemic Stroke Genetics Study (ISGS)	phs000102.v1.p1	CVD	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	0	0	0	0
+CIDR: Genome Wide Association Study in Familial Parkinson Disease (PD)	phs000126.v2.p1		0	0	0	0	0	0	0	0	943	0	0	0	0	0	0	0	0	0	0	0	0
+GWAS for Genetic Determinants of Bone Fragility	phs000138.v2.p1		0	0	0	0	0	0	0	0	1487	0	0	0	0	0	0	0	0	0	0	0	0
+NHGRI Tumor Sequencing Project (Lung Adenocarcinoma)	phs000144.v1.p1		0	0	0	0	0	0	0	0	384	0	0	0	0	0	0	0	0	0	0	0	0
+POPRES: Population Reference Sample	phs000145.v4.p2		0	0	0	0	0	0	0	0	4077	3381	0	0	0	0	0	0	0	0	0	0	0
+Whole-Genome Sequencing of Acute Myeloid Leukemia	phs000159.v8.p4		0	0	9	0	0	9	0	7	0	1	0	0	0	0	0	0	28	32	87	0	0
+Genetics Consortium for Late Onset of Alzheimer's Disease (LOAD CIDR Project)	phs000160.v1.p1		0	0	0	0	0	0	0	0	1132	0	0	0	0	0	0	0	0	0	0	0	0
+NIA - Late Onset Alzheimer's Disease and National Cell Repository for Alzheimer's Disease Family Study: Genome-Wide Association Study for Susceptibility Loci	phs000168.v2.p2		0	0	0	0	0	0	0	0	3007	0	0	0	0	0	0	0	0	0	0	0	0
+Whole Genome Association Study of Visceral Adiposity in the HABC Study	phs000169.v1.p1		0	0	0	0	0	0	0	0	2801	0	0	0	0	0	0	0	0	0	0	0	0
+Genetic Analysis of Limb Malformation Disorders: Freeman Sheldon Syndrome Exome Sequencing Study (LMD-FSS)	phs000204.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	3	0	0	0
+International Standards for Cytogenomic Arrays	phs000205.v6.p2		0	48972	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Genetic Analysis of Limb Malformation Disorders: Miller Syndrome Sequencing Study (LMD-MS)	phs000244.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	4	0	0
+Genome-Wide Association Study of Celiac Disease	phs000274.v1.p1		0	0	0	0	0	0	0	0	2246	0	0	0	0	0	0	0	0	0	0	0	0
+STAMPEED: Northern Finland Birth Cohort 1966 (NFBC1966)	phs000276.v2.p1		0	0	0	0	0	0	0	0	5402	0	0	0	0	0	0	0	4943	586	0	0	0
+NHLBI GO-ESP: Lung Cohorts Exome Sequencing Project (Pulmonary Arterial Hypertension)	phs000290.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	78	0	0	0
+NHLBI GO-ESP: Lung Cohorts Exome Sequencing Project (Lung Health Study of Chronic Obstructive Pulmonary Disease)	phs000291.v2.p1		0	0	0	0	0	0	0	0	0	337	0	0	0	0	0	0	0	337	0	0	0
+The Familial Intracranial Aneurysm Linkage Study (FIA)	phs000293.v1.p1		0	0	0	0	0	0	0	0	2073	0	0	0	0	0	0	0	0	0	0	0	0
+STAMPEED: Myocardial Infarction Genetics Consortium (MIGen)	phs000294.v1.p1	CVD	0	0	0	0	0	0	0	0	6042	0	0	0	0	0	0	0	0	0	0	0	0
+Autism Sequencing Consortium (ASC)	phs000298.v4.p3		0	0	0	0	0	0	0	0	0	1964	0	0	0	0	0	0	0	2450	0	0	0
+Genome-Wide Association Study of Amyotrophic Lateral Sclerosis in Finland	phs000344.v1.p1		0	0	0	0	0	0	0	0	896	0	0	0	0	0	0	0	0	0	0	0	0
+SNPs and Extent of Atherosclerosis (SEA) Study	phs000349.v1.p1		0	0	0	0	0	0	0	0	1068	0	0	0	0	0	0	0	0	0	0	0	0
+NHLBI GO-ESP Family Studies: Pulmonary Arterial Hypertension	phs000354.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	12	0	0	0
+Genetic Modifiers of Huntington's Disease	phs000371.v2.p1		0	0	0	0	0	0	0	0	1206	0	0	0	0	0	0	0	0	221	0	0	0
+Genomic Sequencing of Colorectal Adenocarcinomas	phs000374.v1.p1		0	0	0	0	0	0	0	0	9	0	0	0	0	0	0	0	0	0	0	0	0
+Exome Sequencing of arPEO	phs000392.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+The Genetic Architecture of Smoking and Smoking Cessation	phs000404.v1.p1		0	0	0	0	0	0	0	0	1491	0	0	1417	0	0	0	0	0	0	0	0	0
+Next Generation Mendelian Genetics: Malignant Hyperthermia	phs000405.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	13	0	0	0
+NHLBI GO-ESP: Lung Cohorts Exome Sequencing Project (Asthma)	phs000422.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	191	0	0	0
+Whole Exome Sequencing of Chronic Lymphocytic Leukemia	phs000435.v3.p1		0	0	0	0	0	116	0	74	128	0	0	0	0	0	0	160	0	167	4	0	0
+Drug Resistant Hypertension in African Americans' Exome	phs000442.v1.p1	CVD	0	0	0	0	0	0	0	0	0	91	0	0	0	0	0	0	0	91	0	0	0
+Prostate Cancer Genome Sequencing Project	phs000447.v1.p1		0	0	0	0	0	0	0	0	27	0	0	0	0	0	0	0	0	22	9	0	0
+Melanoma Genome Sequencing Project	phs000452.v2.p1		0	0	0	0	0	0	0	0	50	0	0	0	0	0	0	0	0	50	0	0	0
+Dobyns DBD	phs000455.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	10	0	0	0
+The Molecular Basis of Inherited Reproductive Disorders	phs000475.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0
+NHLBI Exome Sequencing in SCID	phs000479.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	3	0	0	0
+Cholesterol and Pharmacogenetics (CAP) Study	phs000481.v2.p1	CVD	0	0	0	0	0	0	0	157	597	0	0	0	0	0	0	0	0	0	0	0	0
+Genomic Sequencing of Lung Adenocarcinoma	phs000488.v2.p1		0	0	0	0	0	0	0	0	30	0	0	0	0	0	0	0	0	30	8	0	0
+Non-Invasive Whole Genome Sequencing of a Human Fetus	phs000500.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6	0	0
+Genome Sequencing of Hepatocellular Carcinoma	phs000509.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	89	0	0	0
+Identification of Genes Involved in Familial Coronary Artery Disease	phs000514.v1.p1	CVD	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	19	0	0	0
+Genome Sequencing of Pancreatic Ductal Adenocarcinoma	phs000516.v2.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	59	24	0	0	0
+NHLBI GO-ESP Family Studies: Idiopathic Bronchiectasis	phs000518.v1.p1		0	0	0	0	0	0	0	0	0	24	0	0	0	0	0	0	0	24	0	0	0
+Retrotransposition in Colorectal Cancer	phs000536.v2.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	13	0	0	0	0
+Next Generation Mendelian Genetics: Familial Hemophagocytic Lymphohistiocytosis	phs000537.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	0	0	0
+Next Generation Mendelian Genetics: Congenital Hyperinsulinism	phs000539.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	0	0	0
+Next Generation Mendelian Genetics: Neonatal Diabetes	phs000542.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	0	0	0
+Familial Exome Sequencing in Rare Pediatric Phenotypes	phs000553.v1.p1		0	0	0	0	0	0	0	0	6	0	0	0	0	0	0	0	0	6	0	0	0
+Minnesota Center for Twin and Family Research (MCTFR)	phs000620.v1.p1		0	0	0	0	0	0	0	0	5960	0	0	0	0	0	0	0	0	0	981	0	0
+Rare Mendelian Disease in Old Order Amish and Mennonite Patients	phs000623.v1.p1		0	0	0	0	0	0	0	0	0	105	0	0	0	0	0	0	0	106	0	0	0
+Whole Exome Sequencing for Familial Intracranial Aneurysm (FIA I-II) Study	phs000636.v1.p1		0	0	0	0	0	0	0	0	0	45	0	0	0	0	0	0	0	45	0	0	0
+Study of Adaptation to Hypoxia in Ethiopian Highlanders	phs000647.v1.p1		0	0	0	0	0	0	0	0	0	13	0	0	0	0	0	0	0	0	0	0	0
+Genetics of Inherited Muscle Disease	phs000655.v3.p1		0	0	0	0	0	0	0	52	0	403	0	0	0	0	0	0	0	365	84	0	0
+Mount Sinai Hospital (MSH, Toronto, CANADA) pelvic pouch microbiome study	phs000659.v1.p1		80	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Chinese Alternating Hemiplegia of Childhood (AHC) Disease Study	phs000660.v1.p1		0	0	0	0	0	0	0	0	0	12	0	0	0	0	0	0	0	12	0	0	0
+Genome Variations Among the Aboriginals in Malaysia	phs000664.v1.p1		0	0	0	0	0	0	0	0	34	0	0	0	0	0	0	0	0	0	0	0	0
+A Family-Based Study of Genes and Environment in Young-Onset Breast Cancer	phs000678.v1.p1		0	0	0	0	0	0	0	0	3342	0	0	0	0	0	0	0	0	0	0	0	0
+Whole-genome sequencing in multiplex epilepsy families	phs000690.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	10	36	0	0
+CIP: Differential Response to Hydroxyurea and Incidence of Stroke in Sickle Cell Disease	phs000691.v2.p1	CVD	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	651	0	0	0
+University of Washington Center for Mendelian Genomics (UW-CMG)	phs000693.v5.p1	CVD	0	0	0	0	0	0	0	0	0	1439	0	0	0	0	0	0	0	1439	0	0	0
+Baylor Hopkins Center for Mendelian Genomics (BH CMG)	phs000711.v5.p1	CVD	0	0	0	0	0	0	0	0	0	860	0	0	0	0	0	0	0	1422	0	0	0
+NINDS MS and ADEM Deep Sequencing Studies	phs000715.v1.p1		0	0	0	0	0	0	0	35	0	0	0	0	0	0	0	0	0	0	0	0	0
+DFCI Colorectal Cancer Cohorts	phs000722.v2.p2		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	410	0	410	0	0	0
+miRNA profiles in serum and CSF of Parkinson's and Alzheimer's patients	phs000727.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	211
+Lung Cancer Susceptibility in Smokers	phs000728.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	165	0	0	0
+L1-seq and genome-wide SNP genotyping in a multiethnic Asian population	phs000732.v1.p1		0	0	0	0	0	0	0	0	17	0	0	0	0	0	0	0	20	0	0	0	0
+Osteosarcoma Genome-wide Association Study	phs000734.v1.p1		0	0	0	0	0	0	0	0	694	0	0	0	0	0	0	0	0	0	0	0	0
+Yale Center for Mendelian Genomics (Y CMG)	phs000744.v4.p2	CVD	0	0	0	0	0	0	0	0	1	1887	0	0	0	0	0	0	0	1896	0	0	0
+RNAseq analysis of posterior cingulate astrocytes in Alzheimer's disease	phs000745.v1.p1		0	0	0	0	0	0	0	20	0	0	0	0	0	0	0	0	0	0	0	0	0
+Whole Exome and Transcriptome Sequencing in Sporadic ALS	phs000747.v2.p1		0	0	0	0	0	0	0	17	0	6	0	0	0	0	0	0	0	6	0	0	17
+GEI Studies - Psoriasis	phs000766.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4844	0	0	0	0
+Joint Genome-Wide Gene Expression and GWAS Mapping in the MGS Dataset	phs000775.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	798	0
+Paired AML Epigenetics Study on Clonality	phs000793.v1.p1		0	0	0	0	0	17	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Autosomal recessive PGM3 mutations cause a new Congenital Disorder of Glycosylation	phs000809.v1.p1		0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0	0	0
+Comparison of custom capture for targeted next generation DNA sequencing	phs000811.v1.p1		0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	10	0	0	0	0
+Characterization of X Chromosome Inactivation by high-throughput sequencing	phs000816.v2.p1		0	0	0	0	0	0	0	80	0	15	0	0	0	0	0	0	0	410	17	0	0
+Responses to Varicella Zoster Virus Vaccination	phs000817.v1.p1		0	0	0	8	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Whole Genome Sequencing of HUES63 and HUES64	phs000825.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0	0
+N.C. Clinical Genomic Evaluation by NextGen Exome Sequencing (NCGENES)	phs000827.v3.p1		0	0	0	0	0	0	0	0	0	592	0	0	0	0	0	0	0	0	0	0	0
+Sensitivity to the subjective effects of amphetamine	phs000832.v1.p1		0	0	0	0	0	0	0	0	381	0	0	381	0	0	0	0	0	0	0	0	0
+Single Cell Analysis Program - Transcriptome (SCAP-T)	phs000833.v7.p1	CVD	0	0	0	0	0	0	0	176	0	0	0	0	0	0	0	0	0	0	0	0	0
+Autosomal recessive TPP2 mutations cause a new human immunodeficiency	phs000848.v1.p1		0	0	0	0	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0
+Normative Aging Study (NAS)	phs000853.v1.p1		0	0	0	0	657	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Genomic Predictors of Combat Stress Vulnerability and Resilience	phs000864.v1.p1		0	0	0	0	0	0	0	0	3992	0	0	0	0	0	0	0	0	0	0	0	0
+Transcriptome Sequencing of Pediatric Neuroblastoma	phs000868.v1.p1		0	0	0	0	0	0	0	29	0	0	0	0	0	0	0	0	0	0	0	0	0
+Functional Dynamics of the Elderly Gut Microbiome During Probiotic Consumption	phs000896.v1.p1		12	0	0	0	0	0	0	12	0	0	0	0	0	0	0	0	0	0	0	0	0
+University of Washington CSF biomarker study for Parkinson disease	phs000901.v1.p1		0	0	0	0	0	0	0	57	0	0	0	0	0	0	0	0	0	0	0	0	0
+Genetic Analysis of Psoriasis and Psoriatic Arthritis	phs000982.v1.p1		0	0	0	0	0	0	0	0	2847	0	0	0	0	0	0	0	0	0	0	0	0
+PsychENCODE: Autism Transcriptional and Epigenetic Profiling	phs001022.v1.p1		0	0	120	0	0	0	0	79	0	0	0	0	0	0	0	0	0	0	0	0	0
+International AMD Genomics Consortium - Exome Chip Experiment	phs001039.v1.p1		0	0	0	0	0	0	0	0	27895	0	0	27895	0	0	0	0	0	0	0	0	0
+The FUSION Tissue Biopsy Study	phs001048.v1.p1		0	0	1	0	0	0	250	250	246	0	0	0	0	246	0	0	0	0	0	0	0
+Genome Studies in Hereditary Spastic Paraplegia	phs001080.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	103	0	0	0
+Starting Treatment with Agonist Replacement Therapies (START)	phs001135.v1.p1		0	0	0	0	0	0	0	0	978	0	0	0	0	0	0	0	0	0	0	0	0
+Wisconsin Longitudinal Study on Aging	phs001157.v1.p1		0	0	0	0	0	0	0	0	9027	0	0	0	0	9012	0	0	0	0	0	0	0
+Human Dorsal Root Ganglion PolyA RNA Seq Dataset	phs001158.v1.p1		0	0	0	0	0	0	0	6	0	0	0	0	0	0	0	0	0	0	0	0	0
+NINDS Parkinson's Disease	phs001172.v1.p2		0	0	0	0	0	0	0	0	1741	0	0	0	618	0	0	0	0	618	0	0	0
+Somatic Mutation Load in Clones of Single Human Cells	phs001182.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0	0	2	2	0	0
+The FUSION Study - Islet Expression and Regulation	phs001188.v1.p1		0	0	2	0	0	0	31	31	33	0	0	0	0	33	0	0	0	0	0	0	0
+A Study to Assess the Cardiovascular, Cognitive, and Subjective Effects of Atomoxetine in Combination with Intravenous Methamphetamine	phs001195.v1.p1	CVD	0	0	0	0	0	0	0	0	13	0	0	0	0	0	0	0	0	0	0	0	0
+Neural Systems, Inhibitory Control, and Methamphetamine Dependence	phs001197.v1.p1		0	0	0	0	0	0	0	0	188	0	0	0	0	0	0	0	0	0	0	0	0
+Blepharospasm in a Multiplex African-American Pedigree	phs001206.v1.p1		0	0	0	0	0	0	0	0	0	2	10	0	0	0	0	0	0	0	0	0	0
+MIDCIRS Reveals Antibody Diversification in Young Children with Malaria	phs001209.v1.p1		0	0	0	0	0	0	0	13	0	0	0	0	0	0	0	0	0	0	0	0	0
+NCI Lung Cancer and Smoking Phenotypes in African-American Subjects	phs001210.v1.p1		0	0	0	0	0	0	0	0	154	0	0	0	0	0	0	0	0	0	0	0	0
+Molecular Genetics of Heroin Dependence in China	phs001213.v1.p1		0	0	0	0	0	0	0	0	1043	0	0	0	0	0	0	0	0	0	0	0	0
+NeuroLINCS	phs001231.v2.p1		0	0	4	0	0	0	0	4	0	0	0	0	0	0	0	0	0	0	4	0	0
+Autosomal Recessive CD70 Deficiency	phs001245.v1.p1		0	0	0	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0
+Genome-Wide Analysis for Addiction Susceptibility Genes	phs001266.v1.p1		0	0	0	0	0	0	0	0	645	0	0	0	0	0	0	0	0	0	0	0	0
+Nicotine Addiction Genetics and Correlates	phs001299.v1.p1		0	0	0	0	0	0	0	0	2452	0	0	0	0	0	0	0	0	0	0	0	0
+NABEC: North American Brain Expression Consortium	phs001300.v1.p1		0	0	0	0	0	0	0	276	384	343	0	0	313	0	0	0	0	364	0	0	0
+GWAS of Sporadic and Familial Testicular Germ Cell Tumors	phs001303.v1.p1		0	0	0	0	0	0	0	0	341	0	0	0	0	0	0	0	0	0	0	0	0
+NINDS Inherited Forms of Motor Neuron Disease Study	phs001322.v1.p1		0	0	0	0	0	10	0	6	0	0	0	0	0	0	0	0	1	0	0	0	0
+Epigenetics of Cocaine and Nicotine Addiction	phs001377.v1.p1		0	0	0	0	0	0	0	0	365	0	0	0	0	0	0	0	0	0	0	0	0
+Ancestry Admixture among Chileans	phs001385.v1.p1		0	0	0	0	0	0	0	0	189	0	0	0	0	0	0	0	0	0	0	0	0
+WES and CNV analysis of NF1-Associated Plexiform Neurofibromas	phs001403.v1.p1		0	0	0	0	0	0	0	0	21	0	0	0	0	0	0	0	0	21	0	0	0
+Chromatin Accessibility in Developing Human Brain	phs001438.v1.p1		0	0	3	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0
+Differential Transcription Start Site Usage in Brain-Related Samples	phs001463.v1.p1		0	0	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0	0	0	0	0
+NCI Primary Human Melanocyte QTL Study	phs001500.v1.p1		0	0	0	0	0	0	0	106	106	0	0	0	0	0	0	0	0	0	0	0	0
