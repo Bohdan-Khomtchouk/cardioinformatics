@@ -207,8 +207,28 @@ all_gsm %>%
 ggsave(filename = '../figures/gsm_count_by_tech.png', device='png', width=7, height=3)
 ```
 
-## SRA
+## dbGaP
 
 ```{r}
-
+dbgap.gru = data.table::fread('../data/dbgap-gru-datasets.tsv', sep='\t')
+subject.cnt.cvd = dbgap.gru[dbgap.gru$Topic == 'CVD',c(-1,-2, -3)] %>%
+    summarise_all(funs(sum))
+subject.cnt.all = dbgap.gru[,c(-1,-2, -3)] %>%
+    summarise_all(funs(sum))
+rbind(subject.cnt.cvd, subject.cnt.all) %>%
+    t() %>%
+    set_colnames(c('CVD', 'All'))
+    reshape2::melt() %>%
+    ggplot(aes(x = variable, y = value)) +
+    geom_bar(stat = 'identity') +
+    coord_flip()
+ggplot(dbgap.gru, mapping = aes())
 ```
+
+```{r}
+dbgap = data.table::fread('../data/dbgap-adv-datasets.tsv', sep='\t')
+dbgap$`Subject count` <-
+    gsub(pattern = '^(.*\\W+)(\\d+)(\\W+subjects.*)$', replacement = '\\2', x = dbgap$`Study Content`) %>% as.numeric()
+```
+
+The number of subjects in all CVD studies deposited on dbGaP are `r dbgap[['Subject count']] %>% sum(na.rm = TRUE)`

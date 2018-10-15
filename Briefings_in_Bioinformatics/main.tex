@@ -73,7 +73,7 @@ Text Text Text Text Text Text  Text TextText Text Text Text Text Text  Text Text
 \end{figure}
 
 \begin{table}[!t]
-	\processtable{Number of samples available on GEO that are of potential use of cardioinformatics research, including those deposited by CVD studies and non-CVD studies.\label{Tab:01}} {\begin{tabular}{@{}llll@{}}\toprule 
+	\processtable{Number of samples available on GEO that are of potential use of cardioinformatics research, including those deposited by CVD studies and non-CVD studies.\label{tab:geoSamples}} {\begin{tabular}{@{}llll@{}}\toprule 
 			molecule &non-CVD studies & CVD studies \\ \midrule
 			genomic DNA &            440 &        8525  \\
 			polyA RNA &             89 &         392  \\
@@ -81,6 +81,43 @@ Text Text Text Text Text Text  Text TextText Text Text Text Text Text  Text Text
 			other &             NA &           5  \\
 			protein &             NA &           3  \\ \botrule
 	\end{tabular}}{This is a footnote}
+\end{table}
+
+The figures given in Table \ref{tab:dbgapSubject} are in fact conservative estimates of the data generated so far among the research community. A much larger amount of data are stored on dbGaP and accessible upon approval of data request. Among these, the number of subjects involved in CVD research alone are more than 600000. %658305 to be exact
+
+\todo{supplement table if necessary}
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+	\caption{The subject count aggregated from studies deposited in dbGaP, licensed for General Research Use}
+	\label{tab:dbgapSubject}
+	\begin{tabular}{l l l}
+		\toprule
+		& \textbf{CVD} &  \textbf{All}                         \\ \midrule
+		16s rRNA (NGS)                 &     0 &      92 \\
+		CNV Genotypes                  &     0 &   48972 \\
+		Chromatin (NGS)                &     0 &     139 \\
+		Genomic Sequence Amplicon (NGS)&     0 &       8 \\
+		Methylation (CpG)              &     0 &     657 \\
+		Methylome sequencing           &     0 &     152 \\
+		QTL Results                    &     0 &     281 \\
+		RNA Seq (NGS)                  &   333 &    1498 \\
+		SNP Genotypes (Array)          &  6658 &  113597 \\
+		SNP Genotypes (NGS)            &  4277 &   11786 \\
+		SNP Genotypes (PCR)            &     0 &      10 \\
+		SNP Genotypes (imputed)        &     0 &   29693 \\
+		SNP/CNV Genotypes (NGS)        &     0 &     936 \\
+		SNP/CNV Genotypes (imputed)    &     0 &    9291 \\
+		SNV (.MAF)                     &     0 &       2 \\
+		SNV Aggregate (.MAF)           &     0 &     570 \\
+		Targeted Genome (NGS)          &     0 &    9918 \\
+		Whole Exome (NGS)              &  5518 &   12771 \\
+		Whole Genome (NGS)             &     0 &    1245 \\
+		mRNA Expression (Array)        &     0 &     798 \\
+		miRNA (NGS)                        & 0 &   228 \\ \hline
+	\end{tabular}
 \end{table}
 
 Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
@@ -104,6 +141,9 @@ Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Tex
 %
 %
 \subsection{Bioinformatics as a tool-kit}
+
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
 %
 %\subsubsection{Basic research}
 %for data management, computational analysis, visual representation, etc.
@@ -115,6 +155,9 @@ Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Tex
 
 Bioinformatics is more than a powerful toolkit to manipulate the large amount of data beyond human capability. The paradigm shift from the single physical gene to the "eigengenes" in studying complex diseases \cite{Weiss:2012:Good} is a pragmatic approach.
 
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
+%
 
 \enlargethispage{12pt}
 
