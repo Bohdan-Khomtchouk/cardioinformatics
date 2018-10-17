@@ -394,7 +394,16 @@ Mentioned an interesting set of principles from integrative physiology: homeosta
   author = {Wilsdon, Anna and Sifrim, Alejandro and Hitz, Marc-Phillip and Hurles, Matthew and Brook, J. David},
   month = jun,
   year = {2017},
-  pages = {869}
+  pages = {869},
+  annote = {Notes
+
+\begin{itemize}
+
+\item Cited Andersen et al. \emph{Cell Mol Life Sci}.~2014(2014) for the number of genes implicated in congenital heart disease. Andersen et al. reported 55 genes associated with CHD via intragenic mutations found in human and more than 500 found in mice via targeted mutations. However, the data from OMIM shows less than 30 genes.
+
+\item ~
+
+\end{itemize}}
 }
 
 @article{Landis:2016:Current,
@@ -1379,7 +1388,68 @@ The list of up- and down-regulated genes are available upon clicking on the ‘E
   author = {Santolini, Marc and Romay, Milagros C. and Yukhtman, Clara L. and Rau, Christoph D. and Ren, Shuxun and Saucerman, Jeffrey J. and Wang, Jessica J. and Weiss, James N. and Wang, Yibin and Lusis, Aldons J. and Karma, Alain},
   month = feb,
   year = {2018},
-  pages = {12}
+  pages = {12},
+  annote = {\section{Summary}
+
+\subsection{Motivation}
+
+\begin{itemize}
+
+\item population heterogeneity -$>$ finding of genetic associations in one subset may not apply to another subset in the population
+
+\item homeostasis leads to multiple healthy states: different combinations of alleles lead to equally functional system
+
+\item This study aims to pinpoint the genes that are truly correlate with disease phenotype by coupling genotyping (mouse panel), phenotyping and gene expression (microarray)
+
+\end{itemize}
+
+\subsection{Experimental Designs}
+
+104 genetically diverse mouse strains from the Hybrid Mouse Diversity Panel (HMDP) are used, gene expression (whole heart microarray) and phenotype (heart weight) are measured right before and 3 weeks after inducing cardiac hypertrophy.
+
+For each gene, the correlation (Pearson) is calculated between the fold-change of gene expression level and the fold-change of heart mass.
+
+Two gene sets are identified
+
+\begin{itemize}
+
+\item SAM genes are significantly dis-regulated on the population levels
+
+\item FC genes are significantly correlated with the degree of cardiac hypertrophy
+
+\end{itemize}
+
+\subsection{Analyses}
+
+\begin{enumerate}
+
+\item Differential gene expressions: identify 2 gene sets as described above. Little overlap between the two sets.
+
+\item Biological relevance: convert mouse to human genes, query for disease associations on HuGE database, perform enrichment test for diseases, resulting in 2 list of enriched diseases: SAM gene-assciated and FC-gene associated. Diseases associated with FC genes are mostly cardiac, while those associated with SAM genes are less related.
+
+\item Co-expression network
+
+\begin{itemize}
+
+\item 2 gene sets are pooled, PCC calculated for every pair to create co-expression networks, one for control (pre-ISO) and one for disease (post-ISO)
+
+\item 2 distinct clusters are found, representative for each set of genes. A few genes jump from one cluster to the other in the pathological state.
+
+\end{itemize}
+
+\item Interacting partners
+
+\begin{itemize}
+
+\item convert mouse gene to human, gene to protein, query for interacting partners, perform pathway enrichment on the interacting set.
+
+\end{itemize}
+
+\end{enumerate}
+
+\section{Notes}
+
+Good examples of how even a focused study can make use of a plethora of bioinformatics analyses, and the combinations of these methods are critical in the success of an experimental design.}
 }
 
 @article{Dewey:2011:Gene,
@@ -1499,6 +1569,7 @@ Also as put forth in the paper, variants should also be interpreted separately f
   author = {Richards, Sue and Aziz, Nazneen and Bale, Sherri and Bick, David and Das, Soma and {Gastier-Foster}, Julie and Grody, Wayne W. and Hegde, Madhuri and Lyon, Elaine and Spector, Elaine and Voelkerding, Karl and Rehm, Heidi L.},
   month = may,
   year = {2015},
+  keywords = {variant interpretation},
   pages = {405-423},
   annote = {\section{Summary}
 
@@ -2305,6 +2376,116 @@ Proteomics informed by transcriptomics: RNA-seq data are acquired on the samples
   year = {2010},
   keywords = {genomics,Next-generation sequencing,review},
   pages = {476-486}
+}
+
+@article{Rehm:2017:new,
+  title = {A New Era in the Interpretation of Human Genomic Variation},
+  volume = {19},
+  copyright = {2017 Nature Publishing Group},
+  issn = {1530-0366},
+  doi = {10.1038/gim.2017.90},
+  language = {en},
+  journal = {Genetics in Medicine},
+  author = {Rehm, Heidi L.},
+  month = jul,
+  year = {2017},
+  pages = {1092-1095},
+  annote = {Advocate for data sharing from laboratory by submitting variants to ClinVar by the recognition of the two way benefits
+
+\begin{itemize}
+
+\item Submitters improved in the quality of their variants interpretation
+
+\item Community benefits from the growing database
+
+\end{itemize}}
+}
+
+@article{Freedman:2017:Challenges,
+  title = {Challenges and {{Opportunities}} in {{Linking Long Noncoding RNAs}} to {{Cardiovascular}}, {{Lung}}, and {{Blood Diseases}}},
+  language = {EN},
+  journal = {Arteriosclerosis, Thrombosis, and Vascular Biology},
+  author = {Freedman, Jane E. and Miano, Joseph M.},
+  year = {2017-January},
+  annote = {\begin{itemize}
+
+\item "Currently [2016] only $\approx$50 lncRNAs have been characterized and studied in the heart, vasculature, and lung, and of these, only a small handful have been shown to have effects in a pathological setting."
+
+\item Bioinformatics of lncRNAs
+
+\begin{itemize}
+
+\item ~~~ Assembly of novel lncRNAs: Scripture (requires reference genome, splice donor/acceptor sequences, relative expression of each exon)
+
+\item Databases of annotated lncRNAs: \href{http://www.noncode.org/,}{http://www.noncode.org/,} \href{https://lncipedia.org/,}{https://lncipedia.org/,} \href{http://www.lncrnadb.org/}{http://www.lncrnadb.org/}
+
+\item miRNA response element prediction
+
+\item Potential mRNA binding partner: blast search
+
+\item Secondary structure prediction
+
+\end{itemize}
+
+\end{itemize}}
+}
+
+@article{Sallam:2018:Long,
+  title = {Long {{Noncoding RNA Discovery}} in {{Cardiovascular Disease}}},
+  language = {EN},
+  journal = {Circulation Research},
+  author = {Sallam, Tamer and Sandhu, Jaspreet and Tontonoz, Peter},
+  year = {2018-January-5},
+  annote = {\section{Summary}
+
+\begin{itemize}
+
+\item Challenges in lncRNAs
+
+\begin{itemize}
+
+\item ~~~ Low abundance level
+
+\item ~~~ Highly specific to tissue types
+
+\item ~~~ Many have polyA tails but some (eRNAs) do not, requiring optimization of library preparation
+
+\end{itemize}
+
+\item Need to be validated: qPCR,
+
+\end{itemize}
+
+\section{Notes}
+
+Some interesting facts
+
+\begin{itemize}
+
+\item Protein-coding genes account for 2\% of the human genome, while $>$ 90\% of the genome is actively transcribed.
+
+\end{itemize}
+
+~
+
+~}
+}
+
+@article{Telenti:2016:Deep,
+  title = {Deep Sequencing of 10,000 Human Genomes},
+  volume = {113},
+  copyright = {\textcopyright{}  . Freely available online through the PNAS open access option.},
+  issn = {0027-8424, 1091-6490},
+  doi = {10.1073/pnas.1613365113},
+  language = {en},
+  number = {42},
+  journal = {Proceedings of the National Academy of Sciences},
+  author = {Telenti, Amalio and Pierce, Levi C. T. and Biggs, William H. and di Iulio, Julia and Wong, Emily H. M. and Fabani, Martin M. and Kirkness, Ewen F. and Moustafa, Ahmed and Shah, Naisha and Xie, Chao and Brewerton, Suzanne C. and Bulsara, Nadeem and Garner, Chad and Metzker, Gary and Sandoval, Efren and Perkins, Brad A. and Och, Franz J. and Turpaz, Yaron and Venter, J. Craig},
+  month = oct,
+  year = {2016},
+  keywords = {genomics,human genetic diversity,noncoding genome},
+  pages = {11901-11906},
+  pmid = {27702888}
 }
 
 
