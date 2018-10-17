@@ -14,6 +14,7 @@ library(magrittr)
 library(dplyr)
 library(tidyr)
 devtools::load_all('../')
+VAR.CONSEQUENCES = data.table::fread('../data/ensembl-vep-consequences.tsv', sep='\t')
 ```
 
 ## Exploratory analysis of GWAS
@@ -46,6 +47,16 @@ The `associations` table report one _association_ per row. There are three types
 2. The multiple-SNP haplotype - trait association, in which SNPs are separated by `;`
 3. The SNP-SNP interaction, in which the pairs are described as `snp1 x snp2`
 
+```{r}
+type1.ind = (!grepl(pattern = ';', gwas$SNPS) & !grepl(pattern = ' x ', gwas$SNPS))
+type2.ind = grepl(pattern = ';', gwas$SNPS)
+type3.ind = grepl(pattern = ' x ', gwas$SNPS)
+
+is.type1 = function(X, test_col = 'SNPS') { return(!grepl(pattern = ';', X[[test_col]]) & !grepl(pattern = ' x ', X[[test_col]])) }
+is.type2 = function(X, test_col = 'SNPS') { return(grepl(pattern = ';', X[[test_col]])) }
+is.type3 = function(X, test_col = 'SNPS') { return(grepl(pattern = ' x ', X[[test_col]])) }
+```
+
 Some examples of multiple-SNP haplotypes
 
 ```{r}
@@ -69,10 +80,10 @@ There are SNPs associated with traits both as an individual variant and in linka
 
 ```{r}
 # start = proc.time()
-type1 = gwas[(!grepl(pattern = ';', gwas$SNPS) & !grepl(pattern = ' x ', gwas$SNPS)),]$SNPS %>% unique()
-type2 = gwas[grepl(pattern = ';', gwas$SNPS),]$SNPS %>% unique()
-type3 = gwas[grepl(pattern = ' x ', gwas$SNPS),]$SNPS %>% unique()
-singleInMulti = sapply(type1, FUN = function(y) {return(grep(pattern = paste0('\\b', y, '\\b'), x = type2, value = TRUE, perl = TRUE))})
+type1.snp = gwas[type1.ind,]$SNPS %>% unique()
+type2.snp = gwas[type2.ind,]$SNPS %>% unique()
+type3.snp = gwas[type3.ind,]$SNPS %>% unique()
+singleInMulti = sapply(type1.snp, FUN = function(y) {return(grep(pattern = paste0('\\b', y, '\\b'), x = type2.snp, value = TRUE, perl = TRUE))})
 # singleInInter = sapply(type1, FUN = function(y) {return(grep(pattern = paste0('\\b', y, '\\b'), x = type3, value = TRUE, perl = TRUE))})
 # dt = proc.time() - start
 # print(dt)
@@ -102,30 +113,102 @@ split_records <- function(x, cols, split = ';') {
         return()
 }
 
-type1 = gwas[(!grepl(pattern = ';', gwas$SNPS) & !grepl(pattern = ' x ', gwas$SNPS)),c('SNPS', 'CONTEXT')]
-type2 = gwas[grepl(pattern = ';', gwas$SNPS),c('SNPS', 'CONTEXT')]
-type3 = gwas[grepl(pattern = ' x ', gwas$SNPS),c('SNPS', 'CONTEXT')]
+context1 = gwas[is.type1(gwas, 'SNPS'),c('SNPS', 'CONTEXT')]
+context2 = gwas[is.type2(gwas, 'SNPS'),c('SNPS', 'CONTEXT')]
+context3 = gwas[is.type3(gwas, 'SNPS'),c('SNPS', 'CONTEXT')]
 
-variant.contexts = split_records(type2, cols = c('SNPS', 'CONTEXT'), split = ';') %>%
-    rbind(split_records(type3, cols = c('SNPS', 'CONTEXT'), split = ' x ')) %>%
-    rbind(type1) %>%
+variant.contexts = split_records(context2, cols = c('SNPS', 'CONTEXT'), split = ';') %>%
+    rbind(split_records(context3, cols = c('SNPS', 'CONTEXT'), split = ' x ')) %>%
+    rbind(context1) %>%
     dplyr::distinct()
 
-# sanity check -- one variant, multiple contexts
-dplyr::count(variant.contexts, SNPS)
+# one variant, multiple contexts
+# dplyr::count(variant.contexts, SNPS)
 
-dplyr::count(variant.contexts, CONTEXT) %>%
-    ggplot(mapping =  aes(x = CONTEXT, y = n)) +
-    geom_bar(stat='identity') + coord_flip()
-
-count(gwas, CONTEXT)
-gwas[gwas$CONTEXT == "3_prime_UTR_variant; intron_variant; intergenic_variant",]
-setdiff(gwas.studies$PUBMEDID %>% unique(),gwas$PUBMEDID %>% unique())
-gwas$`DISEASE/TRAIT` %>% unique() %>% length()
-gwas$CONTEXT %>%  unique()  %>% length()
+context.cnt = dplyr::count(variant.contexts, CONTEXT)
 ```
 
-### Case study: `rs10454444`
+### Disease associations
+
+```{r}
+gwas.queries <- data.table::fread('../data/conditionList.tsv', sep='\t')$query %>% unique() %>%
+    lapply(FUN = function(y) {
+        gwas[grepl(pattern = y, x = gwas$MAPPED_TRAIT, ignore.case = TRUE) | grepl(pattern = y, x = gwas$`DISEASE/TRAIT`, ignore.case = TRUE),] %>%
+            return()
+    })
+gwas.CVDs <- do.call(rbind, gwas.queries)
+# is.type1(gwas.CVDs) %>% sum() +
+#     is.type2(gwas.CVDs) %>% sum() +
+#     is.type3(gwas.CVDs) %>% sum()
+
+context1 = gwas.CVDs[is.type1(gwas.CVDs, 'SNPS'),c('SNPS', 'CONTEXT')]
+context2 = gwas.CVDs[is.type2(gwas.CVDs, 'SNPS'),c('SNPS', 'CONTEXT')]
+context3 = gwas.CVDs[is.type3(gwas.CVDs, 'SNPS'),c('SNPS', 'CONTEXT')]
+
+variant.contexts = split_records(context2, cols = c('SNPS', 'CONTEXT'), split = ';') %>%
+    rbind(split_records(context3, cols = c('SNPS', 'CONTEXT'), split = ' x ')) %>%
+    rbind(context1) %>%
+    dplyr::distinct()
+
+context.cnt.combined = dplyr::count(variant.contexts, CONTEXT) %>%
+    dplyr::full_join(x = context.cnt, y = ., all = TRUE, by = 'CONTEXT', incomparables = 0) %>%
+    `[<-`(is.na(.[[2]]), 2, 0) %>%
+    `[<-`(is.na(.[[3]]), 3, 0) %>%
+    set_names(c('CONTEXT', 'All traits', 'CVD'))
+context.cnt[['All traits']] = context.cnt[[2]] + 0.1
+context.cnt[['CVD']] = context.cnt[[3]] + 0.1
+context.cnt.combined %>%
+    reshape2::melt(id.vars = 'CONTEXT') %>%
+    ggplot(mapping =  aes(x = CONTEXT)) +
+        geom_bar(aes(y =value, fill=variable), stat='identity',alpha = 0.8) +
+        scale_y_log10(limits = c(1, NA)) + 
+        coord_flip()
+```
+
+The ditribution of CVD-associated variants in the human genome reflect the distribution of variants in all variants studied so far 
+
+```{r}
+context.cnt %>%
+    ggplot(aes(x = n.x, y = n.y)) +
+    geom_point() +
+    scale_x_log10(limits = c(1, NA)) +
+    scale_y_log10(limits = c(1, NA))
+# count(gwas, CONTEXT)
+# gwas[gwas$CONTEXT == "3_prime_UTR_variant; intron_variant; intergenic_variant",]
+# setdiff(gwas.studies$PUBMEDID %>% unique(),gwas$PUBMEDID %>% unique())
+# gwas$`DISEASE/TRAIT` %>% unique() %>% length()
+# gwas$CONTEXT %>%  unique()  %>% length()
+```
+
+#### p-value vs context
+
+```{r}
+gwas.CVDs[is.type1(gwas.CVDs, 'SNPS'),c('SNPS', 'CONTEXT', 'PVALUE_MLOG')] %>%
+    ggplot(aes(y = PVALUE_MLOG, x = CONTEXT)) +
+    geom_boxplot()  +
+    coord_flip()
+```
+
+
+#### p-value vs calculated impact
+
+Variation effects are predicted using Ensembl VEP, resulting in SIFT and polyphen score
+
+```{r}
+# library(xml2)
+server <- "https://rest.ensembl.org"
+ext <- "/vep/human/id"
+var.queries = gwas.CVDs$`STRONGEST SNP-RISK ALLELE`[1:3] %>% jsonlite::toJSON()
+var.queries = gwas.CVDs$`SNPS`[1:3] %>% jsonlite::toJSON()
+r <- httr::POST(paste(server, ext, sep = ""),
+                httr::content_type("application/json"),
+                httr::accept("application/json"),
+                body = sprintf('{ "ids" : %s }', var.queries))
+ 
+httr::stop_for_status(r)
+variants.ensembl = (httr::content(r)) %>% jsonlite::toJSON() %>% jsonlite::fromJSON()
+```
+
 
 ```{r}
 gwas[grepl(pattern = '\\brs10454444\\b', gwas$SNPS), c('SNPS', 'STRONGEST SNP-RISK ALLELE', 'RISK ALLELE FREQUENCY', 'PUBMEDID', 'STUDY', 'DISEASE/TRAIT', 'INITIAL SAMPLE SIZE', 'REPLICATION SAMPLE SIZE', 'REPORTED GENE(S)', 'MAPPED_GENE', 'PVALUE_MLOG')]
@@ -183,11 +266,7 @@ The number of genes associated with
 ### Mapping disease names
 
 ```{r}
-gwas.queries <- data.table::fread('../data/conditionList.tsv', sep='\t')$query %>% unique() %>%
-    sapply(FUN = function(y) {
-        gwas[grepl(pattern = y, x = gwas$MAPPED_TRAIT, ignore.case = TRUE) | grepl(pattern = y, x = gwas$`DISEASE/TRAIT`, ignore.case = TRUE), 'MAPPED_TRAIT'] %>%
-            return()
-    })
+
 
 dgn.mappings = data.table::fread('../data/disgenet/disease_mappings.tsv', sep='\t')
 standardNames = data.table::fread('../data/conditionList.tsv', sep='\t') %>%
