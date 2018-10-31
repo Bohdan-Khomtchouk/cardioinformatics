@@ -161,8 +161,12 @@ context.cnt.combined %>%
     reshape2::melt(id.vars = 'CONTEXT') %>%
     ggplot(mapping =  aes(x = CONTEXT)) +
         geom_bar(aes(y =value, fill=variable), stat='identity',alpha = 0.8) +
+        scale_fill_discrete( guide_legend(title = 'Mapped traits')) +
         scale_y_log10(limits = c(1, NA)) + 
+        ylab('Variant count') +
+        theme(legend.position = c(0.83,0.87)) +
         coord_flip()
+ggsave('../figures/variant_contexts.png',height = 4, width=6)
 ```
 
 The ditribution of CVD-associated variants in the human genome reflect the distribution of variants in all variants studied so far 
