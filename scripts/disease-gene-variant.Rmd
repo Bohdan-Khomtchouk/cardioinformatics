@@ -117,10 +117,12 @@ context1 = gwas[is.type1(gwas, 'SNPS'),c('SNPS', 'CONTEXT')]
 context2 = gwas[is.type2(gwas, 'SNPS'),c('SNPS', 'CONTEXT')]
 context3 = gwas[is.type3(gwas, 'SNPS'),c('SNPS', 'CONTEXT')]
 
-variant.contexts = split_records(context2, cols = c('SNPS', 'CONTEXT'), split = ';') %>%
-    rbind(split_records(context3, cols = c('SNPS', 'CONTEXT'), split = ' x ')) %>%
-    rbind(context1) %>%
-    dplyr::distinct()
+# variant.contexts = split_records(context2, cols = c('SNPS', 'CONTEXT'), split = ';') %>%
+    # rbind(split_records(context3, cols = c('SNPS', 'CONTEXT'), split = ' x ')) %>%
+    # rbind(context1) %>%
+    # dplyr::distinct()
+
+variant.contexts = context1 %>% dplyr::distinct()
 
 # one variant, multiple contexts
 # dplyr::count(variant.contexts, SNPS)
@@ -145,18 +147,23 @@ context1 = gwas.CVDs[is.type1(gwas.CVDs, 'SNPS'),c('SNPS', 'CONTEXT')]
 context2 = gwas.CVDs[is.type2(gwas.CVDs, 'SNPS'),c('SNPS', 'CONTEXT')]
 context3 = gwas.CVDs[is.type3(gwas.CVDs, 'SNPS'),c('SNPS', 'CONTEXT')]
 
-variant.contexts = split_records(context2, cols = c('SNPS', 'CONTEXT'), split = ';') %>%
-    rbind(split_records(context3, cols = c('SNPS', 'CONTEXT'), split = ' x ')) %>%
-    rbind(context1) %>%
-    dplyr::distinct()
+# variant.contexts = 
+#     split_records(context2, cols = c('SNPS', 'CONTEXT'), split = ';') %>%
+#     rbind(split_records(context3, cols = c('SNPS', 'CONTEXT'), split = ' x ')) %>%
+#     rbind(context1) %>%
+#     dplyr::distinct()
 
-context.cnt.combined = dplyr::count(variant.contexts, CONTEXT) %>%
+variant.contexts = context1 %>% dplyr::distinct()
+
+context.cnt.cvd = dplyr::count(variant.contexts, CONTEXT) 
+context.cnt.combined = 
+    context.cnt.cvd %>%
     dplyr::full_join(x = context.cnt, y = ., all = TRUE, by = 'CONTEXT', incomparables = 0) %>%
     `[<-`(is.na(.[[2]]), 2, 0) %>%
     `[<-`(is.na(.[[3]]), 3, 0) %>%
     set_names(c('CONTEXT', 'All traits', 'CVD'))
-context.cnt[['All traits']] = context.cnt[[2]] + 0.1
-context.cnt[['CVD']] = context.cnt[[3]] + 0.1
+# context.cnt.combined[['All traits']] = context.cnt.combined[['All traits']] + 0.1
+# context.cnt.combined[['CVD']] = context.cnt.combined[['CVD']] + 0.1
 context.cnt.combined %>%
     reshape2::melt(id.vars = 'CONTEXT') %>%
     ggplot(mapping =  aes(x = CONTEXT)) +
@@ -172,8 +179,9 @@ ggsave('../figures/variant_contexts.png',height = 4, width=6)
 The ditribution of CVD-associated variants in the human genome reflect the distribution of variants in all variants studied so far 
 
 ```{r}
-context.cnt %>%
-    ggplot(aes(x = n.x, y = n.y)) +
+context.cnt.combined %>%
+    set_names(c('CONTEXT', 'All_traits', 'CVD')) %>%
+    ggplot(aes_string(x = 'All_traits', y = 'CVD')) +
     geom_point() +
     scale_x_log10(limits = c(1, NA)) +
     scale_y_log10(limits = c(1, NA))
@@ -183,6 +191,44 @@ context.cnt %>%
 # gwas$`DISEASE/TRAIT` %>% unique() %>% length()
 # gwas$CONTEXT %>%  unique()  %>% length()
 ```
+#### Distribution in genome, associations filtered at $5\times10^{-8}$
+
+```{r}
+gwas.sigVars <-  gwas[gwas$`P-VALUE` < 5e-8,]
+context.cnt.all.sigVars =
+    gwas.sigVars[is.type1(gwas.sigVars, 'SNPS'), c('SNPS', 'CONTEXT')] %>%
+    dplyr::distinct() %>%
+    dplyr::count(CONTEXT)
+
+gwas.CVDs.sigVars <- gwas.CVDs[gwas.CVDs$`P-VALUE` < 5e-8,]
+context.cnt.CVDs.sigVars =
+    gwas.CVDs.sigVars[is.type1(gwas.CVDs.sigVars, 'SNPS'), c('SNPS', 'CONTEXT')] %>%
+    dplyr::distinct() %>%
+    dplyr::count(CONTEXT)
+
+
+context.cnt.sigVars = 
+    dplyr::full_join(x = context.cnt.all.sigVars,
+                     y = context.cnt.CVDs.sigVars,
+                     all = TRUE, by = 'CONTEXT', incomparables = 0) %>%
+    `[<-`(is.na(.[[2]]), 2, 0) %>%
+    `[<-`(is.na(.[[3]]), 3, 0) %>%
+    set_names(c('CONTEXT', 'All traits', 'CVD'))
+# context.cnt.combined[['All traits']] = context.cnt.combined[['All traits']] + 0.1
+# context.cnt.combined[['CVD']] = context.cnt.combined[['CVD']] + 0.1
+context.cnt.sigVars %>%
+    reshape2::melt(id.vars = 'CONTEXT') %>%
+    ggplot(mapping =  aes(x = CONTEXT)) +
+        geom_bar(aes(y =value, fill=variable), stat='identity',alpha = 0.8) +
+        scale_fill_discrete( guide_legend(title = 'Mapped traits')) +
+        scale_y_log10(limits = c(1, NA)) + 
+        ylab('Variant count') +
+        theme(legend.position = c(0.83,0.87)) +
+        coord_flip()
+
+ggsave('../figures/variant_contexts_sigVars.png',height = 4, width=6)
+```
+
 
 #### p-value vs context
 
