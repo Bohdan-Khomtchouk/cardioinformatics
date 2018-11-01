@@ -132,6 +132,8 @@ context.cnt = dplyr::count(variant.contexts, CONTEXT)
 
 ### Disease associations
 
+#### Distribution of variants in genome
+
 ```{r}
 gwas.queries <- data.table::fread('../data/conditionList.tsv', sep='\t')$query %>% unique() %>%
     lapply(FUN = function(y) {
@@ -191,7 +193,7 @@ context.cnt.combined %>%
 # gwas$`DISEASE/TRAIT` %>% unique() %>% length()
 # gwas$CONTEXT %>%  unique()  %>% length()
 ```
-#### Distribution in genome, associations filtered at $5\times10^{-8}$
+#### Distribution of variants in genome, associations filtered at $5\times10^{-8}$
 
 ```{r}
 gwas.sigVars <-  gwas[gwas$`P-VALUE` < 5e-8,]
@@ -229,6 +231,17 @@ context.cnt.sigVars %>%
 ggsave('../figures/variant_contexts_sigVars.png',height = 4, width=6)
 ```
 
+
+#### Frequency vs Effect size
+
+```{r}
+gwas$EffectSize = gwas$`OR or BETA` %>% as.numeric()
+gwas$AlleleFrequency = gwas$`RISK ALLELE FREQUENCY` %>% as.numeric()
+gwas[is.type1(gwas, "SNPS"),] %>%
+    ggplot(aes(x = AlleleFrequency, y = EffectSize)) +
+    scale_y_log10() +
+    geom_point()
+```
 
 #### p-value vs context
 
@@ -361,22 +374,54 @@ ggsave(filename = '../figures/disgenet-intersection.png', device = 'png', width 
 ### Mapping disease names to database unique index
 
 ```{r}
+dgn.all = data.table::fread('../data/disgenet/all_gene_disease_associations.tsv')
 dgn.mappings = data.table::fread('../data/disgenet/disease_mappings.tsv', sep='\t')
-standardNames = data.table::fread('../data/conditionList.tsv', sep='\t') %>%
-    merge(dgn.mappings[,c('diseaseId', 'code', 'name')], by.x = 'HPOTermId', by.y= 'code', all.x = TRUE, all.y = FALSE, sort = FALSE)
+standardNames = data.table::fread('../data/conditionList.tsv', sep='\t')
 ```
 
 ### All the associations with CVDs found in Disgenet
 
 ```{r}
-dgn.cvdIds = standardNames %>%
-    `$`('diseaseId') %>%
-    unique() %>% subset(., !is.na(.)) %>%
-    data.frame('diseaseId' = .) %>%
-    merge(dgn.mappings[,c('diseaseId', 'name')], all.x = TRUE, all.y = FALSE, sort=FALSE) %>% unique()
-dgn.CVDs = data.table::fread('../data/disgenet/all_gene_disease_associations.tsv') %>%
-    subset(diseaseId %in% dgn.cvdIds$diseaseId)
+hpo2dgn = standardNames$HPOTermId %>%
+    lapply(function(x) {
+        return(dgn.mappings[dgn.mappings$code == x, 'diseaseId'])
+    }) %>%
+    set_names(standardNames$HPOTermId) %>%
+    lapply(function(x) {
+        subset(dgn.all, diseaseId %in% x[['diseaseId']]) %>%
+            `$`('geneId') %>%
+            unique() %>%
+            length() %>%
+            return()
+    })
+
+groupColors = c('#a6cee3', '#1f78b4', '#4daf4a', 'darkgreen', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6')
+tmp = data.frame('HPOTermId' = names(hpo2dgn), 'disgenetCount' = as.numeric(hpo2dgn)) %>%
+    merge(standardNames, by = 'HPOTermId', sort = FALSE)
+tmp$color <- factor(tmp$query) %>% `levels<-`(groupColors) %>% as.character()
+tmp %>%
+    ggplot() +
+    geom_bar(aes(x=factor(HPOTermName, levels=HPOTermName),y=disgenetCount, fill=query),stat = 'identity') +
+    theme_bw() +
+    theme(axis.text.y = element_text(color = tmp$color)) +
+    scale_fill_manual(values = groupColors) +
+    guides(fill=guide_legend(title='Group')) +
+    ylab('Number of genes on disgenet') +
+    xlab('Phenotype') +
+    coord_flip()
+
+ggsave('../figures/disgenet-gene-count.png', device = 'png', width = 10, height=4.5)
+# standardNames = data.table::fread('../data/conditionList.tsv', sep='\t') %>%
+    # merge(dgn.mappings[,c('diseaseId', 'name', 'code', 'vocabularyName')], by.x = 'HPOTermId', by.y= 'code', all.x = TRUE, all.y = FALSE, sort = FALSE)
 ```
+
+```{r}
+dgn.CVDs %>%
+    ggplot() +
+    geom_bar(aes(x=diseaseName)) +
+    coord_flip()
+```
+
 
 ### Gene association similarity among the diseases
 
