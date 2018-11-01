@@ -279,11 +279,14 @@ plot.heatmap(m) + ggtitle('OMIM gene association similarity')
 groupColors = c('#a6cee3', '#1f78b4', '#4daf4a', 'darkgreen', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6')
 tmp <- diag(m.commonGenes) %>%
     reshape2::melt() %>%
-    `$<-`('HPOTerm', rownames(.)) %>%
-    merge(standardNames, by.x='HPOTerm', by.y='HPOTermName', all.x = TRUE, all.y= FALSE, sort=FALSE)
+    `$<-`('HPOTermName', rownames(.)) %>%
+    merge(standardNames, by.x='HPOTermName', by.y='HPOTermName', all.x = TRUE, all.y= FALSE, sort=FALSE)
+tmp$OMIMCount = tmp$value
+tmp$value <- NULL
+write.table(tmp, file = '../data/geneAssociationCount-OMIM.tsv', sep = '\t', quote = FALSE, row.names = FALSE)
 tmp$color <- factor(tmp$query) %>% `levels<-`(groupColors) %>% as.character()
 p <- ggplot(tmp) +
-    geom_bar(aes(x=factor(HPOTerm, levels=HPOTerm),y=value, fill=query),stat = 'identity') +
+    geom_bar(aes(x=factor(HPOTermName, levels=HPOTermName),y=OMIMCount, fill=query),stat = 'identity') +
     theme_bw() +
     theme(axis.text.y = element_text(color = tmp$color)) +
     scale_fill_manual(values = groupColors) +

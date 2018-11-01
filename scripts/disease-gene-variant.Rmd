@@ -398,6 +398,7 @@ hpo2dgn = standardNames$HPOTermId %>%
 groupColors = c('#a6cee3', '#1f78b4', '#4daf4a', 'darkgreen', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6')
 tmp = data.frame('HPOTermId' = names(hpo2dgn), 'disgenetCount' = as.numeric(hpo2dgn)) %>%
     merge(standardNames, by = 'HPOTermId', sort = FALSE)
+write.table(tmp, file = '../data/geneAssociationCount-disgenet.tsv', sep='\t', quote=FALSE, row.names = FALSE)
 tmp$color <- factor(tmp$query) %>% `levels<-`(groupColors) %>% as.character()
 tmp %>%
     ggplot() +
