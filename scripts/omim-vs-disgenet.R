@@ -20,3 +20,5 @@ p <- dga %>%
     coord_flip()
 print(p)
 ggsave('../figures/gene-associations-discrepancy.png', device = 'png', width = 10, height=4.5)
+
+
