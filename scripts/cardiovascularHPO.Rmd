@@ -138,6 +138,49 @@ for (i in 1:nrow(standardNames)) {
 }
 ```
 
+## Explore phenotype-gene associations annotated by HPO
+
+```{r, message=FALSE}
+standardNames = read.table('../data/conditionList.tsv', sep='\t', header=TRUE)
+m = matrix(0, nrow=nrow(standardNames), ncol = nrow(standardNames)) %>%
+    `colnames<-`(standardNames$HPOTermName) %>%
+    `rownames<-`(standardNames$HPOTermName)
+
+m.commonGenes = m
+hpo.associations = data.table::fread('../data/hpo/ALL_SOURCES_ALL_FREQUENCIES_phenotype_to_genes.txt', sep = '\t', header=FALSE, quote="") %>%
+    set_names(c('HPOTermId', 'HPOTermName', 'GeneId', 'GeneSymbol'))
+hpo.CVDs = standardNames$HPOTermId %>%
+    lapply(function(x) {
+        subset(hpo.associations, HPOTermId == x) %>%
+            `$`('GeneSymbol') %>%
+            unique()  %>%
+            return()
+    }) %>%
+    set_names(standardNames$HPOTermId)
+
+
+for (i in 1:(nrow(standardNames))) {
+    map_i = hpo.CVDs[[i]]
+    m.commonGenes[i,i] = length(map_i)
+    if (m.commonGenes[i,i] != 0) m[i,i] = 1 
+    if (i == nrow(standardNames)) break
+    for (j in (i+1):nrow(standardNames)) {
+        map_j = hpo.CVDs[[j]]
+        m[i,j] = m[j,i] = jaccard(map_i, map_j)
+        m.commonGenes[i,j] = m.commonGenes[j,i] = length(intersect(map_i, map_j))
+    }
+}
+
+plot.heatmap(m) + ggtitle('HPO gene association similarity')
+ggsave('../figures/hpo-gene-association-sim.png', width = 10, height = 7)
+(plot.heatmap(m.commonGenes) + ggtitle('HPO common gene associations')) %>% ggplotly()
+
+```
+
+```{r}
+
+```
+
 
 ## Explore OMIM associations
 
