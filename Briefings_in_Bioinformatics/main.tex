@@ -56,11 +56,15 @@ The first draft of the human genome project had brought a lot of hope and excite
 
 %{https://www.ncbi.nlm.nih.gov/mesh/68002318} 
 
-As the most common cause of heart transplantation, dilated cardiomyopathy (DCM) worths investigating. In a recent review \citep{Burke:2016:Clinical} 16 disease-causing genes were compiled, along with an additional 41 putative genes. Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively. These numbers clearly advocate for more bioinformatics analyses to gain insights into this condition and the other conditions that are equivalently complex.
 
 \section{Complexity of CVDs}
 
-The number of genes involved in a disease has increased steadily and in most cases, go beyond a few genes that could be described in a single-page table or diagram.
+\subsection{The increasing number of actors}
+
+As more studies are published, the number of genes involved in a disease has also increased and in most cases, gone beyond a few genes that could be described in a single-page table or diagram.
+
+
+As the most common cause of heart transplantation, dilated cardiomyopathy (DCM) worths investigating. In a recent review \citep{Burke:2016:Clinical} 16 disease-causing genes were compiled, along with an additional 41 putative genes. Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively. These numbers clearly advocate for more bioinformatics analyses to gain insights into this condition and the other conditions that are equivalently complex.
 
 According the amount of possible interactions between them increase combinatorially.
 
@@ -68,27 +72,45 @@ Accordingly, the number of biological states is exponential. Among these states,
 
 As with other complex diseases, missing heritability has been a long-standing puzzle in cardiovascular diseases \citep{Manolio:2009:Finding}. Despite the early successes in pinpointing the causes of several monogenic diseases, the large body of genome-wide association (GWA) studies have defied many widely held beliefs about genetic variants in human, hinting at the directions to search for the missing heritability.
 
-\subsection{Rare variants}
+polygenic score: how many genes involved
+
+
+
+
+rare variants
 
 The most trivial situation where inherited risk is not fully accounted for is when the variants are simply too rare to be detected with sufficient power. One addresses this issue by collecting more samples or improving statistical tests.
 
 The availability of a large number of genomes and exomes, on one hand enabled the detection of such rare variants, and on the others,  showed that rare variants 
 
-\subsection{Structural variants and non-coding variants}
+
+\subsection{The under-explored territories}
+
+structural variants
 
 An obvious reason for missing the significant variants is to search in the wrong place. Most genotyping arrays were designed to detect SNPs, essentially ignoring the structural variants including copy number variants, inversion, translocation, etc. As next-generation sequencing is employed in genotyping, the protein-coding part of the genome, i.e. \textit{exome} are prioritized, based on a regularly cited fact that the exome harbors 85\% of the disease-causing variants turns out to be an outdated estimate from 1995 \citep{Antonarakis:2001:nature}. Our survey of the variants having significant association with human traits, as compiled by GWAS (to limit to associations with p-value less than $10^{-5}$), revealed a large fraction in non-protein coding regions such as intron, interngenic, 5'-UTR, 3'-UTR, etc (Figure \ref{fig:variant_context}). Notably, the distribution of CVD-associated variants in the genome mimic that of the complete set of variants. This observation emphasizes the fact that our understanding of CVD as well as biology in general has been critically limited by our technical capability to characterize protein-coding genes. 
 
-\subsection{From polygenic to omnigenic}
 
-\subsection{Epigenetics}
+non-coding
 
-More recent findings have unraveled a larger role of non-coding RNAs and epigenetics in cardiovascular biology.
+epigenetics
 
-\subsection{Environment interactions}
+What is epigenetics? 
+Recent findings have unraveled a more important role of non-coding RNAs and epigenetics in cardiovascular biology.
+
+environment interactions
 
 A critical limitation to study at the molecular level is the interaction between gene  and environment.
 
 It has been known for decades that non-genetic factors play a critical role in cardiovascular health, such that a risk prediction using lifestyle variables perform much better than a polygenic score \citep{Joyner:2011:Ten}. The understanding of this interaction at the molecular level is still relevant for basic research, as well as health care applications. The research has been limited due to the difficulties in monitoring one's external environment. Such barrriers start to be lifted, thanks to the development of wearable devices that can collect real time data in a non-intrusive manner. Studies on the exposome have started to accumulate \citep{Jiang:2018:Dynamic}, projecting the greater need of large scale, streaming data analysis.
+
+
+\subsection{The forgotten concepts}
+
+homeostasis
+
+omnigenic model remind us about the widespread interactions possible in a cell and how important it is to account for most of the actors
+
 
 \begin{figure*}[!tpb]
 	\includegraphics[width=1.\linewidth]{hpo-gene-count}
@@ -108,14 +130,33 @@ Text Text Text Text Text Text  Text TextText Text Text Text Text Text  Text Text
 
 Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text  
 
-\section{Profusion of data}
+
+%
+\section{Cardioinformatics}
+%%
+
+\subsection{The soil is worked}
+
+This part is to introduce the achievements and on-going work in developing the infrastructure for data storage, management and sharing, thus making the case for an invest in bioinformatics analyses to capitalize on these resources.
+
+
+\subsubsection{Infrastructure}
+
+The infrastructure for bioinformatics analyses now is even more mature, thanks to cloud computing \citep{Langmead:2018:Cloud}, secured data storage and management.
+
+Guidelines, protocol
+
+
+Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
+
+\subsubsection{Profusion of data}
 
 Technological advances brought about the accumulation of biological data, both in the number of data points, and the number of dimensions in each data point.
 High-throughput profiling techniques are inarguably the main drive in creating high-dimensional data (DNA, RNA, protein levels).
 A glimpse into central repositories such as GEO or dbGaP hinted at the amount of data points that can be accumulated from small  studies. Depending on the questions at hands, the precise definition of a data point can vary. In most cases, it can be equivalent to the number biological samples or that of individual donors. Although studies directly related to CVDs are of interest when it comes to future CVD research, a significant number of data points from non-CVD studies can be put into use, for example, when these studies investigated samples of cardiovascular origin (heart or vascular tissues).
 
 \begin{figure}[!tpb]%figure1
-\includegraphics[width=1\linewidth]{gsm_count_by_tech.png}
+	\includegraphics[width=1\linewidth]{gsm_count_by_tech.png}
 	\caption{The cumulative number of samples deposited on GEO.}
 	\label{fig:01}
 \end{figure}
@@ -169,14 +210,35 @@ Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Tex
 \end{table}
 
 Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
+
 %
-\section{Solutions from bioinformatics}
-%%
+%\subsubsection{Basic research}
+%for data management, computational analysis, visual representation, etc.
+%
+%\subsubsection{Clinical application}
+%
+%
+
+\subsubsection{Computational methods}
+
+As early as 1999 when the complete human genome and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data. The computational approaches outlined by \cite{Claverie:1999:Computational} for the early day gene expression data are still popular in today transcriptomics studies: differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways. Those old-fashioned methods can still bring fruitful analyses, as illustrated in a recent study on heart failure \citep{Santolini:2018:personalized}.
+
+With less focus on computation, visualization still makes up an important part in facilitating biological research, especially for data exploration, pattern recognition, and data representation. Visualization methods are blooming to accommodate the diverse data types in biology \citep{Pavlopoulos:2015:Visualizing}. With regard to visualization, the exciting challenge to cardioinformatics researcher is the meaningful integrated representation of data layers. In basic research, such representation can mean to put together pieces of information from various experimental techniques. In clinical application, the focus is on facilitating clinical decisions.
+
+Search engine and knowledge synthesis \citep{Lutjohann:2011:Sciencenet}.
+
 \subsection{The multi-layered paths from genome to phenotype}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
+This part is to demonstrate the volume of existing data and the potential of new insights from re-analyses, especially when more than one layers are stacked. Give the examples of those multi-omics studies.
 %
+
 \todo{Tentative: A figure/table enlisting layers of modifications that contribute to determine a phenotype, with the corresponding experimental techniques}
+
+\cite{Santolini:2018:personalized} 
+
+\cite{Klarin:2017:Genetic}
+
+
 %%
 %\begin{itemize}
 %	\item genome
@@ -188,29 +250,19 @@ Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Tex
 %%environmental factors
 %
 %
-\subsection{Bioinformatics as a tool-kit}
-
-As early as 1999 when complete genome sequencing and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data \citep{Claverie:1999:Computational}.
-The infrastructure for bioinformatics analyses now is even more mature, thanks to cloud computing \citep{Langmead:2018:Cloud}, secured data storage and management.
 
 
+\subsection{New and re-newed perspectives}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
-%
-%\subsubsection{Basic research}
-%for data management, computational analysis, visual representation, etc.
-%
-%\subsubsection{Clinical application}
-%
-%
-\subsection{Bioinformatics as a perspective}
+Cardioinformatics offers a number of powerful concepts to investigate complex physiological system.
 
-Bioinformatics is more than a powerful toolkit to manipulate the large amount of data beyond human capability. The paradigm shift from the single physical gene to the "eigengenes" in studying complex diseases \citep{Weiss:2012:Good} is a pragmatic approach.
+The paradigm shift from the physical genes to the "eigengenes" in studying complex diseases \citep{Weiss:2012:Good} is a pragmatic approach. This approach allows one to focus on mimicking the healthy system without the knowledge required to model the individual actors and their interactions, making it an ideal method in the drug discovery workflow. The paradigm can help advancing knowledge further because it suggests an efficient way to engineer biological system and learn how it works.
+
+The heavily connected biological system is among many types that can be modeled and analyzed as graphs. The omnigenic model recently proposed has highlighted the need for this system-level modeling, since the involvement of peripheral genes are widespread in physiological and pathological processes.
+
+\section{Conclusion}
 
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text
-
- Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
 %
 
 \enlargethispage{12pt}
