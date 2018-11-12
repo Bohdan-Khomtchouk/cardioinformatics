@@ -85,6 +85,12 @@ The most trivial situation where inherited risk is not fully accounted for is wh
 The availability of a large number of genomes and exomes, on one hand enabled the detection of such rare variants, and on the others,  showed that rare variants 
 
 
+\begin{figure*}[!tpb]
+	\includegraphics[width=1.\linewidth]{hpo-gene-count}
+	\caption{The number of genes associated with \textit{Abnormality of the cardiovascular system} (HP:0001626) as reported in the Human Phenotype Ontology \citep{Kohler:2014:Human}, with phenotype annotations pooled from OMIM, ORPHA and DECIPHER.}
+	\label{fig:hpo_gene_count}	
+\end{figure*}
+
 \subsection{The under-explored territories}
 
 
@@ -120,11 +126,7 @@ homeostasis
 omnigenic model remind us about the widespread interactions possible in a cell and how important it is to account for most of the actors
 
 
-\begin{figure*}[!tpb]
-	\includegraphics[width=1.\linewidth]{hpo-gene-count}
-	\caption{The number of genes associated with \textit{Abnormality of the cardiovascular system} (HP:0001626) as annotated with the Human Phenotype Ontology \citep{Kohler:2014:Human}.}
-	\label{fig:hpo_gene_count}	
-\end{figure*}
+
 
 \begin{figure}[!tpb]
 	\includegraphics[width=1\linewidth]{variant_contexts_sigVars}
@@ -230,7 +232,7 @@ Aside from central authoritative repositories of research data, smaller database
 \subsection{Computational methods}
 
 
-As early as 1999 when the complete human genome and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data. The computational approaches outlined by \cite{Claverie:1999:Computational} for the early day gene expression data are still popular in today transcriptomics studies: differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways. Those old-fashioned methods can still bring fruitful analyses, as illustrated in a recent study on heart failure \citep{Santolini:2018:personalized}.
+As early as 1999 when the complete human genome and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data. The computational approaches outlined by \cite{Claverie:1999:Computational} for the early day gene expression data are still popular in today transcriptomics studies: differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways. Those old-fashioned methods can still bring fruitful analyses, as illustrated in a recent study on heart failure \citep{Santolini:2018:personalized}. A significant improvement in the power of differential expression analysis is the large number of samples which will be highly difficult to obtained in individual studies. Opportunity: re-analysis of newly compiled data, framework to enable streaming analysis as new data is deposited.
 
 The application of machine learning will be indispensable in many aspects of cardiology \citep{Shameer:2017:Translational,Shameer:2018:Machine}. Given the availability of machine learning performant implementations, cardioinformatics is better positioned to tackle domain-specific questions and develop clinical application. For example, ML can be applied to enhance medical image. In basic research, natural language processing can be a promising tool to improve data collection and organization.
 
