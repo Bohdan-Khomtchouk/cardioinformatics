@@ -86,6 +86,9 @@ The availability of a large number of genomes and exomes, on one hand enabled th
 
 \subsection{The under-explored territories}
 
+
+Variant calling and pathogenicity prediction. Currently inconsistent. Mostly developed for protein-coding fraction of the genome (SIFT, Polyphen, etc.), largely ignore the non-coding regions.
+
 structural variants
 
 An obvious reason for missing the significant variants is to search in the wrong place. Most genotyping arrays were designed to detect SNPs, essentially ignoring the structural variants including copy number variants, inversion, translocation, etc. As next-generation sequencing is employed in genotyping, the protein-coding part of the genome, i.e. \textit{exome} are prioritized, based on a regularly cited fact that the exome harbors 85\% of the disease-causing variants turns out to be an outdated estimate from 1995 \citep{Antonarakis:2001:nature}. Our survey of the variants having significant association with human traits, as compiled by GWAS (to limit to associations with p-value less than $10^{-5}$), revealed a large fraction in non-protein coding regions such as intron, interngenic, 5'-UTR, 3'-UTR, etc (Figure \ref{fig:variant_context}). Notably, the distribution of CVD-associated variants in the genome mimic that of the complete set of variants. This observation emphasizes the fact that our understanding of CVD as well as biology in general has been critically limited by our technical capability to characterize protein-coding genes. 
@@ -95,7 +98,11 @@ non-coding
 
 epigenetics
 
-What is epigenetics? 
+Epigenetics, by definition, includes all the heritable modifications that occur without the changes in DNA sequences. Epigenetic processes involve DNA methylation, histone modifications, and the less well-defined group of non-coding RNAs.
+
+Thanks to the advance of next-generation sequencing techniques, the prevalence of long non-coding RNAs in cardiovascular diseases has emerged. A range of functions have been reported for lncRNAs, including imprinting, scaffolding, enhancer, and molecular sponges. More research is certainly needed to obtain a complete catalog of lncRNA functions.
+
+
 Recent findings have unraveled a more important role of non-coding RNAs and epigenetics in cardiovascular biology.
 
 environment interactions
@@ -120,13 +127,13 @@ omnigenic model remind us about the widespread interactions possible in a cell a
 
 \begin{figure}[!tpb]
 	\includegraphics[width=1\linewidth]{variant_contexts_sigVars}
-	\caption{Distribution of known variants in the human genome.}
+	\caption{Distribution of known variants in the human genome. \comment{Trang: group the contexts into 4 catergories: intronic, splice, intergenic and exonic regions, either by colors or additional chart.}}
 	\label{fig:variant_context}
 \end{figure}
 
 %Some quantity showing the associations of CVD with genes...
 %
-Text Text Text Text Text Text  Text TextText Text Text Text Text Text  Text TextText Text Text Text Text Text  Text TextText Text Text Text Text Text  Text TextText Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text 
+
 
 Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Text  
 
@@ -134,6 +141,7 @@ Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Tex
 %
 \section{Cardioinformatics}
 %%
+As demonstrated earlier, the large number of studies have contributed to a larger, not necessarily more solid, body of knowledge. In the following section, we argue for the readiness and the prospect of cardioinformatics, by looking at the current infrastructure for biological data analytics, the computational methods.
 
 \subsection{The soil is worked}
 
@@ -222,6 +230,7 @@ Text Text Text Text Text Text  Text Text Text Text Text Text Text Text  Text Tex
 
 \subsection{Computational methods}
 
+
 As early as 1999 when the complete human genome and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data. The computational approaches outlined by \cite{Claverie:1999:Computational} for the early day gene expression data are still popular in today transcriptomics studies: differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways. Those old-fashioned methods can still bring fruitful analyses, as illustrated in a recent study on heart failure \citep{Santolini:2018:personalized}.
 
 The application of machine learning will be indispensable in many aspects of cardiology \citep{Shameer:2017:Translational,Shameer:2018:Machine}. Given the availability of machine learning performant implementations, cardioinformatics is better positioned to tackle domain-specific questions and develop clinical application. For example, ML can be applied to enhance medical image. In basic research, natural language processing can be a promising tool to improve data collection and organization.
@@ -229,7 +238,9 @@ The application of machine learning will be indispensable in many aspects of car
 
 With less focus on computation, visualization still makes up an important part in facilitating biological research, especially for data exploration, pattern recognition, and data representation. Visualization methods are blooming to accommodate the diverse data types in biology \citep{Pavlopoulos:2015:Visualizing}. With regard to visualization, the exciting challenge to cardioinformatics researcher is the meaningful integrated representation of data layers. In basic research, such representation can mean to put together pieces of information from various experimental techniques. In clinical application, the focus is on facilitating clinical decisions.
 
-Search engine and knowledge synthesis \citep{Lutjohann:2011:Sciencenet}.
+Visualization of chromatin 3D structure emerges as a demand to analyze and present experimental data from conformation capture experiments. The challenges posed by these experiments, being new, high-throughput and  3-dimensional, are actively researched visualization problems \citep{Goodstadt:2017:Challenges}. As a researcher in cardiovascular disease, it is important to stay abreast with the developments in this field to make the most use of the available data.
+
+Search engine and knowledge synthesis \citep{Lutjohann:2011:Sciencenet}. A universal element of all research, knowledge synthesis is under-rated research task. Like most other areas, most of the work in knowledge synthesis has been and has to be done manually in cardiovascular research. Cardiovascular diseases impose the challenge of understanding complex systems of multiple dimensions, creating the pressing need of summarizing and synthesizing knowledge from the vast body of research in a more robust manner. Natural language processing.
 
 %\subsection{The multi-layered paths from genome to phenotype}
 
@@ -262,6 +273,10 @@ Cardioinformatics offers a number of powerful concepts to investigate complex ph
 The paradigm shift from the physical genes to the "eigengenes" in studying complex diseases \citep{Weiss:2012:Good} is a pragmatic approach. This approach allows one to focus on mimicking the healthy system without the knowledge required to model the individual actors and their interactions, making it an ideal method in the drug discovery workflow. The paradigm can help advancing knowledge further because it suggests an efficient way to engineer biological system and learn how it works.
 
 The heavily connected biological system is among many types that can be modeled and analyzed as graphs. The omnigenic model recently proposed has highlighted the need for this system-level modeling, since the involvement of peripheral genes are widespread in physiological and pathological processes.
+
+\subsection{Prospective development}
+
+
 
 \section{Conclusion}
 
