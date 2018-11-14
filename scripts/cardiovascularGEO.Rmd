@@ -215,20 +215,35 @@ subject.cnt.cvd = dbgap.gru[dbgap.gru$Topic == 'CVD',c(-1,-2, -3)] %>%
     summarise_all(funs(sum))
 subject.cnt.all = dbgap.gru[,c(-1,-2, -3)] %>%
     summarise_all(funs(sum))
-rbind(subject.cnt.cvd, subject.cnt.all) %>%
+dbgap.gru.cnt = rbind(subject.cnt.cvd, subject.cnt.all) %>%
     t() %>%
     set_colnames(c('CVD', 'All'))
-    reshape2::melt() %>%
-    ggplot(aes(x = variable, y = value)) +
-    geom_bar(stat = 'identity') +
-    coord_flip()
-ggplot(dbgap.gru, mapping = aes())
 ```
+
+
 
 ```{r}
 dbgap = data.table::fread('../data/dbgap-adv-datasets.tsv', sep='\t')
-dbgap$`Subject count` <-
-    gsub(pattern = '^(.*\\W+)(\\d+)(\\W+subjects.*)$', replacement = '\\2', x = dbgap$`Study Content`) %>% as.numeric()
+dbgap$`SubjectCount` <- gsub(pattern = '^(.*\\W+)(\\d+)(\\W+subjects.*)$', replacement = '\\2', x = dbgap$`Study Content`) %>% as.numeric()
+dbgap$`SampleCount` <- gsub(pattern = '^(.*\\W+)(\\d+)(\\W+samples.*)$', replacement = '\\2', x = dbgap$`Study Content`) %>% as.numeric()
+dbgap$`MolecularDatasetCount` <- gsub(pattern = '^(.*\\W+)(\\d+)(\\W+molecular dataset.*)$', replacement = '\\2', x = dbgap$`Study Content`) %>% as.numeric()
+dbgap$`MolecularDataType` <- lapply(dbgap$`Study Molecular Data Type`, function(x) {
+    strsplit(x, ",") %>%
+        unlist() %>%
+        trimws() %>%
+        return()
+    
+})
+dbgap$MolecularDataType
+
+# The number of molecular data types in each study
+dbgap$MolecularDataType %>% sapply(length)
+
+# The number of molecular data sets in each study
+dbgap$MolecularDatasetCount
 ```
 
-The number of subjects in all CVD studies deposited on dbGaP are `r dbgap[['Subject count']] %>% sum(na.rm = TRUE)`
+```{r}
+dbgap$`Study Molecular Data Type` %>% table()
+```
+The number of subjects in all CVD studies deposited on dbGaP are `r dbgap[['SubjectCount']] %>% sum(na.rm = TRUE)`
