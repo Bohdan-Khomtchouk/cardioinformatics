@@ -84,7 +84,7 @@ As we further our quest to understand the genetics of heart diseases, many condi
 % 
 There are a certain genetic component in all major categories of heart diseases (Figure \ref{fig:hpo_gene_count}). As more studies are published, the number of genes found associated with a disease has also increased and in most cases, gone beyond a few genes that could be described in a single-page table or diagram.
 
-As the most common cause of heart transplantation, dilated cardiomyopathy (DCM) worths investigating. In a recent review \citep{Burke:2016:Clinical} 16 disease-causing genes were compiled, along with an additional 41 putative genes. Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively.
+As the most common cause of heart transplantation, dilated cardiomyopathy (DCM) worths investigating. In a recent review \citep{Burke:2016:Clinical} 16 disease-causing genes were compiled, along with an additional 41 putative genes. Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively. Clinical application is keeping up, with a typical commercial gene panel for DCM genetic testing cover 50 genes on average, and 111 in total \citep{McNallyElizabethM.:2017:Dilated}.
 %These numbers clearly advocate for more bioinformatics analyses to gain insights into this condition and the other conditions that are equivalently complex.
 It is reasonably expected that when more genes are involved in a disease, the effect exerted by each gene gets smaller \comment{cite?}. Finding the significant associations of such small effect requires a much larger number of samples for sufficient power, or critically different methods of statistical testing and inference.\comment{Check refs. Elaborate on current efforts to have large study populations and to devise new way to fish for those associations.}
 
@@ -112,24 +112,36 @@ non-additive effects
 
 \subsection{The diversity of actors}
 
-Our understanding of CVD has been critically limited by our technical capability in characterizing various molecular fractions of a cell. Recent findings gradually revealed more factors contributing to the genetic risk of cardiovascular diseases.
+Our understanding of CVD has been critically limited by the technical capability in characterizing various molecular fractions of a cell. GWA studies are predominantly conducted on SNPs thanks to the availability of easy-to-produce SNP microarrays. Such technologies have clearly enriched our knowledge base of single nucleotide variants, while leaving structural variations poorly understood. There are now 660 million of SNPs documented in dbSNP, compared to 4.6 millions of structural variations in the DGVa (Database of Genomic Variants Archive, which also includes studies annotated by the NCBI-hosted database of structural variants dbVar) \comment{number from Ensembl, but is it really this much?}. Although structural variation databases are still primordial form of study archives, rather than data entries for structural variations, the map of SV from 1000 Genomes Project \citep{Sudmant:2015:integrated} has enabled further studies of the role of SV in cardiac diseases, suggesting at least the impact of SV on the transcriptional regulation of cardiac genes expressed in the heart \citep{Haas:2018:Genomic}.
+
+%Structural variations turn out to account for more phenotypic variations in human than previously expected \comment{cite}. As for CVD and other complex diseases, structural variants are one of promising lands to look for the missing heritability \citep{Eichler:2010:Missing}.
+Reliable identification of structural variants is an open challenge being addressed by more research recently. Cardiovascular disease offer a concrete and narrow space to facilitate the exploration of this area.
+% non-coding
+When array-based genotyping is gradually replaced by next-generation sequencing, sequencing of exome, i.e. the protein-coding part of the genome, is prioritized over that of the whole genome, based on a regularly cited fact that exome harbors 85\% of the disease-causing variants \citep{Antonarakis:2001:nature}. This figure turns out to be an outdated estimate from 1995. Our survey of all associations in the GWAS catalog \citep{MacArthur:2017:new} ( manually curated to retain only those with p-value less than $10^{-5}$) revealed that a large fraction of variants occur in non-protein coding regions such as intronic, interngenic, and splice junctions (Figure \ref{fig:variant_context}). Interestingly, the distribution of CVD-associated variants mimics that of the all-variant set, suggesting that variants accounting for human traits might be distributed in the same manner across the genome.
+
+Recent findings have attributed a more and more important role of epigenetics in cardiovascular disease risk, besides the 
+
 
 %structural variants
-A large fraction of GWA studies are limited to single nuleotide polymorphisms (SNPs), essentially ignoring structural variants including inversion, translocation and copy number variation \comment{cite}. While there are now 660 million of SNPs documented in dbSNP, the number of structural variants in the Database of Genomic Variants Archive (which also includes studies annotated by the NCBI-hosted database of structural variants dbVar) is 4.9 million. Structural variant databases are still the archives of studies instead of data entry for structural variants,
+A large fraction of GWA studies are limited to single nuleotide polymorphisms (SNPs), essentially ignoring structural variants including inversion, translocation and copy number variation \comment{cite}. 
+
+chromatin conformation \citep{Rosa-Garrido:2017:HighResolution}
+
 %some focusing on limited area of the human genome
 as there is not enough systematic understanding to build their reference database entries. It would be interesting to learn about the occurrence patterns of structural variants, and how they contribute to various phenotypes. Regardless of whether such pattern is shared between the general and clinical populations, it is an under-explored territory that promises more insights toward the long-standing problem of missing heritability  in complex diseases, including CVD.  \comment{More refs. What are the current understanding of SV? How many are there? What are the current challenges of studying SV?}
 
-% non-coding
-When array-based genotyping is gradually replaced by next-generation sequencing, sequencing of exome, i.e. the protein-coding part of the genome, is prioritized over that of the whole genome, based on a regularly cited fact that exome harbors 85\% of the disease-causing variants \citep{Antonarakis:2001:nature}. This figure turns out to be an outdated estimate from 1995. Our survey of all associations in the GWAS catalog \citep{MacArthur:2017:new} ( manually curated to retain only those with p-value less than $10^{-5}$) revealed that a large fraction of variants occur in non-protein coding regions such as intron, interngenic, and splice junctions (Figure \ref{fig:variant_context}). Notably, the distribution of CVD-associated variants mimic that of the complete set of variants.
 
 
 %epigenetics
 
 Epigenetics, by definition, includes all the heritable modifications that occur without the changes in DNA sequences. Epigenetic processes involve DNA methylation, histone modifications, and the less well-defined group of non-coding RNAs.
 
+
 Thanks to the advance of next-generation sequencing techniques, the prevalence of long non-coding RNAs in cardiovascular diseases has emerged. A range of functions have been reported for lncRNAs, including imprinting, scaffolding, enhancer, and molecular sponges. More research is certainly needed to obtain a complete catalog of lncRNA functions. \comment{role of non-coding RNAs and epigenetics in cardiovascular biology \citep{Sallam:2018:Long}}
 
-chromatin conformation \citep{Rosa-Garrido:2017:HighResolution}
+
+
+
 
 environment interactions
 
