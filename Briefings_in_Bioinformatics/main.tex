@@ -13,7 +13,7 @@
 
 \subtitle{Review}
 
-\title[short Title]{Cardioinformatics: the unmet need to pioneer an emerging field at the nexus of bioinformatics and cardiology}
+\title[Cardioinformatics]{Cardioinformatics: the unmet need to pioneer an emerging field at the nexus of bioinformatics and cardiology}
 \author[Sample \textit{et~al}.]{Bohdan B. Khomtchouk\,$^{\text{\sfb 1,}*}$, Diem-Trang Tran\,$^{\text{\sfb 2}}$, Themistocles L. Assimes\,$^{\text{\sfb 3, 4}}$ and Or Gozani\,$^{\text{\sfb 1}}$}
 \address{$^{\text{\sf 1}}$Department of Biology, Stanford University, Stanford, CA, USA \\
 $^{\text{\sf 2}}$School of Computing, University of Utah, Salt Lake City, UT, USA \\
@@ -123,9 +123,14 @@ The rationale for prioritizing the sequencing of exome over that of the entire g
 
 
 %epigenetics
-Cardiovascular risks can be conferred with modifications beyond genomic sequence, collectively studied as epigenetics. Epigenetic processes traditionally involved DNA methylation, a wide range of histone modifications including acetylation, methylation, phosphorylation, uniquitylation, sumoylation and biotinylation, and are now encompassing more RNA-related processes that are not completely understood.
+Cardiovascular risks can be conferred with modifications beyond genomic sequence, collectively studied as epigenetics. Epigenetic processes traditionally involved DNA methylation, a wide range of histone modifications including acetylation, methylation, phosphorylation, uniquitylation, sumoylation and biotinylation, and are now encompassing more processes mediated by the class of long non-coding RNAs (lncRNA). 
+When more lncRNAs were discovered and characterized, the prevalence of these molecules in cardiovascular biology also emerged. LncRNAs are involved in coronary artery disease, myocardial infarction, cardiac hypertrophy, etc. \comment{should we add more details?}  At least 22 lncRNAs were reportedly dis-regulated in cardiovascular diseases, affecting a wide range of molecular, cellular and physiological processes \citep{Das:2018:Deciphering}. With 107,039 lncRNAs detected in the human genome so far (reported by LNCipedia \citep{Volders:2018:LNCipedia}, as of November 2018), more lncRNAs are likely to be found involved in cardiovascular biology, hence promising therapeutic targets.
+% cardiac differentiation, histone methylation, sponge of microRNAs, apoptosis
+ %angiogenesis, inflammation, macrophage activation, sarcomere development, autophagy
 
-Thanks to the advance of next-generation sequencing techniques, the prevalence of long non-coding RNAs in cardiovascular diseases has emerged. A range of functions have been reported for lncRNAs, including imprinting, scaffolding, enhancer, and molecular sponges. More research is certainly needed to obtain a complete catalog of lncRNA functions. \comment{role of non-coding RNAs and epigenetics in cardiovascular biology \citep{Sallam:2018:Long}}
+Difficulty in studying lncRNAs: low abundance level, highly tissue-specific expression. Approaches to study lncRNAs \citep{Sallam:2018:Long}
+
+%A range of functions have been reported for lncRNAs, including imprinting, scaffolding, enhancer, and molecular sponges. More research is certainly needed to obtain a complete catalog of lncRNA functions. \comment{role of non-coding RNAs and epigenetics in cardiovascular biology \citep{Sallam:2018:Long}}
 
 chromatin conformation \citep{Rosa-Garrido:2017:HighResolution}
 
@@ -221,7 +226,7 @@ One common way to access genotype-phenotype data is to file a request, prepare t
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 \begin{table}[]
-	\caption{The subject count aggregated from studies deposited in dbGaP, licensed for General Research Use}
+	\caption{The subject count aggregated from studies deposited in dbGaP, consented for General Research Use (GRU)}
 	\label{tab:dbgapSubject}
 	\begin{tabular}{l l l}
 		\toprule
@@ -247,7 +252,8 @@ One common way to access genotype-phenotype data is to file a request, prepare t
 		Whole Genome (NGS)             &     0 &    1245 \\
 		mRNA Expression (Array)        &     0 &     798 \\
 		miRNA (NGS)                        & 0 &   228 \\ \hline
-		Total subject count & 16786 & 242644 \\ 
+		Total subject count in data consented for GRU & 16786 & 242644 \\ \hline
+		All consent groups & 658305 & Unknown \\	
 	\end{tabular}
 \end{table}
 
