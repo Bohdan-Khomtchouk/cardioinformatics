@@ -18,7 +18,7 @@ assay_cardio_htseq <- dbGetQuery(con, paste('SELECT gsm.gsm, gsm.source_name_ch1
 assay_cardio_htseq %>% write.table(file = '../data/geo-assay-cardio-htseq.tsv', sep='\t',row.names = FALSE)
 assay_cardio_htseq %>% dplyr::count(study_type) %>%
     ggplot() +
-    geom_bar(aes(x=study_type,y=n), stat='identity', fill = ggplotColours(5)[1]) +
+    geom_bar(aes(x=study_type,y=n), stat='identity', fill = ggplotColours(5)[1], alpha=0.9) +
     ylab("Number of assays") +
     theme_bw() +
     coord_flip()
@@ -32,4 +32,3 @@ assay_cardio_htseq$study_type %>% unique() %>%
     }) %>%
     print()
 
-assay_cardio_htseq[assay_cardio_htseq$study_type == "",c('gsm', 'study_type')]
