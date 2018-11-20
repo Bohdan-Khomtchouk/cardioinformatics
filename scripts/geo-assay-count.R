@@ -29,3 +29,5 @@ tech_gsm_counts %>% group_by(technology) %>% arrange(year) %>% mutate(cumcount =
     geom_area(aes(x=year,y=cumcount,fill=technology), alpha=0.9, position='stack') +
     ylab('Cumulative number of samples')
 ggsave(filename = '../figures/gsm_count_by_tech-cardio.png', device='png', width=7, height=3)
+
+dbDisconnect(con)
