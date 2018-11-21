@@ -119,7 +119,7 @@ Our understanding of CVD has been critically limited by the technical capability
 % non-coding
 When array-based genotyping was gradually replaced by next-generation sequencing, the cost of sequencing an \textit{exome}, the protein-coding part of a genome, became much more affordable and enabled the collection of more than 60000 exomes \citep{Lek:2016:Analysis}. Using this data set, \cite{Walsh:2017:Reassessment} have found that many genetic variants associated with various cardiomyopathy diseases turned out to be equally common in clinical cases as in the control population. Genes that were consistently included on genetic testing panels for DCM such as MYBPC3, MYH6, SCN5A, etc. turned out to contribute much less etiology than previously thought, in conderation of their frequency in the control population.
 
-The rationale for prioritizing the sequencing of exome over that of the entire genome is based on a regularly cited fact that the exome harbors 85\% of the disease-causing variants \citep{Antonarakis:2001:nature}. This figure turns out to be an outdated estimate from 1995. Among the variation-phenotype associations curated in the GWAS catalog \citep{MacArthur:2017:new}, a large fraction of variants occur in non-protein coding regions such as intronic, intergenic, and splice junctions (Figure \ref{fig:variant_context}). Interestingly, the distribution of CVD-associated variants mimics that of the all-variant set, suggesting that variants accounting for human traits, neutral or disease-causing, might be distributed in the same manner across the genome.
+The rationale for prioritizing the sequencing of exome over that of the entire genome is based on a regularly cited statement that exome harbors 85\% of the disease-causing variants \citep{Antonarakis:2001:nature}. This figure turns out to be an outdated estimate from 1995. Among the variation-phenotype associations curated in the GWAS catalog \citep{MacArthur:2017:new}, a large fraction of variants occur in non-protein coding regions such as intronic, intergenic, and splice junctions (Figure \ref{fig:variant_context}). Interestingly, the distribution of CVD-associated variants mimics that of the all-variant set, suggesting that variants accounting for human traits, neutral or disease-causing, might be distributed in the same manner across the genome.
 
 
 %epigenetics
@@ -188,12 +188,14 @@ As demonstrated earlier, the large number of studies have contributed to a large
 
 Technological advances brought about the accumulation of biological data, both in the number of data points, and the number of dimensions in each data point.
 High-throughput profiling techniques are inarguably the main drive in creating high-dimensional data (DNA, RNA, protein levels).
-A glimpse into central repositories such as GEO or dbGaP hinted at the amount of data points that can be accumulated from small  studies. Depending on the questions at hands, the precise definition of a data point can vary. In most cases, it can be equivalent to the number biological samples or that of individual donors. Although studies directly related to CVDs are of interest when it comes to future CVD research, a significant number of data points from non-CVD studies can be put into use, for example, when these studies investigated samples of cardiovascular origin (heart or vascular tissues).
+A glimpse into central repositories such as GEO or dbGaP hinted at the amount of data points that have been accumulated from small studies and can be re-used for future studies. In GEO, CVD research has contributed more than 2000 microarray datasets, and about 900 of high-throughput sequencing datasets for various purposes (Figure \ref{fig:geo-assay}). Especially abundant are mRNA-seq assays, performed as the main assay in most studies, and usually coupled with another profiling technique. In dbGaP where human genotype-phenotype data are deposited, CVD research has collected data on 658305 subjects, 16786 (2.5\%) of which had consented for the data to be employed for General Research Use (GRU) (Table \ref{tab:dbgapSubject}).
+
+%Depending on the questions at hands, the precise definition of a data point can vary. In most cases, it can be equivalent to the number biological samples or that of individual donors. Although studies directly related to CVDs are of interest when it comes to future CVD research, a significant number of data points from non-CVD studies can be put into use, for example, when these studies investigated samples of cardiovascular origin (heart or vascular tissues).
 
 \begin{figure*}[!tpb]
 	\includegraphics[width=1\linewidth]{assay-count-cardio}
 	\caption{(\textbf{A}) The cumulative number of molecular assays \comment{(i.e. unique combinations of biosample, study and platform)} deposited on GEO by cardiovascular research. (\textbf{B}) Breakdown of high-throughput sequencing assays by the type of study.}
-	\label{fig:01}\comment{To avoid excessive overcounting of irrelevant samples such as those from plants or unrelated model organisms, we only counted samples deposited with a Pubmed ID pointing to a cardiovascular study. Surveys were done on the GEOmetadb database \citep{Zhu:2008:GEOmetadb} updated on 2018/11/17.}
+	\label{fig:geo-assay}\comment{To avoid excessive overcounting of irrelevant samples such as those from plants or unrelated model organisms, we only counted samples deposited with a Pubmed ID pointing to a cardiovascular study. Surveys were done on the GEOmetadb database \citep{Zhu:2008:GEOmetadb} updated on 2018/11/17.}
 \end{figure*} 
 
 \begin{table}[!t]
@@ -257,6 +259,7 @@ One common way to access genotype-phenotype data is to file a request, prepare t
 	\end{tabular}
 \end{table}
 
+The data from non-CVD studies are of great potential use as the baseline, for example when comparing the normal vs disease state, general vs clinical population. Moreover, assays on non-cardiac and non-vascular tissues are indispensable in identifying the transcripts with expression specific to the cardiovascular system.
 
 \subsubsection{Infrastructure}
 
@@ -300,7 +303,8 @@ Visualization of chromatin 3D structure emerges as a demand to analyze and prese
 Search engine and knowledge synthesis \citep{Lutjohann:2011:Sciencenet}. A universal element of all research, knowledge synthesis is under-rated research task. Like most other areas, most of the work in knowledge synthesis has been and has to be done manually in cardiovascular research. Cardiovascular diseases impose the challenge of understanding complex systems of multiple dimensions, creating the pressing need of summarizing and synthesizing knowledge from the vast body of research in a more robust manner. Natural language processing.
 
 
-The bottleneck in the application of these computational methods are not in their implementation, but in the shortage of domain knowledge. Many generic bio-portals have been published in the recent years, aiming to make complicated data as accessible as possible to a general audience. The lack of focus on a research topic has limited their usefulness. Cardioinformatics, as 
+The bottleneck in the application of these computational methods are not in their implementation, but in the shortage of domain knowledge. Many generic bio-portals have been published in the recent years, aiming to make complicated data as accessible as possible to a general audience. The lack of focus on a research topic has limited their usefulness.
+
 %\subsection{The multi-layered paths from genome to phenotype}
 
 
@@ -323,6 +327,8 @@ Cardioinformatics offers a number of powerful concepts to investigate complex ph
 The paradigm shift from the physical genes to the "eigengenes" in studying complex diseases \citep{Weiss:2012:Good} is a pragmatic approach. This approach allows one to focus on mimicking the healthy system without the knowledge required to model the individual actors and their interactions, making it an ideal method in the drug discovery workflow. The paradigm can help advancing knowledge further because it suggests an efficient way to engineer biological system and learn how it works.
 
 The heavily connected biological system is among many types that can be modeled and analyzed as graphs. The omnigenic model recently proposed has highlighted the need for this system-level modeling, since the involvement of peripheral genes are widespread in physiological and pathological processes.
+
+Integrated analyses of multiple layers
 
 \subsection{Prospective development}
 
