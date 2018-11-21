@@ -188,7 +188,7 @@ As demonstrated earlier, the large number of studies have contributed to a large
 
 Technological advances brought about the accumulation of biological data, both in the number of data points, and the number of dimensions in each data point.
 High-throughput profiling techniques are inarguably the main drive in creating high-dimensional data (DNA, RNA, protein levels).
-A glimpse into central repositories such as GEO or dbGaP hinted at the amount of data points that have been accumulated from small studies and can be re-used for future studies. In GEO, CVD research has contributed more than 2000 microarray datasets, and about 900 of high-throughput sequencing datasets for various purposes (Figure \ref{fig:geo-assay}). Especially abundant are mRNA-seq assays, performed as the main assay in most studies, and usually coupled with another profiling technique. In dbGaP where human genotype-phenotype data are deposited, CVD research has collected data on 658305 subjects, 16786 (2.5\%) of which had consented for the data to be employed for General Research Use (GRU) (Table \ref{tab:dbgapSubject}).
+A glimpse into central repositories such as GEO or dbGaP hinted at the amount of data points that have been accumulated from small studies and can be re-used for future studies. In GEO, CVD research has contributed more than 2000 microarray datasets, and about 900 of high-throughput sequencing datasets for various purposes (Figure \ref{fig:geo-assay}). Especially abundant are mRNA-seq assays, performed as the main assay in most studies, and usually coupled with another profiling technique. In dbGaP where human genotype-phenotype data are deposited, CVD research has collected data on 658305 subjects, 16786 (2.5\%) of which had consented for the data to be employed for general research (Table \ref{tab:dbgapSubject}), leaving a vast majority of data accessible only upon approval of data request.
 
 %Depending on the questions at hands, the precise definition of a data point can vary. In most cases, it can be equivalent to the number biological samples or that of individual donors. Although studies directly related to CVDs are of interest when it comes to future CVD research, a significant number of data points from non-CVD studies can be put into use, for example, when these studies investigated samples of cardiovascular origin (heart or vascular tissues).
 
@@ -198,27 +198,34 @@ A glimpse into central repositories such as GEO or dbGaP hinted at the amount of
 	\label{fig:geo-assay}\comment{To avoid excessive overcounting of irrelevant samples such as those from plants or unrelated model organisms, we only counted samples deposited with a Pubmed ID pointing to a cardiovascular study. Surveys were done on the GEOmetadb database \citep{Zhu:2008:GEOmetadb} updated on 2018/11/17.}
 \end{figure*} 
 
+%\begin{table}[!t]
+%	\processtable{Number of samples available on GEO that are of potential use of cardioinformatics research, including those deposited by CVD studies and non-CVD studies.\label{tab:geoSamples}} {\begin{tabular}{@{}llll@{}}\toprule 
+%			molecule &non-CVD studies & CVD studies \\ \midrule
+%			genomic DNA &            440 &        8525  \\
+%			polyA RNA &             89 &         392  \\
+%			total RNA &           2974 &       39540  \\
+%			other &             NA &           5  \\
+%			protein &             NA &           3  \\ \botrule
+%	\end{tabular}}{This is a footnote}
+%\end{table}
+
 \begin{table}[!t]
-	\processtable{Number of samples available on GEO that are of potential use of cardioinformatics research, including those deposited by CVD studies and non-CVD studies.\label{tab:geoSamples}} {\begin{tabular}{@{}llll@{}}\toprule 
-			molecule &non-CVD studies & CVD studies \\ \midrule
-			genomic DNA &            440 &        8525  \\
-			polyA RNA &             89 &         392  \\
-			total RNA &           2974 &       39540  \\
-			other &             NA &           5  \\
-			protein &             NA &           3  \\ \botrule
+	\processtable{PLACEHOLDER -- table enlisting high-throughput molecular assays.
+	\label{tab:geoSamples}} {\begin{tabular}{@{}llll@{}}\toprule 
+			Biological relation? & Data layer &  \\ \midrule
+			- &            Genome &          -  \\ \botrule
 	\end{tabular}}{This is a footnote}
 \end{table}
-
-The figures given in Table \ref{tab:dbgapSubject} are in fact the conservative estimates of the data generated so far among the research community. A much larger amount of data are stored on dbGaP and accessible upon approval of data request. Among these, the number of subjects involved in CVD research alone are more than 600000. %658305 to be exact
-In term of subject count, the amount of data from CVD-related studies permitted for General Research Use is only
+%The figures given in Table \ref{tab:dbgapSubject} are in fact the conservative estimates of the data generated so far among the research community. A much larger amount of data are stored on dbGaP and accessible upon approval of data request. Among these, the number of subjects involved in CVD research alone are more than 600000. %658305 to be exact
+%In term of subject count, the amount of data from CVD-related studies permitted for General Research Use is only
 % 16786 / 658305
-2.5\% of all the CVD-related studies deposited on dbGaP.
+%2.5\% of all the CVD-related studies deposited on dbGaP.
 
 \comment{supplement table if necessary}
 
 Aside from central authoritative repositories of research data, smaller databases with narrower focus are budding. For example, many databases have been created to collect chromatin structure data from 3C, 4C, 5C and HiC-seq experiments. A few databases are actively gathering knowledge about non-coding RNAs. Being in these under-explored territories, researchers may need more work to collect and curate their data from multiple sources before using them for further analyses.
 
-A number of projects have successfully re-processed and re-analyzed the large amount of biological samples across large databases such as TCGA, dbGaP, etc., providing novel insights or cloud-compatible analytics protocols (Rail-dbGaP \citep{Nellore:2016:RaildbGaP}, Toil \citep{Vivian:2017:Toil}). These successes on one hand demonstrate the great potential of existing data sets, and on the other, provide concrete examples on how cloud-based computing can be performed, to overcome huge requirements of storage, memory and computational power. More than 20 providers are actively provisioning cloud services in both commercial and academic sectors \citep{Langmead:2018:Cloud}, promising even lower cost and higher accessibility.
+A number of projects have successfully re-processed and re-analyzed the large amount of biological samples across large databases such as TCGA, dbGaP, etc., providing novel insights or cloud-compatible analytics protocols (Rail-dbGaP \citep{Nellore:2016:RaildbGaP}, Toil \citep{Vivian:2017:Toil}). These successes on one hand demonstrate the great potential of existing data sets, and on the other, provide concrete examples on how cloud-based computing can be performed, to overcome huge requirements of storage, memory and computational power. More than 20 providers are provisioning cloud services in both commercial and academic sectors \citep{Langmead:2018:Cloud}, promising even lower cost and higher accessibility.
 
 A list of databases focusing on human genotype-phenotype data was already presented elsewhere \citep{Brookes:2015:Human}, illustrating the expansion of data available to biomedical research. The figures in Table \ref{tab:dbgapSubject} exemplify a prominent issue in making these data more accessible. A promising solution, the DataSHIELD platform to enable sensitive data analytics without physical nor direct access to the data \citep{Gaye:2014:DataSHIELD}, has been available for years and is now enabling wider applications \citep{Wilson:2017:DataSHIELD}.
 
@@ -287,7 +294,8 @@ efforts to standardize data management and sharing
 As early as 1999 when the complete human genome and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data. The computational approaches outlined by \cite{Claverie:1999:Computational} for the early day gene expression data are still popular in today transcriptomics studies: differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways. Those old-fashioned methods can still bring fruitful analyses, as illustrated in a recent study on heart failure \citep{Santolini:2018:personalized}. A significant improvement in the power of differential expression analysis is the large number of samples which will be highly difficult to obtained in individual studies. Opportunity: re-analysis of newly compiled data, framework to enable streaming analysis as new data is deposited.
 
 
-The combination of different layers of omics data is the most useful when they are collected simultaneously. However, even when they are not collected for the same samples, the additional layers can still be of great value, for example, to serve as priors. Examples
+The potential of integrative analysis on multiple layers of -omics data has been recognized nearly a decade ago \citep{Hawkins:2010:Nextgeneration}. Since then, various strategies have been developed, reviewed recently by \cite{Ritchie:2015:Methods}. In cardiovascular research, some forms of integrated data analysis have become routine, such as the correlation of SNPs with eQTL and phenotype. More powerful forms of integration are gaining traction, as the available data become more abundant and heterogeneous.
+
 
 * proteomics + transcriptomics \citep{Uhlen:2015:Tissuebased}
 * genomics + transcriptomics \citep{Klarin:2017:Genetic}
