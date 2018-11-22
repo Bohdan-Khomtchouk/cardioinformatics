@@ -86,16 +86,15 @@ There are a certain genetic component in all major categories of heart diseases 
 
 As the most common cause of heart transplantation, dilated cardiomyopathy (DCM) worths investigating. In a recent review \citep{Burke:2016:Clinical} 16 disease-causing genes were compiled, along with an additional 41 putative genes. Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively. Clinical application is keeping up, with a typical commercial gene panel for DCM genetic testing cover 50 genes on average, and 111 in total \citep{McNally:2017:Dilated}.
 %These numbers clearly advocate for more bioinformatics analyses to gain insights into this condition and the other conditions that are equivalently complex.
-It is reasonably expected that when more genes are involved in a disease, the effect exerted by each gene gets smaller \comment{cite?}. Finding the significant associations of such small effect requires a much larger number of samples for sufficient power, or critically different methods of statistical testing and inference.\comment{Check refs. Elaborate on current efforts to have large study populations and to devise new way to fish for those associations.}
+It is reasonably expected that when more genes are involved in a disease, the effect exerted by each gene gets smaller. 
+%Recent study asserted the negative correlation between minor allele frequency and the effect size across all tissues (liver, skeletal muscle, adipose tissue, atherosclerotic aortic root, artery and blood) in the Stockholm-Tartu Atherosclerosis Reverse Networks Engineering Task study (STARNET) \citep{Franzen:2016:Cardiometabolic} \comment{Figure S17}.
+Finding the significant associations of such small effect requires a much larger number of samples for sufficient power, or critically different methods of statistical testing and inference.\comment{Check refs. Elaborate on current efforts to have large study populations and to devise new way to fish for those associations.}
 
 Beside the increasing difficulty discovering these genes, modeling of their effects is speedily complicated. With a potential interaction between every pair of genomic features, be they genes or regulatory sequences, the number of such interactions increase quadratically with the number of actors, leading to the combinatorial explosion of states that a biological system can assume.
 Moreover, genetic interactions do not limit to those within a single biological pathway. Independent research in aging has unraveled the intertwined relation between heart disease and longevity pathways \citep{North:2012:Intersection}.  With age being the most important factor in constituting cardiovascular risk, it is unavoidable that an even larger number of genes and pathways will be involved in future analyses of CVD genetics.
 
 
 does it help to have too many variants in a genetic risk score?
-
-non-additive effects
-
 
 %As with other complex diseases, missing heritability has been a long-standing puzzle in cardiovascular diseases \citep{Manolio:2009:Finding}. Despite the early successes in pinpointing the causes of several monogenic diseases, the large body of genome-wide association (GWA) studies have defied many widely held beliefs about genetic variants in human, hinting at the directions to search for the missing heritability.
 
@@ -127,7 +126,7 @@ Our understanding of CVD has been critically limited by the technical capability
 % non-coding
 When array-based genotyping was gradually replaced by next-generation sequencing, the cost of sequencing an \textit{exome}, the protein-coding part of a genome, became much more affordable and enabled the collection of more than 60000 exomes \citep{Lek:2016:Analysis}. Using this data set, \cite{Walsh:2017:Reassessment} have found that many genetic variants associated with various cardiomyopathy diseases turned out to be equally common in clinical cases as in the control population. Genes that were consistently included on genetic testing panels for DCM such as MYBPC3, MYH6, SCN5A, etc. turned out to contribute much less etiology than previously thought, in conderation of their frequency in the control population.
 
-The rationale for prioritizing the sequencing of exome over that of the entire genome is based on a regularly cited statement that exome harbors 85\% of the disease-causing variants \citep{Antonarakis:2001:nature}. This figure turns out to be an outdated estimate from 1995. Among the variation-phenotype associations curated in the GWAS catalog \citep{MacArthur:2017:new}, a large fraction of variants occur in non-protein coding regions such as intronic, intergenic, and splice junctions (Figure \ref{fig:variant_context}). Interestingly, the distribution of CVD-associated variants mimics that of the all-variant set, suggesting that variants accounting for human traits, neutral or disease-causing, might be distributed in the same manner across the genome.
+The rationale for prioritizing the sequencing of exome over that of the entire genome is based on a regularly cited statement that exome harbors 85\% of the disease-causing variants \citep{Antonarakis:2001:nature}. This figure turns out to be an outdated estimate from 1995. Among the variation-phenotype associations curated in the GWAS catalog \citep{MacArthur:2017:new}, a large fraction of variants occur in non-protein coding regions such as intronic, intergenic, and splice junctions (Figure \ref{fig:variant_context}). Interestingly, the distribution of CVD-associated variants mimics that of the all-variant set, suggesting that variants accounting for human traits, neutral or disease-causing, might be distributed in the same manner across the genome. Recent study also asserted the prevalence of regulatory variants among those associated with cardiometabolic risk \citep{Franzen:2016:Cardiometabolic}.
 
 
 %epigenetics
@@ -148,7 +147,12 @@ It has been known for decades that non-genetic factors play a critical role in c
 Recent development of wearable devices can now collect real time data in a non-intrusive manner, allowing for dynamic monitoring of the exposome \citep{Jiang:2018:Dynamic}. As complex traits being heavily influenced by environmental factors, cardiovascular diseases are especially well-positioned to benefit from the advancement of exposome measurement.
 
 
-\subsection{The forgotten concepts}
+%\subsection{The complex actions}
+
+From a molecular perspective, a phenotype can be influenced at any stage, starting from the DNA sequence, to the chromatin structures and modifications, down to RNA transcripts, proteins and metabolites \comment{Figure \ref{fig:multiomics}}. Accordingly, a gene (and its variants) may exert its effect in various modes.
+
+
+Heritability of complex diseases has been modeled on the assumption that contributions of genes are additive. Many examples have refuted that assumption, suggesting that the effects of genes can be compensatory, or synergistic.
 
 homeostasis
 
@@ -327,7 +331,7 @@ The bottleneck in the application of these computational methods are not in thei
 %
 %
 
-\subsection{New and re-newed perspectives}
+%%%%%% perspective
 
 Cardioinformatics offers a number of powerful concepts to investigate complex physiological system.
 
@@ -335,7 +339,6 @@ The paradigm shift from the physical genes to the "eigengenes" in studying compl
 
 The heavily connected biological system is among many types that can be modeled and analyzed as graphs. The omnigenic model recently proposed has highlighted the need for this system-level modeling, since the involvement of peripheral genes are widespread in physiological and pathological processes.
 
-Integrated analyses of multiple layers
 
 \subsection{Prospective development}
 
