@@ -84,17 +84,19 @@ As we further our quest to understand the genetics of heart diseases, many condi
 % 
 There are a certain genetic component in all major categories of heart diseases (Figure \ref{fig:hpo_gene_count}). As more studies are published, the number of genes found associated with a disease has also increased and in most cases, gone beyond a few genes that could be described in a single-page table or diagram.
 
-As the most common cause of heart transplantation, dilated cardiomyopathy (DCM) worths investigating. In a recent review \citep{Burke:2016:Clinical} 16 disease-causing genes were compiled, along with an additional 41 putative genes. Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively. Clinical application is keeping up, with a typical commercial gene panel for DCM genetic testing cover 50 genes on average, and 111 in total \citep{McNally:2017:Dilated}.
+Dilated cardiomyopathy (DCM), the most common cause of heart transplantation, is a vivid example of how causal variants and their corresponding genes kept being discovered. In a recent review \citep{Burke:2016:Clinical} 16 disease-causing genes were compiled, along with an additional 41 putative genes. Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively. Clinical application is keeping up, with a typical commercial gene panel for DCM genetic testing cover 50 genes on average, and 111 in total \citep{McNally:2017:Dilated}.
 %These numbers clearly advocate for more bioinformatics analyses to gain insights into this condition and the other conditions that are equivalently complex.
-It is reasonably expected that when more genes are involved in a disease, the effect exerted by each gene gets smaller. 
+Since it is reasonably expected that when more genes are involved in a disease, the effect exerted by each gene gets smaller, these ever-enlarging gene panels suggest that the risks conferred by mutations in a single gene is less likely to be indicative of the disease risk.
 %Recent study asserted the negative correlation between minor allele frequency and the effect size across all tissues (liver, skeletal muscle, adipose tissue, atherosclerotic aortic root, artery and blood) in the Stockholm-Tartu Atherosclerosis Reverse Networks Engineering Task study (STARNET) \citep{Franzen:2016:Cardiometabolic} \comment{Figure S17}.
-Finding the significant associations of such small effect requires a much larger number of samples for sufficient power, or critically different methods of statistical testing and inference.\comment{Check refs. Elaborate on current efforts to have large study populations and to devise new way to fish for those associations.}
+From the research perspective, they imply that the quest of pinpointing the causal variants is getting more difficult, because testing the variant-phenotype association on small-effect variations requires a much larger number of samples for sufficient power, or critically different methods of statistical testing and inference.\comment{Check refs. Elaborate on current efforts to have large study populations and to devise new way to fish for those associations.}
 
 Beside the increasing difficulty discovering these genes, modeling of their effects is speedily complicated. With a potential interaction between every pair of genomic features, be they genes or regulatory sequences, the number of such interactions increase quadratically with the number of actors, leading to the combinatorial explosion of states that a biological system can assume.
 Moreover, genetic interactions do not limit to those within a single biological pathway. Independent research in aging has unraveled the intertwined relation between heart disease and longevity pathways \citep{North:2012:Intersection}.  With age being the most important factor in constituting cardiovascular risk, it is unavoidable that an even larger number of genes and pathways will be involved in future analyses of CVD genetics.
 
 
-does it help to have too many variants in a genetic risk score?
+omnigenic model remind us about the widespread interactions possible in a cell and how important it is to account for most of the actors
+
+%does it help to have too many variants in a genetic risk score?
 
 %As with other complex diseases, missing heritability has been a long-standing puzzle in cardiovascular diseases \citep{Manolio:2009:Finding}. Despite the early successes in pinpointing the causes of several monogenic diseases, the large body of genome-wide association (GWA) studies have defied many widely held beliefs about genetic variants in human, hinting at the directions to search for the missing heritability.
 
@@ -156,7 +158,6 @@ Heritability of complex diseases has been modeled on the assumption that contrib
 
 homeostasis
 
-omnigenic model remind us about the widespread interactions possible in a cell and how important it is to account for most of the actors
 
 %Accordingly, the number of biological states is exponential. Among these states, it is obvious that biological systems do not seek for a single optimal state, but always strive for the most convenient functional one. Therefore, it is reasonable to expect a diverse set of states in which biological system is equivalently functional.
 
@@ -186,19 +187,9 @@ As demonstrated earlier, the large number of studies have contributed to a large
 
 \subsubsection{Profusion of data}
 
-
-\comment{This part is to demonstrate the volume of existing data and the potential of new insights from re-analyses, especially when more than one layers are stacked. Give the examples of those multi-omics studies.}
-
-
-\comment{Tentative: A figure/table enlisting layers of modifications that contribute to determine a phenotype, with the corresponding experimental techniques}
-
-\cite{Santolini:2018:personalized} 
-
-\cite{Klarin:2017:Genetic}
-
-Technological advances brought about the accumulation of biological data, both in the number of data points, and the number of dimensions in each data point.
-High-throughput profiling techniques are inarguably the main drive in creating high-dimensional data (DNA, RNA, protein levels).
-A glimpse into central repositories such as GEO or dbGaP hinted at the amount of data points that have been accumulated from small studies and can be re-used for future studies. In GEO, CVD research has contributed more than 2000 microarray datasets, and about 900 of high-throughput sequencing datasets for various purposes (Figure \ref{fig:geo-assay}). Especially abundant are mRNA-seq assays, performed as the main assay in most studies, and usually coupled with another profiling technique. In dbGaP where human genotype-phenotype data are deposited, CVD research has collected data on 658305 subjects, 16786 (2.5\%) of which had consented for the data to be employed for general research (Table \ref{tab:dbgapSubject}), leaving a vast majority of data accessible only upon approval of data request.
+Biological data has steadily increased, in both the number of data points, and the number of dimensions in each data point.
+Major classes of biological molecules including DNA, RNA, and protein can now be characterized and/or quantified with high-throughput techniques. The output of these assays is essentially a giant vector on the order of $10^3$ to $10^5$ elements depending on the type of molecule and technology \comment{table of molecule type -- contemporary tech -- number of species per tech might be interesting. may not be very useful though}. Central repositories such as GEO and dbGaP have accumulated an immense number of assays, effectively increasing the number of data points available for future studies.
+In the Gene Expression Omnibus (GEO), CVD publications have contributed more than 2000 microarray datasets, and about 900 of high-throughput sequencing datasets for various purposes (Figure \ref{fig:geo-assay}). Especially abundant are mRNA-seq assays, performed as the main assay in most studies, and usually coupled with another profiling technique. In dbGaP where human genotype-phenotype data are deposited, CVD research has collected data on 658305 subjects, 16786 (2.5\%) of which had consented for the data to be employed for general research (Table \ref{tab:dbgapSubject}), leaving a vast majority of data accessible only upon approval of data request.
 
 %Depending on the questions at hands, the precise definition of a data point can vary. In most cases, it can be equivalent to the number biological samples or that of individual donors. Although studies directly related to CVDs are of interest when it comes to future CVD research, a significant number of data points from non-CVD studies can be put into use, for example, when these studies investigated samples of cardiovascular origin (heart or vascular tissues).
 
@@ -228,12 +219,9 @@ A glimpse into central repositories such as GEO or dbGaP hinted at the amount of
 
 Aside from central authoritative repositories of research data, smaller databases with narrower focus are budding. For example, many databases have been created to collect chromatin structure data from 3C, 4C, 5C and HiC-seq experiments. A few databases are actively gathering knowledge about non-coding RNAs. Being in these under-explored territories, researchers may need more work to collect and curate their data from multiple sources before using them for further analyses.
 
-A number of projects have successfully re-processed and re-analyzed the large amount of biological samples across large databases such as TCGA, dbGaP, etc., providing novel insights or cloud-compatible analytics protocols (Rail-dbGaP \citep{Nellore:2016:RaildbGaP}, Toil \citep{Vivian:2017:Toil}). These successes on one hand demonstrate the great potential of existing data sets, and on the other, provide concrete examples on how cloud-based computing can be performed, to overcome huge requirements of storage, memory and computational power. More than 20 providers are provisioning cloud services in both commercial and academic sectors \citep{Langmead:2018:Cloud}, promising even lower cost and higher accessibility.
 
-A list of databases focusing on human genotype-phenotype data was already presented elsewhere \citep{Brookes:2015:Human}, illustrating the expansion of data available to biomedical research. The figures in Table \ref{tab:dbgapSubject} exemplify a prominent issue in making these data more accessible. A promising solution, the DataSHIELD platform to enable sensitive data analytics without physical nor direct access to the data \citep{Gaye:2014:DataSHIELD}, has been available for years and is now enabling wider applications \citep{Wilson:2017:DataSHIELD}.
 
-One common way to access genotype-phenotype data is to file a request, prepare the computing facility, implement the security measures, and transfer the data upon approval. This mode of access is currently applied for all control-accessed data in dbGaP, adding a significant administrative burden to researchers who need access to the data. The AHA Precision Medicine Platform \citep{Kass-Hout:2018:American} has simplified this process significantly by streamlining the search, request and transfer of data to be analyzed on a secured cloud-based workspace.
-
+A list of databases focusing on human genotype-phenotype data was already presented elsewhere \citep{Brookes:2015:Human}, illustrating the expansion of data available to biomedical research. 
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -273,6 +261,16 @@ The data from non-CVD studies are of great potential use as the baseline, for ex
 
 \subsubsection{Infrastructure}
 
+Large amount of data imposed critical challenges in storing, managing and computing.
+With more than 400000 RNA-seq runs, each taking 2GB \citep{Langmead:2018:Cloud}, the space required to simply store these data on the Sequence Read Archive (SRA) database amounts to 800 TB.
+Although the storage required to store the raw data of high-throughput sequencing experiments are certainly exceeding the capability of an average computing facility, the major challenge is turning these archives into easily accessible databases.
+As illustrated in Table \ref{tab:dbgapSubject}, there are potentially 660000 records to be re-used in future studies on human disease. To access these data, one needs to file a request, prepare the computing facility, implement the security measures, and transfer the data upon approval. However, before filing a request, one needs to dive into the metadata of individual studies and decide which data sets are useful for the target research. Important metadata such as which phenotypic variables are available are vastly different from study to study, yet not easily queried or filtered by. Another metadata that is critical to the request of dbGaP data sets is the consent for each data sets. 
+This mode of access is currently applied for all control-accessed data in dbGaP, adding a significant administrative burden to researchers who need access to the data. The AHA Precision Medicine Platform \citep{Kass-Hout:2018:American} has simplified this process significantly by streamlining the search, request and transfer of data to be analyzed on a secured cloud-based workspace.
+
+The figures in Table \ref{tab:dbgapSubject} exemplify a prominent issue in making these data more accessible. A promising solution, the DataSHIELD platform to enable sensitive data analytics without physical nor direct access to the data \citep{Gaye:2014:DataSHIELD}, has been available for years and is now enabling wider applications \citep{Wilson:2017:DataSHIELD}.
+
+A number of projects have successfully re-processed and re-analyzed the large amount of biological samples across large databases such as TCGA, dbGaP, etc., providing novel insights or cloud-compatible analytics protocols (Rail-dbGaP \citep{Nellore:2016:RaildbGaP}, Toil \citep{Vivian:2017:Toil}). These successes on one hand demonstrate the great potential of existing data sets, and on the other, provide concrete examples on how cloud-based computing can be performed, to overcome huge requirements of storage, memory and computational power. More than 20 providers are provisioning cloud services in both commercial and academic sectors \citep{Langmead:2018:Cloud}, promising even lower cost and higher accessibility.
+
 The infrastructure for bioinformatics analyses now is even more mature, thanks to cloud computing \citep{Langmead:2018:Cloud}, secured data storage and management.
 
 Guidelines, protocol
@@ -293,9 +291,7 @@ efforts to standardize data management and sharing
 
 \subsection{Computational methods}
 
-
-As early as 1999 when the complete human genome and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data. The computational approaches outlined by \cite{Claverie:1999:Computational} for the early day gene expression data are still popular in today transcriptomics studies: differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways. Those old-fashioned methods can still bring fruitful analyses, as illustrated in a recent study on heart failure \citep{Santolini:2018:personalized}. A significant improvement in the power of differential expression analysis is the large number of samples which will be highly difficult to obtained in individual studies. Opportunity: re-analysis of newly compiled data, framework to enable streaming analysis as new data is deposited.
-
+As early as 1999 when the complete human genome and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data. The computational approaches outlined by \cite{Claverie:1999:Computational} for the early day gene expression data are still popular in today transcriptomics studies: differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways. Those old-fashioned methods can still bring fruitful analyses, as illustrated in a recent study on heart failure \citep{Santolini:2018:personalized}. With more samples piling up from individual studies, such analyses can be performed with potentially more statistical power. \comment{see if we can find good examples}
 
 The potential of integrative analysis on multiple layers of -omics data has been recognized nearly a decade ago \citep{Hawkins:2010:Nextgeneration}. Since then, various strategies have been developed, reviewed recently by \cite{Ritchie:2015:Methods}. In cardiovascular research, some forms of integrated data analysis have become routine, such as the correlation of SNPs with eQTL and phenotype. More powerful forms of integration are gaining traction, as the available data become more abundant and heterogeneous.
 
