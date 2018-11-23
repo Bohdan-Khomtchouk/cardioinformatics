@@ -132,7 +132,8 @@ The rationale for prioritizing the sequencing of exome over that of the entire g
 
 
 %epigenetics
-Cardiovascular risks can be conferred with modifications beyond genomic sequence, collectively studied as epigenetics. Epigenetic processes traditionally involved DNA methylation, a wide range of histone modifications including acetylation, methylation, phosphorylation, uniquitylation, sumoylation and biotinylation, and are now encompassing more processes mediated by the class of long non-coding RNAs (lncRNA). 
+Cardiovascular risks can be conferred with modifications beyond genomic sequence, collectively studied as epigenetics. Epigenetic processes traditionally involved DNA methylation, a wide range of histone modifications including acetylation, methylation, phosphorylation, uniquitylation, sumoylation and biotinylation, and are now encompassing more processes mediated by the class of long non-coding RNAs (lncRNA). Epigenome-wide association studies are on the rise, proposing a number of DNA methylation sites associated with blood lipid \citep{Irvin:2014:Epigenomewide}, body mass index \citep{Dick:2014:DNA, Wahl:2017:Epigenomewide}, heart failure \citep{Meder:2017:EpigenomeWide}, heart attack history \citep{Rask-Andersen:2016:Epigenomewide}.
+
 When more lncRNAs were discovered and characterized, the prevalence of these molecules in cardiovascular biology also emerged. LncRNAs are involved in coronary artery disease, myocardial infarction, cardiac hypertrophy, etc. \comment{should we add more details?}  At least 22 lncRNAs were reportedly dis-regulated in cardiovascular diseases, affecting a wide range of molecular, cellular and physiological processes \citep{Das:2018:Deciphering}. With 107,039 lncRNAs detected in the human genome so far (reported by LNCipedia \citep{Volders:2018:LNCipedia}, as of November 2018), more lncRNAs are likely to be found involved in cardiovascular biology, hence promising therapeutic targets.
 % cardiac differentiation, histone methylation, sponge of microRNAs, apoptosis
  %angiogenesis, inflammation, macrophage activation, sarcomere development, autophagy
@@ -266,67 +267,39 @@ With more than 400000 RNA-seq runs, each taking 2GB \citep{Langmead:2018:Cloud},
 Although the storage required to store the raw data of high-throughput sequencing experiments are certainly exceeding the capability of an average computing facility, the major challenge is turning these archives into easily accessible databases, especially under the legal and ethical constraint to protect participants' privacy.
 As illustrated in Table \ref{tab:dbgapSubject}, there are 658305 records of genotype-phenotype data potentially relevant to future biomedical studies. To access these data, one needs to file a request, prepare the computing facility, implement the security measures, and transfer the data upon approval. However, before filing a request, one needs to dive into the metadata of individual studies and decide which data sets are useful for the target research. Important information about a dataset such as the list of phenotypic variables are vastly different from study to study and cannot be filtered against. In addition to those parameters of a study design, researchers need to be aware of the various types of consents applied to different data sets, many times within a single study. This procedure to obtain data access is currently applied for all control-accessed data in dbGaP, adding a significant administrative burden to biomedical researchers.
 As an effort towards more accessible biomedical data, the AHA Precision Medicine Platform \citep{Kass-Hout:2018:American} has simplified this process by streamlining the search, request and transfer of data. Data sets deposited on the platform were harmonized such that users can query data sets across multiple studies by some common parameters, selectively request access to the relevant data, and perform analyses on the cloud-based workspace.
-Although the data filtering step is greatly facilitated, data can only be delivered to a restricted community who had been granted access and became responsible for securing their copy of the control-accessed data.
- 
-A promising solution, the DataSHIELD platform to enable sensitive data analytics without physical nor direct access to the data \citep{Gaye:2014:DataSHIELD}, has been available for years and is now enabling wider applications \citep{Wilson:2017:DataSHIELD}.
+Although the data filtering step is greatly facilitated, data can only be delivered to a restricted community who had been granted access and became responsible for securing their copy of the control-accessed data. In the attempt to alleviate all the responsibilities associating with the direct access of sensitive data, the DataSHIELD platform has been developed \citep{Gaye:2014:DataSHIELD, Wilson:2017:DataSHIELD}. This platform allows data users to perform analytics without disclosure of sensitive or identifiable information.
+%more applications \citep{Wilson:2017:DataSHIELD}.
 
-A number of projects have successfully re-processed and re-analyzed the large amount of biological samples across large databases such as TCGA, dbGaP, etc., providing novel insights or cloud-compatible analytics protocols (Rail-dbGaP \citep{Nellore:2016:RaildbGaP}, Toil \citep{Vivian:2017:Toil}). These successes on one hand demonstrate the great potential of existing data sets, and on the other, provide concrete examples on how cloud-based computing can be performed, to overcome huge requirements of storage, memory and computational power. More than 20 providers are provisioning cloud services in both commercial and academic sectors \citep{Langmead:2018:Cloud}, promising even lower cost and higher accessibility.
-
-The infrastructure for bioinformatics analyses now is even more mature, thanks to cloud computing \citep{Langmead:2018:Cloud}, secured data storage and management.
-
-Guidelines, protocol
+Bioinformatics analyses have also started to benefit from cloud-based computing.
+A number of projects have successfully re-processed and re-analyzed the large amount of biological samples across large databases such as TCGA, dbGaP, etc., providing novel insights or cloud-compatible analytics protocols, such as Rail-dbGaP \citep{Nellore:2016:RaildbGaP}, Toil \citep{Vivian:2017:Toil}. These successes on one hand demonstrate the great potential of existing data sets, and on the other, provide concrete examples on how cloud-based computing can be performed, to overcome huge requirements of storage, memory and computational power. More than 20 providers are provisioning cloud services in both commercial and academic sectors \citep{Langmead:2018:Cloud}, promising even lower cost and higher accessibility.
 
 
-Data visibility
-
-
-efforts to standardize data management and sharing
-
-%
-%\subsubsection{Basic research}
-%for data management, computational analysis, visual representation, etc.
-%
-%\subsubsection{Clinical application}
-%
+%Guidelines, protocol
+%Data visibility
+%efforts to standardize data management and sharing
 %
 
-\subsection{Computational methods}
+\subsection{Computational tools}
 
 As early as 1999 when the complete human genome and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data. The computational approaches outlined by \cite{Claverie:1999:Computational} for the early day gene expression data are still popular in today transcriptomics studies: differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways. Those old-fashioned methods can still bring fruitful analyses, as illustrated in a recent study on heart failure \citep{Santolini:2018:personalized}. With more samples piling up from individual studies, such analyses can be performed with potentially more statistical power. \comment{see if we can find good examples}
 
-The potential of integrative analysis on multiple layers of -omics data has been recognized nearly a decade ago \citep{Hawkins:2010:Nextgeneration}. Since then, various strategies have been developed, reviewed recently by \cite{Ritchie:2015:Methods}. In cardiovascular research, some forms of integrated data analysis have become routine, such as the correlation of SNPs with eQTL and phenotype. More powerful forms of integration are gaining traction, as the available data become more abundant and heterogeneous.
+As high-throughput technology was expanded to cover different molecular aspects of a cellular process, the potential power of integrative analysis on multiple layers of -omics data has been recognized as early as a decade ago \citep{Hawkins:2010:Nextgeneration}. Since then, various strategies have been developed, reviewed recently by \cite{Ritchie:2015:Methods}. In cardiovascular research, some forms of integrated data analysis have become routine, such as the correlation of SNPs with eQTL and phenotype. More powerful forms of integration are gaining traction, as the available data become more abundant and heterogeneous.
 
 
-* proteomics + transcriptomics \citep{Uhlen:2015:Tissuebased}
-* genomics + transcriptomics \citep{Klarin:2017:Genetic}
-
-
+%* proteomics + transcriptomics \citep{Uhlen:2015:Tissuebased}
+%
+%* genomics + transcriptomics \citep{Klarin:2017:Genetic}
 
 The application of machine learning will be indispensable in many aspects of cardiology \citep{Shameer:2017:Translational,Shameer:2018:Machine}. Given the availability of machine learning performant implementations, cardioinformatics is better positioned to tackle domain-specific questions and develop clinical application. For example, ML can be applied to enhance medical image. In basic research, natural language processing can be a promising tool to improve data collection and organization.
 
-With less focus on computation, visualization still makes up an important part in facilitating biological research, especially for data exploration, pattern recognition, and data representation. Visualization methods are blooming to accommodate the diverse data types in biology \citep{Pavlopoulos:2015:Visualizing}. With regard to visualization, the exciting challenge to cardioinformatics researcher is the meaningful integrated representation of data layers. In basic research, such representation can mean to put together pieces of information from various experimental techniques. In clinical application, the focus is on facilitating clinical decisions.
+Although not a traditional part of computational research, visualization has become more indispensable in the new era when exploratory data analysis requires substantial human judgement. Visualization facilitates biological research by enhancing data exploration, pattern recognition, and data representation. Visualization methods are blooming to accommodate the diverse data types in biology \citep{Pavlopoulos:2015:Visualizing}. With regard to visualization, the exciting challenge to cardioinformatics researcher is the meaningful integrated representation of data layers. In basic research, such representation can mean to put together pieces of information from various experimental techniques. In clinical application, the focus is on facilitating clinical decisions.
 
 Visualization of chromatin 3D structure emerges as a demand to analyze and present experimental data from conformation capture experiments. The challenges posed by these experiments, being new, high-throughput and  3-dimensional, are actively researched visualization problems \citep{Goodstadt:2017:Challenges}. As a researcher in cardiovascular disease, it is important to stay abreast with the developments in this field to make the most use of the available data.
 
 Search engine and knowledge synthesis \citep{Lutjohann:2011:Sciencenet}. A universal element of all research, knowledge synthesis is under-rated research task. Like most other areas, most of the work in knowledge synthesis has been and has to be done manually in cardiovascular research. Cardiovascular diseases impose the challenge of understanding complex systems of multiple dimensions, creating the pressing need of summarizing and synthesizing knowledge from the vast body of research in a more robust manner. Natural language processing.
 
 
-The bottleneck in the application of these computational methods are not in their implementation, but in the shortage of domain knowledge. Many generic bio-portals have been published in the recent years, aiming to make complicated data as accessible as possible to a general audience. The lack of focus on a research topic has limited their usefulness.
-
-%\subsection{The multi-layered paths from genome to phenotype}
-
-
-%%
-%\begin{itemize}
-%	\item genome
-%	\item epigenome
-%	\item transcriptome: mRNA, non-coding RNA: microRNA, long non-coding RNA
-%	\item 	proteome
-%	\item	metabolome
-%\end{itemize}
-%%environmental factors
-%
-%
+Most often, the bottleneck in the application of these computational methods are not in their implementation, but in the shortage of domain knowledge. Many generic bio-portals have been published in the recent years, aiming to make complicated data as accessible as possible to a general audience. The lack of focus on a research topic has limited their usefulness.
 
 %%%%%% perspective
 
@@ -338,6 +311,10 @@ The heavily connected biological system is among many types that can be modeled 
 
 
 \subsection{Prospective development}
+
+nanopore sequencing
+
+single cell
 
 
 
