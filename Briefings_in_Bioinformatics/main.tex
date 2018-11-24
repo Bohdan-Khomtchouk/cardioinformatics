@@ -68,9 +68,6 @@ Lack of mechanistic understanding
 
 Lack of platforms for accessible data and knowledge base
 
-AHA precision medicine platform mark the presence of this field in precision medicine. However, the platform also exposed some critical issues \comment{Trang: re-visit AHA PMP for more specific points}. Unless we recognize the opportunities and tend to the challenges, cardiovascular research won't benefit from this new wave of methodological advance.
-
-
 %{https://www.ncbi.nlm.nih.gov/mesh/68002318} 
 
 As we further our quest to understand the genetics of heart diseases, many conditions have become too complicated for traditional approaches. Reflecting on the current body of knowledge, we recognize that many aspects of this complexity can be addressed with more computational methods.
@@ -90,12 +87,9 @@ Since it is reasonably expected that when more genes are involved in a disease, 
 %Recent study asserted the negative correlation between minor allele frequency and the effect size across all tissues (liver, skeletal muscle, adipose tissue, atherosclerotic aortic root, artery and blood) in the Stockholm-Tartu Atherosclerosis Reverse Networks Engineering Task study (STARNET) \citep{Franzen:2016:Cardiometabolic} \comment{Figure S17}.
 From the research perspective, they imply that the quest of pinpointing the causal variants is getting more difficult, because testing the variant-phenotype association on small-effect variations requires a much larger number of samples for sufficient power, or critically different methods of statistical testing and inference.\comment{Check refs. Elaborate on current efforts to have large study populations and to devise new way to fish for those associations.}
 
-Beside the increasing difficulty discovering these genes, modeling of their effects is speedily complicated. With a potential interaction between every pair of genomic features, be they genes or regulatory sequences, the number of such interactions increase quadratically with the number of actors, leading to the combinatorial explosion of states that a biological system can assume.
-Moreover, genetic interactions do not limit to those within a single biological pathway. Independent research in aging has unraveled the intertwined relation between heart disease and longevity pathways \citep{North:2012:Intersection}.  With age being the most important factor in constituting cardiovascular risk, it is unavoidable that an even larger number of genes and pathways will be involved in future analyses of CVD genetics.
+Beside the increasing difficulty discovering these genes, modeling of their effects is speedily complicated. With a potential interaction between every pair of genomic features, be they genes or regulatory sequences, the number of such interactions increase quadratically with the number of actors, leading to the combinatorial explosion of states that a biological system can assume. \comment{ethnicity and ancestry may be mentioned here}
 
-
-omnigenic model remind us about the widespread interactions possible in a cell and how important it is to account for most of the actors
-
+The number of genes contributing to CVD risks will likely inflate beyond those directly associated with diseased traits. Independent research in aging has unraveled the intertwined relation between heart disease and longevity pathways \citep{North:2012:Intersection}.  With age being the most important factor in constituting cardiovascular risk \citep{Steenman:2017:Cardiac}, it is unavoidable that an even larger number of genes and pathways will be involved in future analyses of CVD genetics. In the recent omnigenic model for complex traits, it is proposed that most heritability of these traits is explained by peripheral genes outside of the core pathways. Following this model, future analyses of CVD might need to include thousands of genes to model a single disease.
 %does it help to have too many variants in a genetic risk score?
 
 %As with other complex diseases, missing heritability has been a long-standing puzzle in cardiovascular diseases \citep{Manolio:2009:Finding}. Despite the early successes in pinpointing the causes of several monogenic diseases, the large body of genome-wide association (GWA) studies have defied many widely held beliefs about genetic variants in human, hinting at the directions to search for the missing heritability.
@@ -282,9 +276,8 @@ A number of projects have successfully re-processed and re-analyzed the large am
 
 As early as 1999 when the complete human genome and high-throughput transcriptomic profiling are on the horizon, research community have started to recognize the critical use of bioinformatics analyses in generating insights from these data. The computational approaches outlined by \cite{Claverie:1999:Computational} for the early day gene expression data are still popular in today transcriptomics studies: differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways. Those old-fashioned methods can still bring fruitful analyses, as illustrated in a recent study on heart failure \citep{Santolini:2018:personalized}. With more samples piling up from individual studies, such analyses can be performed with potentially more statistical power. \comment{IMPORTANT -- find good examples}
 
-As high-throughput technology was expanded to cover different molecular aspects of a cellular processes, the potential power of integrative analysis on multiple layers of -omics data has been recognized as early as a decade ago \citep{Hawkins:2010:Nextgeneration}. Since then, various strategies have been developed, following one of the two schemes: multi-staged or  \cite{Ritchie:2015:Methods}. In cardiovascular research, multi-staged data integration has been commonly used, for example to match SNPs associated with a given trait to expression quantitative trait loci (eQTL). In these studies, each sample is genotyped and measured for RNA expression levels simultaneously.
- integrated data analysis have become routine, such as the correlation of SNPs with eQTL and phenotype. These multi-staged data integration approaches rely on a  More powerful forms of integration are gaining traction, as the available data become more abundant and heterogeneous.
-
+As high-throughput technology was expanded to cover different molecular aspects of a cellular processes, the potential power of integrative analysis on multiple layers of -omics data has been recognized as early as a decade ago \citep{Hawkins:2010:Nextgeneration}. Since then, various strategies have been developed, following one of the two schemes: multi-staged or meta-dimensional \cite{Ritchie:2015:Methods}. Multi-staged data integration has been routinely used in cardiovascular research, for example in the search of expression quantitative trait (eQTL) loci, SNPs resulted from previous GWAS are tested for correlation with gene expression levels from transcriptomics profiling data. Meta-dimensional data integration does not rely on the assumption that phenotype is the end point of the one-way flow of information from genome, to transcriptome and then proteome, thus allowing for modeling of complex phenotype without prior knowledge about the interplay of different omics layers.
+\comment{find examples -- in and outside of CVDs}
 
 %* proteomics + transcriptomics \citep{Uhlen:2015:Tissuebased}
 %
@@ -304,12 +297,8 @@ Search engine and knowledge synthesis \citep{Lutjohann:2011:Sciencenet}. A unive
 Most often, the bottleneck in the application of these computational methods are not in their implementation, but in the shortage of domain knowledge. Many generic bio-portals have been published in the recent years, aiming to make complicated data as accessible as possible to a general audience. The lack of focus on a research topic has limited their usefulness.
 
 %%%%%% perspective
-
-Cardioinformatics offers a number of powerful concepts to investigate complex physiological system.
-
-The paradigm shift from the physical genes to the "eigengenes" in studying complex diseases \citep{Weiss:2012:Good} is a pragmatic approach. This approach allows one to focus on mimicking the healthy system without the knowledge required to model the individual actors and their interactions, making it an ideal method in the drug discovery workflow. The paradigm can help advancing knowledge further because it suggests an efficient way to engineer biological system and learn how it works.
-
-The heavily connected biological system is among many types that can be modeled and analyzed as graphs. The omnigenic model recently proposed has highlighted the need for this system-level modeling, since the involvement of peripheral genes are widespread in physiological and pathological processes.
+Bioinformatics provides more than the powerful toolkits to study cardiovascular diseases. Important perspectives have arisen from the application of computational methodology. The paradigm shift from the physical genes to the "eigengenes" in studying complex diseases \citep{Weiss:2012:Good} is an example. This approach allows one to focus on mimicking the healthy system without the knowledge required to model the individual actors and their interactions, making it an ideal method in the drug discovery workflow. The paradigm can help advancing knowledge further because it suggests an efficient way to engineer biological system and learn how it works.
+\comment{omnigenic}
 
 
 \subsection{Prospective development}
