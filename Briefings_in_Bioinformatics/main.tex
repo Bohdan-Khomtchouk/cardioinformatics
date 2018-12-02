@@ -64,50 +64,25 @@ More recently, the Knowledge Portal Network Group at the Broad Institute has beg
 In addition to these various genetic association efforts, CVD knowledge bases such as HeartBioPortal \hl{(cite)} have begun integrating gene expression information with genetic association information, motivated by the stimulus that transcriptomic data provide powerful insights into the effects of genetic variation on gene expression and alternative splicing in both health and disease.  Such large-scale integrative multi-omics efforts now also extend beyond academia into biotech startup companies such as Quiltomics, Omicsoft, Omics Data Automation, Occamzrazor, NextBio, etc. -- many of which have successfully been acquired by larger biotech companies such as Illumina, Qiagen, etc.  Therefore, the biological data science world has started moving progressively closer towards large-scale integration of knowledge bases, rather than simply individual studies or datasets.    
 
 
-
-\newpage
-\section*{Notes section}
-
-Maybe mention ExAC and gnomAD browsers for ancestry, which include rs IDs involved in CVD, although it's not a pressing issue to mention.
-
-The first draft of the human genome project had brought a lot of hope and excitement about potential advancements in the diagnosis and treatment of cardiac diseases, such as the ability to identify disease genes within the associated loci, to improve risk estimation based on more precise genotypes, or to personalize the prediction of drug effect on a patient, \citep{Komajda:2001:heart}.
-
-
-Outstanding problems
-
-Variant calling and pathogenicity prediction. Currently inconsistent. Mostly developed for protein-coding fraction of the genome (SIFT, Polyphen, etc.), largely ignore the non-coding regions.
-Pathogenicity assignment: variable, conflicting, not applicable for all populations.
-
-Risk estimation
-
-Lack of mechanistic understanding
-
-Lack of platforms for accessible data and knowledge base
-
-%{https://www.ncbi.nlm.nih.gov/mesh/68002318} 
-
-As we further our quest to understand the genetics of heart diseases, many conditions have become too complicated for traditional approaches. Reflecting on the current body of knowledge, we recognize that many aspects of this complexity can be addressed with more computational methods.
-
-
-
-\section{Complexity of CVDs}  % the problems
-
-\subsection{The number of actors}
+\section*{Complexity of CVDs}  % the problems
+\subsection*{The number of actors}
 
 % large number --> small effects
 % large number --> more interactions, intra and inter-pathways
 % 
-There are a certain genetic component in all major categories of heart diseases (Figure \ref{fig:hpo_gene_count}). As more studies are published, the number of genes found associated with a disease has also increased and in most cases, gone beyond a few genes that could be described in a single-page table or diagram.
+There is a certain genetic component in all major categories of heart disease (Figure \ref{fig:hpo_gene_count}).  As more studies are published, the number of genes found associated with a disease has also increased and, in most cases, gone beyond a few genes that could be described in a single-page table or diagram.  Dilated cardiomyopathy (DCM), the most common cause of heart transplantation, is a vivid example of how causal variants and their corresponding genes kept being discovered over the years.  In a recent review \citep{Burke:2016:Clinical}, 16 disease-causing genes were compiled, along with an additional 41 putative genes.  Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively.  Clinical application has been keeping up, with a typical commercial gene panel for DCM genetic testing covering 50 genes on average, and 111 in total \citep{McNally:2017:Dilated}.  These numbers suggest for more bioinformatics analyses to gain insights into this condition and the other conditions that are equivalently complex.  Since it is reasonably expected that when more genes are involved in a disease, the individual effect exerted by each gene gets smaller, these ever-enlarging gene panels suggest that the risks conferred by mutations in a single gene is less likely to be indicative of the disease risk.  For example, one recent study asserted the negative correlation between minor allele frequency and the effect size across all tissues (liver, skeletal muscle, adipose tissue, atherosclerotic aortic root, artery and blood) in the Stockholm-Tartu Atherosclerosis Reverse Networks Engineering Task study (STARNET) \citep{Franzen:2016:Cardiometabolic} \comment{Figure S17}.  From a research perspective, these findings imply that the quest of pinpointing causal variants is getting progressively more difficult, because testing the variant-phenotype association on small-effect variations requires a much larger number of samples for sufficient power, or critically different methods of statistical testing and inference.
 
-Dilated cardiomyopathy (DCM), the most common cause of heart transplantation, is a vivid example of how causal variants and their corresponding genes kept being discovered. In a recent review \citep{Burke:2016:Clinical} 16 disease-causing genes were compiled, along with an additional 41 putative genes. Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively. Clinical application is keeping up, with a typical commercial gene panel for DCM genetic testing cover 50 genes on average, and 111 in total \citep{McNally:2017:Dilated}.
-%These numbers clearly advocate for more bioinformatics analyses to gain insights into this condition and the other conditions that are equivalently complex.
-Since it is reasonably expected that when more genes are involved in a disease, the effect exerted by each gene gets smaller, these ever-enlarging gene panels suggest that the risks conferred by mutations in a single gene is less likely to be indicative of the disease risk.
-%Recent study asserted the negative correlation between minor allele frequency and the effect size across all tissues (liver, skeletal muscle, adipose tissue, atherosclerotic aortic root, artery and blood) in the Stockholm-Tartu Atherosclerosis Reverse Networks Engineering Task study (STARNET) \citep{Franzen:2016:Cardiometabolic} \comment{Figure S17}.
-From the research perspective, they imply that the quest of pinpointing the causal variants is getting more difficult, because testing the variant-phenotype association on small-effect variations requires a much larger number of samples for sufficient power, or critically different methods of statistical testing and inference.\comment{Check refs. Elaborate on current efforts to have large study populations and to devise new way to fish for those associations.}
+\begin{figure*}[!tpb]
+	\includegraphics[width=1.\linewidth]{hpo-gene-count}
+	\caption{The number of genes associated with \emph{``Abnormality of the cardiovascular system"} (HP:0001626) as reported in the Human Phenotype Ontology \citep{Kohler:2014:Human}, with phenotype annotations pooled from OMIM \hl{(cite)} , ORPHA \hl{(cite)}  and DECIPHER \hl{(cite)}.}
+	\label{fig:hpo_gene_count}	
+\end{figure*}
 
-Beside the increasing difficulty discovering these genes, modeling of their effects is speedily complicated. With a potential interaction between every pair of genomic features, be they genes or regulatory sequences, the number of such interactions increase quadratically with the number of actors, leading to the combinatorial explosion of states that a biological system can assume. \comment{ethnicity and ancestry may be mentioned here}
+\comment{Check refs. Elaborate on current efforts to have large study populations and to devise new way to fish for those associations.}
 
-The number of genes contributing to CVD risks will likely inflate beyond those directly associated with diseased traits. Independent research in aging has unraveled the intertwined relation between heart disease and longevity pathways \citep{North:2012:Intersection}.  With age being the most important factor in constituting cardiovascular risk \citep{Steenman:2017:Cardiac}, it is unavoidable that an even larger number of genes and pathways will be involved in future analyses of CVD genetics. In the recent omnigenic model for complex traits, it is proposed that most heritability of these traits is explained by peripheral genes outside of the core pathways. Following this model, future analyses of CVD might need to include thousands of genes to model a single disease.
+Besides for the increasing difficulty of discovering these genes, modeling their effects is getting increasingly more complicated. With a potential interaction between every pair of genomic features, be they genes or regulatory sequences, the number of such interactions increase quadratically with the number of actors, leading to the combinatorial explosion of states that a biological system can assume.  Ethnicity and ancestry-specific differences add a further layer of complexity.
+
+The number of genes contributing to CVD risks will likely inflate beyond those directly associated with diseased traits. Independent research in aging has unraveled the intertwined relation between heart disease and longevity pathways \citep{North:2012:Intersection}.  With age being the most important factor in constituting cardiovascular risk \citep{Steenman:2017:Cardiac}, it is unavoidable that an even larger number of genes and pathways will be involved in future analyses of CVD genetics.  For example, in the recent omnigenic model for complex traits, it is proposed that most heritability of these traits is explained by peripheral genes outside of the core pathways \hl{(cite)}. Following this model, future analyses of CVD might need to include thousands of genes to model a single disease regulatory network.
 %does it help to have too many variants in a genetic risk score?
 
 %As with other complex diseases, missing heritability has been a long-standing puzzle in cardiovascular diseases \citep{Manolio:2009:Finding}. Despite the early successes in pinpointing the causes of several monogenic diseases, the large body of genome-wide association (GWA) studies have defied many widely held beliefs about genetic variants in human, hinting at the directions to search for the missing heritability.
@@ -116,11 +91,6 @@ The number of genes contributing to CVD risks will likely inflate beyond those d
 %rare variants. The most trivial situation where inherited risk is not fully accounted for is when the variants are simply too rare to be detected with sufficient power. One addresses this issue by collecting more samples or improving statistical tests. \comment{This reason has driven a lot of efforts to enlarge and diversify the study population, but I can't seem to get the relation RARE => PATHOGENIC.} The availability of a large number of genomes and exomes, on one hand enabled the detection of such rare variants, and on the others,  showed that rare variants 
 
 
-\begin{figure*}[!tpb]
-	\includegraphics[width=1.\linewidth]{hpo-gene-count}
-	\caption{The number of genes associated with \textit{Abnormality of the cardiovascular system} (HP:0001626) as reported in the Human Phenotype Ontology \citep{Kohler:2014:Human}, with phenotype annotations pooled from OMIM, ORPHA and DECIPHER.}
-	\label{fig:hpo_gene_count}	
-\end{figure*}
 
 
 \subsection{The diversity of actors}
@@ -325,6 +295,28 @@ nanopore sequencing
 
 single cell
 
+\section*{Notes section}
+
+Maybe mention ExAC and gnomAD browsers for ancestry, which include rs IDs involved in CVD, although it's not a pressing issue to mention.
+
+The first draft of the human genome project had brought a lot of hope and excitement about potential advancements in the diagnosis and treatment of cardiac diseases, such as the ability to identify disease genes within the associated loci, to improve risk estimation based on more precise genotypes, or to personalize the prediction of drug effect on a patient, \citep{Komajda:2001:heart}.
+
+
+Outstanding problems
+
+Variant calling and pathogenicity prediction. Currently inconsistent. Mostly developed for protein-coding fraction of the genome (SIFT, Polyphen, etc.), largely ignore the non-coding regions.
+Pathogenicity assignment: variable, conflicting, not applicable for all populations.
+
+Risk estimation
+
+Lack of mechanistic understanding
+
+Lack of platforms for accessible data and knowledge base
+
+%{https://www.ncbi.nlm.nih.gov/mesh/68002318} 
+
+As we further our quest to understand the genetics of heart diseases, many conditions have become too complicated for traditional approaches. Reflecting on the current body of knowledge, we recognize that many aspects of this complexity can be addressed with more computational methods.
+
 
 
 \section{Conclusion}
@@ -339,12 +331,12 @@ single cell
 
 \section*{Acknowledgements}
 
-Text Text Text Text Text Text  Text Text.  
+BBK acknowledges and thanks the American Heart Association (AHA) for financial support through the AHA Postdoctoral Fellowship program.
 \vspace*{-12pt}
 
 \section*{Funding}
 
-This work has been supported by the... Text Text  Text Text.\vspace*{-12pt}
+This work has been supported by the American Heart Association (AHA) Postdoctoral Fellowship grant \#18POST34030375 (Khomtchouk).\vspace*{-12pt}
 
 \bibliographystyle{natbib}
 %\bibliographystyle{achemnat}
