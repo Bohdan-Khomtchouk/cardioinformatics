@@ -1,4 +1,4 @@
-SO term	SO description	SO accession	Display term	IMPACT	Protein-coding
+SOTerm	SODescription	SOAccession	DisplayTerm	IMPACT	IsProteinCoding
 transcript_ablation	A feature ablation whereby the deleted region includes a transcript feature	SO:0001893	Transcript ablation	HIGH	0
 splice_acceptor_variant	A splice variant that changes the 2 base region at the 3' end of an intron	SO:0001574	Splice acceptor variant	HIGH	0
 splice_donor_variant	A splice variant that changes the 2 base region at the 5' end of an intron	SO:0001575	Splice donor variant	HIGH	0
