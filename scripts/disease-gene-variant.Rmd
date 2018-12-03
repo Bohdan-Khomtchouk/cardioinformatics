@@ -164,19 +164,32 @@ context.cnt.combined =
     dplyr::full_join(x = context.cnt, y = ., all = TRUE, by = 'CONTEXT', incomparables = 0) %>%
     `[<-`(is.na(.[[2]]), 2, 0) %>%
     `[<-`(is.na(.[[3]]), 3, 0) %>%
-    set_names(c('CONTEXT', 'All traits', 'CVD'))
+    set_names(c('SOTerm', 'All traits', 'CVD')) %>%
+    dplyr::left_join(VAR.CONSEQUENCES[,c('SOTerm', 'DisplayTerm', 'IsProteinCoding')], by = 'SOTerm') %>%
+    subset(SOTerm != "") %>%
+    dplyr::arrange(., dplyr::desc(.$IsProteinCoding))
+
+labelOrder = context.cnt.combined$DisplayTerm
 # context.cnt.combined[['All traits']] = context.cnt.combined[['All traits']] + 0.1
 # context.cnt.combined[['CVD']] = context.cnt.combined[['CVD']] + 0.1
-context.cnt.combined %>%
-    reshape2::melt(id.vars = 'CONTEXT') %>%
-    ggplot(mapping =  aes(x = CONTEXT)) +
+labelColors = c('blue', 'green')
+tmp <- context.cnt.combined %>%
+    reshape2::melt(id.vars = c('SOTerm', 'DisplayTerm', 'IsProteinCoding'))
+tmp$color <- factor(tmp$IsProteinCoding) %>% `levels<-`(labelColors) %>% as.character()
+p <- context.cnt.combined %>%
+    reshape2::melt(id.vars = c('SOTerm', 'DisplayTerm', 'IsProteinCoding')) %>%
+    ggplot(mapping =  aes(x = factor(DisplayTerm, levels = labelOrder))) +
         geom_bar(aes(y =value, fill=variable), stat='identity',alpha = 0.8) +
         scale_fill_discrete( guide_legend(title = 'Mapped traits')) +
         scale_y_log10(limits = c(1, NA)) + 
         ylab('Variant count') +
+        xlab('Context') +
         theme(legend.position = c(0.83,0.87)) +
         coord_flip()
-ggsave('../figures/variant_contexts.png',height = 4, width=6)
+p
+ggsave('../figures/variant_contexts-sorted.png',height = 4, width=6)
+p + theme(axis.text.y = element_text(color = tmp$color))
+ggsave('../figures/variant_contexts-sorted-colored.png',height = 4, width=6)
 ```
 
 The ditribution of CVD-associated variants in the human genome reflect the distribution of variants in all variants studied so far 
