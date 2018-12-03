@@ -210,9 +210,9 @@ There is a certain genetic component in all major categories of heart disease (F
 	% Please add the following required packages to your document preamble:
 	% \usepackage{booktabs}
 	\begin{table}[]
-		\caption{The subject count aggregated from studies deposited in dbGaP, consented for General Research Use (GRU)}
-		\label{tab:dbgapSubject}
-		\begin{tabular}{l l l}
+	\processtable{The subject count aggregated from studies deposited in dbGaP, consented for General Research Use (GRU)
+		\label{tab:dbgapSubject}}
+{\begin{tabular}{l l l}
 			\toprule
 			& \textbf{CVD} &  \textbf{All}                         \\ \midrule
 			16s rRNA (NGS)                 &     0 &      92 \\
@@ -238,7 +238,7 @@ There is a certain genetic component in all major categories of heart disease (F
 			miRNA (NGS)                        & 0 &   228 \\ \hline
 			Total subject count in data consented for GRU & 16786 & 242644 \\ \hline
 			All consent groups & 658305 & Unknown \\	
-		\end{tabular}
+		\end{tabular}}{NGS: Next-generation sequencing\\ QTL: Quantitative Trait Loci}
 	\end{table}
 	
 	The data from non-CVD studies are of great potential use as the baseline, for example when comparing the normal vs disease state, general vs clinical population. Moreover, assays on non-cardiac and non-vascular tissues are indispensable in identifying the transcripts with expression specific to the cardiovascular system.
