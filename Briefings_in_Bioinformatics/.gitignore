@@ -6,3 +6,6 @@
 **.synctex.gz
 **.tar
 **.pdf
+**/.DS_Store
+**/*Temp*.synctex
+**/*Temp*.tex
