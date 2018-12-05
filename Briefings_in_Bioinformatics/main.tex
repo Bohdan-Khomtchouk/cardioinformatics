@@ -62,6 +62,16 @@ The last few years have seen a meteoric rise in the availability of computationa
 More recently, the Knowledge Portal Network Group at the Broad Institute has begun implementing a wide variety of complex disease knowledge bases focused on type II diabetes, sleep disorders, cardiovascular and cerebrovascular diseases.  The purpose of these resources is to aggregate and store statistical data for billions of genetic variants and organize them to be rapidly queried and visualized by biologists, statistical geneticists, pharmaceutical researchers, and clinicians to find genetic associations, treatment targets, etc.  Other such knowledge bases focused on exploring large-scale genetic association data in the context of, for instance, drug/treatment targets include the OpenTargets initiative \citep{Koscielny:2017:Open}, which is a public-private venture that generates evidence on the validity of therapeutic targets based on genome-scale experiments and analysis.  Similarly, the Accelerating Medicines Partnership-Alzheimer's Disease (AMP-AD) Target Discovery and Preclinical Validation Project has developed an AMP-AD Knowledge Portal to help researchers identify potential drug targets to accelerate pre-competitive Alzheimer's disease treatment and prevention \citep{NIA:2015:AMP}.  
 	
 	In addition to these various genetic association efforts, CVD knowledge bases such as HeartBioPortal \hl{(cite)} have begun integrating gene expression information with genetic association information, motivated by the stimulus that transcriptomic data provide powerful insights into the effects of genetic variation on gene expression and alternative splicing in both health and disease.  Such large-scale integrative multi-omics efforts now also extend beyond academia into biotech startup companies such as Quiltomics, Omicsoft, Omics Data Automation, Occamzrazor, NextBio, etc. -- many of which have successfully been acquired by larger biotech companies such as Illumina, Qiagen, etc.  Therefore, the biological data science world has started moving progressively closer towards large-scale integration of knowledge bases, rather than simply individual studies or datasets.    
+
+
+		\begin{figure*}[!tpb]
+		\includegraphics[width=1.\linewidth]{hpo-gene-count}
+		\caption{The number of genes associated with \emph{``Abnormality of the cardiovascular system"} (HP:0001626) as reported in the Human Phenotype Ontology \citep{Kohler:2014:Human},
+			 with phenotype annotations pooled from OMIM \citep{McKusick:2018:OMIM} , Orphanet \citep{INSERM:1997:Orphanet}  and DECIPHER \citep{Firth:2009:DECIPHER}.}
+		\label{fig:hpo_gene_count}	
+	\end{figure*}
+	
+	
 	
 	
 	\section*{Complexity of CVDs}  % the problems
@@ -71,13 +81,6 @@ More recently, the Knowledge Portal Network Group at the Broad Institute has beg
 	% large number --> more interactions, intra and inter-pathways
 	% 
 There is a certain genetic component in all major categories of heart disease (Figure \ref{fig:hpo_gene_count}).  As more studies are published, the number of genes found associated with a disease has also increased and, in most cases, gone beyond a few genes that could be described in a single-page table or diagram.  Dilated cardiomyopathy (DCM), the most common cause of heart transplantation, is a vivid example of how causal variants and their corresponding genes were discovered over the years.  In a recent review \citep{Burke:2016:Clinical}, 16 disease-causing genes were compiled, along with an additional 41 putative genes.  Meanwhile, GWAS catalog and HPO annotation suggested a much larger number of genes associated with this condition, 69 genes and 115 genes, respectively.  Clinical application has been keeping up, with a typical commercial gene panel for DCM genetic testing covering 50 genes on average, and 111 in total \citep{McNally:2017:Dilated}.  These numbers suggest the need for more bioinformatics analyses to gain insights into this condition and other CVD conditions that are equivalently complex.  Since it is reasonably expected that when more genes are involved in a disease, the individual effect exerted by each gene gets smaller, these ever-enlarging gene panels suggest that the risks conferred by mutations in a single gene is less likely to be indicative of the disease risk.  For example, one recent study asserted the negative correlation between minor allele frequency and the effect size across all tissues (liver, skeletal muscle, adipose tissue, atherosclerotic aortic root, artery and blood) in the Stockholm-Tartu Atherosclerosis Reverse Networks Engineering Task study (STARNET) \citep{Franzen:2016:Cardiometabolic}.  From a research perspective, these findings imply that the quest of pinpointing causal variants is getting progressively more difficult, because testing the variant-phenotype association on small-effect variations requires a much larger number of samples for sufficient power, or critically different methods of statistical testing and inference. \hl{(ask Tim if should mention Mendelian randomization and instrumental variable analysis in this discussion)}
-	
-	\begin{figure*}[!tpb]
-		\includegraphics[width=1.\linewidth]{hpo-gene-count}
-		\caption{The number of genes associated with \emph{``Abnormality of the cardiovascular system"} (HP:0001626) as reported in the Human Phenotype Ontology \citep{Kohler:2014:Human},
-			 with phenotype annotations pooled from OMIM \citep{McKusick:2018:OMIM} , Orphanet \citep{INSERM:1997:Orphanet}  and DECIPHER \citep{Firth:2009:DECIPHER}.}
-		\label{fig:hpo_gene_count}	
-	\end{figure*}
 	
 	
 	Besides for the increasing difficulty of discovering these genes, modeling their effects is getting increasingly more complicated as well. With a potential interaction between every pair of genomic features, be they genes or regulatory sequences, the number of such interactions increase quadratically with the number of actors, leading to the combinatorial explosion of states that a biological system can assume.  Ethnicity and ancestry-specific differences add a further layer of complexity.
