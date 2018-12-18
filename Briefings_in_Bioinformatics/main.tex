@@ -14,6 +14,7 @@
 \newcommand{\comment}[1]{\textcolor{red}{#1}}
 \newcommand{\todo}[1]{\colorbox{yellow}{\parbox{1\linewidth}{#1}}}
 
+
 \begin{document}
 	\firstpage{1}
 	
@@ -189,7 +190,7 @@ As with other complex diseases, missing heritability has been a long-standing pu
 		\end{tabular}}{NGS: Next-generation sequencing\\ QTL: Quantitative Trait Loci}
 	\end{table}
 	
-	Such abundance and diversity of data promises valuable insights once the data is aggregated across studies within a given omics domain (e.g., RNA-seq), or across multiple omics domains (e.g., RNA-seq, ChIP-seq, ATAC-seq, etc.). Efforts to aggregate genomic data (both individual and summary-level statistics) have resulted in valuable datasets such as The Cancer Genome Atlas \citep{TCGA:2013:Cancer} for genomics and functional genomics data in cancer, or ExAC and gnomAD for exome and genome sequencing data with a focus on race/ethnic group-specific population allele frequencies \citep{Lek:2016:Analysis}. With the upcoming wave of trans-omics data spanning diverse sources and sequencing types (Figure \ref{fig:trans-omics}), algorithms-based data harmonization will become a more pressing problem for cardioinformatics. Some early solutions have started to be proposed, e.g., Biochat for GEO data \citep{Khomtchouk:2018:Biochat} or OmicsDI for diverse datasets spanning genomics, transcriptomics, proteomics and metabolomics \citep{Perez-Riverol:2017:Discovering}.
+	Such abundance and diversity of data promises valuable insights once the data is aggregated across studies within a given omics domain (e.g., RNA-seq), or across multiple omics domains (e.g., RNA-seq, ChIP-seq, ATAC-seq, etc.). Efforts to aggregate genomic data (both individual and summary-level statistics) have resulted in valuable datasets such as The Cancer Genome Atlas \citep{TCGA:2013:Cancer} for genomics and functional genomics data in cancer, or ExAC and gnomAD for exome and genome sequencing data with a focus on race/ethnic group-specific population allele frequencies \citep{Lek:2016:Analysis}. With the upcoming wave of trans-omics data spanning diverse sources and sequencing types (Figure \ref{fig:trans-omics}), algorithms-based data harmonization will become a more pressing problem for cardioinformatics. Some early solutions have started to be proposed, e.g., Biochat for GEO metadata \citep{Khomtchouk:2018:Biochat}, OmicsDI for diverse datasets spanning genomics, transcriptomics, proteomics and metabolomics \citep{Perez-Riverol:2017:Discovering}, and metadata-driven frameworks for harmonizing and analyzing AHA Precision Medicine Platform clinical trials data using an OMOP common data model \hl{(Trang, cite OMOP as well as this URL from Rocky 2018 and take the backslash out of the URL: https://www.iscb.org/cms\_addon/conferences/rocky2018/track/posters.php)}
 	
 	\begin{figure*}[!tpb]
 		\includegraphics[width=1\linewidth]{assay-count-cardio}
