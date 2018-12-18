@@ -3351,6 +3351,7 @@ Interesting result, but not sure what to take from this survey, because the esti
   author = {Gaye, Amadou and Marcon, Yannick and Isaeva, Julia and LaFlamme, Philippe and Turner, Andrew and Jones, Elinor M. and Minion, Joel and Boyd, Andrew W. and Newby, Christopher J. and Nuotio, Marja-Liisa and Wilson, Rebecca and Butters, Oliver and Murtagh, Barnaby and Demir, Ipek and Doiron, Dany and Giepmans, Lisette and Wallace, Susan E. and {Budin-Lj\o{}sne}, Isabelle and Oliver Schmidt, Carsten and Boffetta, Paolo and Boniol, Mathieu and Bota, Maria and Carter, Kim W. and {deKlerk}, Nick and Dibben, Chris and Francis, Richard W. and Hiekkalinna, Tero and Hveem, Kristian and Kval\o{}y, Kirsti and Millar, Sean and Perry, Ivan J. and Peters, Annette and Phillips, Catherine M. and Popham, Frank and Raab, Gillian and Reischl, Eva and Sheehan, Nuala and Waldenberger, Melanie and Perola, Markus and {van den Heuvel}, Edwin and Macleod, John and Knoppers, Bartha M. and Stolk, Ronald P. and Fortier, Isabel and Harris, Jennifer R. and Woffenbuttel, Bruce HR and Murtagh, Madeleine J. and Ferretti, Vincent and Burton, Paul R.},
   month = dec,
   year = {2014},
+  keywords = {data privacy,virtual pooling},
   pages = {1929-1944}
 }
 
@@ -3367,7 +3368,38 @@ Interesting result, but not sure what to take from this survey, because the esti
   month = apr,
   year = {2017},
   keywords = {data privacy,distributed data,sensitive data},
-  pages = {21}
+  pages = {21},
+  annote = {\section{Summary}
+
+\subsection{Architecture}
+
+DataSHIELD server: located behind the data owner's firewall, hosting the data.
+
+Opal: R environment pre-configured with DataSHIELD package, R parser that only allows DataSHIELD functions to run
+
+DataSHIELD client:
+
+DataSHIELD client-side packages, providing functions that make call to server-side functions
+
+\subsection{Client-server function pairs}
+
+Only the server-side functions can have access to individual-level data
+
+Analytical functions are essentially the extension of R functions, with modifications such that disclosive results won't be returned. (For example, means and quantiles won't be evaluated for 0\% and 100\%, print() is not supported, contingency table must have all cells with count $>$= 5 to be reported, etc.
+
+Supported analytics
+
+\begin{itemize}
+
+\item Summary statistics (mean, quantiles, etc)
+
+\item Histogram
+
+\item Generalized linear model
+
+\end{itemize}
+
+~}
 }
 
 @article{Nellore:2016:RaildbGaP,
@@ -4596,6 +4628,127 @@ Demonstrates how the platform can be used to study biological responses (changes
   howpublished = {https://mlperf.org/},
   author = {{MLPerf}},
   year = {2018}
+}
+
+@unpublished{Sweeney:2013:Identifying,
+  type = {White Paper},
+  title = {Identifying {{Participants}} in the {{Personal Genome Project}} by {{Name}}},
+  author = {Sweeney, Latanya and Abu, Akua and Winn, Julia},
+  month = apr,
+  year = {2013}
+}
+
+@article{Consortium:2009:Public,
+  title = {Public {{Access}} to {{Genome}}-{{Wide Data}}: {{Five Views}} on {{Balancing Research}} with {{Privacy}} and {{Protection}}},
+  volume = {5},
+  issn = {1553-7404},
+  shorttitle = {Public {{Access}} to {{Genome}}-{{Wide Data}}},
+  doi = {10.1371/journal.pgen.1000665},
+  language = {en},
+  number = {10},
+  journal = {PLOS Genetics},
+  author = {Consortium, P3g and Church, George and Heeney, Catherine and Hawkins, Naomi and de Vries, Jantina and Boddington, Paula and Kaye, Jane and Bobrow, Martin and Weir, Bruce},
+  month = oct,
+  year = {2009},
+  keywords = {Forensics,Genome-wide association studies,Genomic databases,Genomic medicine,Genomics,Human genomics,Internet,Scientists},
+  pages = {e1000665},
+  annote = {\section{Summary}
+
+\subsection{P3G}
+
+Universal researcher ID to allow granting access to genomic databases and revoking access upon infringement of the terms
+
+\subsection{George Church}
+
+New insights come from integrative analysis, thus relying on sharing data across the fields with people in various fields, usually not given direct permission on the data.
+
+Model: obtain fully informed consent which educate people about the risk (Example: Havard Personal Genome Project requires participant to go through a consent of 20 questions strictly required to be answered correctly).
+
+\subsection{University of Oxford Ethox Centre}
+
+Increase in the amount and variety of data makes it impractical to promise complete privacy to participants in genomic research.
+
+~
+
+~}
+}
+
+@article{Plis:2016:COINSTAC,
+  title = {{{COINSTAC}}: {{A Privacy Enabled Model}} and {{Prototype}} for {{Leveraging}} and {{Processing Decentralized Brain Imaging Data}}},
+  volume = {10},
+  issn = {1662-453X},
+  shorttitle = {{{COINSTAC}}},
+  doi = {10.3389/fnins.2016.00365},
+  language = {English},
+  journal = {Frontiers in Neuroscience},
+  author = {Plis, Sergey M. and Sarwate, Anand D. and Wood, Dylan and Dieringer, Christopher and Landis, Drew and Reed, Cory and Panta, Sandeep R. and Turner, Jessica A. and Shoemaker, Jody M. and Carter, Kim W. and Thompson, Paul and Hutchison, Kent and Calhoun, Vince D.},
+  year = {2016},
+  keywords = {brain imaging,data privacy,data sharing,Decentralized algorithms,decentralized processing,distributed data,Privacy,virtual pooling}
+}
+
+@article{Carter:2016:ViPAR,
+  title = {{{ViPAR}}: A Software Platform for the {{Virtual Pooling}} and {{Analysis}} of {{Research Data}}},
+  volume = {45},
+  issn = {0300-5771},
+  shorttitle = {{{ViPAR}}},
+  doi = {10.1093/ije/dyv193},
+  language = {en},
+  number = {2},
+  journal = {International Journal of Epidemiology},
+  author = {Carter, Kim W. and Francis, Richard W. and Carter, K. W. and Francis, R. W. and Bresnahan, M. and Gissler, M. and Gr\o{}nborg, T. K. and Gross, R. and Gunnes, N. and Hammond, G. and Hornig, M. and Hultman, C. M. and Huttunen, J. and Langridge, A. and Leonard, H. and Newman, S. and Parner, E. T. and Petersson, G. and Reichenberg, A. and Sandin, S. and Schendel, D. E. and Schalkwyk, L. and Sourander, A. and Steadman, C. and Stoltenberg, C. and Suominen, A. and Sur\'en, P. and Susser, E. and Sylvester Vethanayagam, A. and Yusof, Z.},
+  month = apr,
+  year = {2016},
+  keywords = {data privacy,decentralized processing,distributed data,virtual pooling},
+  pages = {408-416}
+}
+
+@article{Ohno-Machado:2012:iDASH,
+  title = {{{iDASH}}: Integrating Data for Analysis, Anonymization, and Sharing},
+  volume = {19},
+  issn = {1067-5027},
+  shorttitle = {{{iDASH}}},
+  doi = {10.1136/amiajnl-2011-000538},
+  language = {en},
+  number = {2},
+  journal = {Journal of the American Medical Informatics Association},
+  author = {{Ohno-Machado}, Lucila and Bafna, Vineet and Boxwala, Aziz A. and Chapman, Brian E. and Chapman, Wendy W. and Chaudhuri, Kamalika and Day, Michele E. and Farcas, Claudiu and Heintzman, Nathaniel D. and Jiang, Xiaoqian and Kim, Hyeoneui and Kim, Jihoon and Matheny, Michael E. and Resnic, Frederic S. and Vinterbo, Staal A.},
+  month = mar,
+  year = {2012},
+  keywords = {data integration,data privacy},
+  pages = {196-201}
+}
+
+@article{Davies:2016:SoftwareEnabled,
+  title = {Software-{{Enabled Distributed Network Governance}}: {{The PopMedNet Experience}}},
+  volume = {4},
+  copyright = {Authors who publish with this journal agree to the following terms:    Authors retain copyright and grant the journal right of first publication with the work simultaneously licensed under a  Creative Commons Attribution License  that allows others to share the work with an acknowledgement of the work's authorship and initial publication in this journal.  Authors are able to enter into separate, additional contractual arrangements for the non-exclusive distribution of the journal's published version of the work (e.g., post it to an institutional repository or publish it in a book), with an acknowledgement of its initial publication in this journal.  Authors are permitted and encouraged to post their work online (e.g., in institutional repositories or on their website) prior to and during the submission process, as it can lead to productive exchanges, as well as earlier and greater citation of published work (See  The Effect of Open Access ).  All third-party images reproduced on this journal are shared under Educational Fair Use. For more information on  Educational Fair Use , please see  this useful checklist prepared by Columbia University Libraries .   All copyright  of third-party content posted here for research purposes belongs to its original owners.  Unless otherwise stated all references to characters and comic art presented on this journal are \textcopyright, \textregistered{} or \texttrademark{} of their respective owners. No challenge to any owner's rights is intended or should be inferred.},
+  issn = {2327-9214},
+  shorttitle = {Software-{{Enabled Distributed Network Governance}}},
+  doi = {10.13063/2327-9214.1213},
+  language = {en},
+  number = {2},
+  journal = {eGEMs (Generating Evidence \& Methods to improve patient outcomes)},
+  author = {Davies, Melanie and Erickson, Kyle and Wyner, Zachary and Malenfant, Jessica M. and Rosen, Rob and Brown, Jeff},
+  month = mar,
+  year = {2016},
+  pages = {5}
+}
+
+@article{Chen:2017:PRINCESS,
+  title = {{{PRINCESS}}: {{Privacy}}-Protecting {{Rare}} Disease {{International Network Collaboration}} via {{Encryption}} through {{Software}} Guard {{extensionS}}},
+  volume = {33},
+  issn = {1367-4803},
+  shorttitle = {{{PRINCESS}}},
+  doi = {10.1093/bioinformatics/btw758},
+  language = {en},
+  number = {6},
+  journal = {Bioinformatics},
+  author = {Chen, Feng and Wang, Shuang and Jiang, Xiaoqian and Ding, Sijie and Lu, Yao and Kim, Jihoon and Sahinalp, S. Cenk and Shimizu, Chisato and Burns, Jane C. and Wright, Victoria J. and Png, Eileen and Hibberd, Martin L. and Lloyd, David D. and Yang, Hai and Telenti, Amalio and Bloss, Cinnamon S. and Fox, Dov and Lauter, Kristin and {Ohno-Machado}, Lucila},
+  month = mar,
+  year = {2017},
+  keywords = {data privacy,distributed data,rare variants},
+  pages = {871-878},
+  annote = {A framework for analyzing genetic variants from genotyping data. Data are securely transfered in compressed and encrypted form to an untrusted computational server. This server then compress the data further and send to a data processing enclave hosted on a trusted server. Within the enclave, the data are decrypted and de-compressed to recover a data segment. Statistical test is performed in a stream, with each segment (8000 SNPs) being tested individually, each time updating the list of top K SNPs.}
 }
 
 
