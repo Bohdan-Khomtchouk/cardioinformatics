@@ -1763,7 +1763,7 @@ The authors compared the pedigrees of families with the same mutation on beta ca
   author = {Kircher, Martin and Witten, Daniela M. and Jain, Preti and O'Roak, Brian J. and Cooper, Gregory M. and Shendure, Jay},
   month = mar,
   year = {2014},
-  keywords = {variants of uncertain significance,variants,CADD,pathogenicity},
+  keywords = {CADD,non-coding variants,pathogenicity,variants,variants of uncertain significance},
   pages = {310-315},
   annote = {CADD score
 
@@ -4285,6 +4285,21 @@ Demonstrates how the platform can be used to study biological responses (changes
   pmcid = {PMC3013647}
 }
 
+@article{Zuk:2014:Searching,
+  title = {Searching for Missing Heritability: {{Designing}} Rare Variant Association Studies},
+  volume = {111},
+  issn = {0027-8424, 1091-6490},
+  shorttitle = {Searching for Missing Heritability},
+  doi = {10.1073/pnas.1322563111},
+  language = {en},
+  number = {4},
+  journal = {Proceedings of the National Academy of Sciences},
+  author = {Zuk, O. and Schaffner, S. F. and Samocha, K. and Do, R. and Hechter, E. and Kathiresan, S. and Daly, M. J. and Neale, B. M. and Sunyaev, S. R. and Lander, E. S.},
+  month = jan,
+  year = {2014},
+  pages = {E455-E464}
+}
+
 @article{Khomtchouk:2018:HeartBioPortal,
   title = {{{HeartBioPortal}}: An Internet-of-Omics for Human Cardiovascular Disease Data},
   copyright = {\textcopyright{} 2018, Posted by Cold Spring Harbor Laboratory. The copyright holder for this pre-print is the author. All rights reserved. The material may not be redistributed, re-used or adapted without the author's permission.},
@@ -4683,7 +4698,16 @@ Increase in the amount and variety of data makes it impractical to promise compl
   journal = {Frontiers in Neuroscience},
   author = {Plis, Sergey M. and Sarwate, Anand D. and Wood, Dylan and Dieringer, Christopher and Landis, Drew and Reed, Cory and Panta, Sandeep R. and Turner, Jessica A. and Shoemaker, Jody M. and Carter, Kim W. and Thompson, Paul and Hutchison, Kent and Calhoun, Vince D.},
   year = {2016},
-  keywords = {brain imaging,data privacy,data sharing,Decentralized algorithms,decentralized processing,distributed data,Privacy,virtual pooling}
+  keywords = {brain imaging,data privacy,data sharing,Decentralized algorithms,decentralized processing,distributed data,Privacy,virtual pooling},
+  annote = {Prototype system that proposed distributed algorithms for analysis of data hosted on different sites. This version implemented decentralized gradient descent. Future version is envisioned to includ decentralized version of PCA, ICA, NMF and regression.
+
+Distinguished themselves from dataSHIELD by:
+
+ease of use (data owners manage data sharing via a single data interface, no need to make a shareable copy) and implementation
+
+~
+
+~}
 }
 
 @article{Carter:2016:ViPAR,
@@ -4754,6 +4778,249 @@ Data still need to leave the original sites, leaving the need to transfer large 
   keywords = {data privacy,distributed data,rare variants},
   pages = {871-878},
   annote = {A framework for analyzing genetic variants from genotyping data. Data are securely transfered in compressed and encrypted form to an untrusted computational server. This server then compress the data further and send to a data processing enclave hosted on a trusted server. Within the enclave, the data are decrypted and de-compressed to recover a data segment. Statistical test is performed in a stream, with each segment (8000 SNPs) being tested individually, each time updating the list of top K SNPs.}
+}
+
+@article{Shringarpure:2015:Privacy,
+  title = {Privacy {{Risks}} from {{Genomic Data}}-{{Sharing Beacons}}},
+  volume = {97},
+  issn = {0002-9297},
+  doi = {10.1016/j.ajhg.2015.09.010},
+  number = {5},
+  journal = {The American Journal of Human Genetics},
+  author = {Shringarpure, Suyash S. and Bustamante, Carlos D.},
+  month = nov,
+  year = {2015},
+  pages = {631-646}
+}
+
+@article{Castaneda:2015:Clinical,
+  title = {Clinical Decision Support Systems for Improving Diagnostic Accuracy and Achieving Precision Medicine},
+  volume = {5},
+  issn = {2043-9113},
+  doi = {10.1186/s13336-015-0019-3},
+  number = {1},
+  journal = {Journal of Clinical Bioinformatics},
+  author = {Castaneda, Christian and Nalley, Kip and Mannion, Ciaran and Bhattacharyya, Pritish and Blake, Patrick and Pecora, Andrew and Goy, Andre and Suh, K. Stephen},
+  month = mar,
+  year = {2015},
+  pages = {4}
+}
+
+@misc{::OMOP,
+  title = {{{OMOP Common Data Model}} \textendash{} {{OHDSI}}},
+  language = {en-US}
+}
+
+@article{Sim:2012:SIFT,
+  title = {{{SIFT}} Web Server: Predicting Effects of Amino Acid Substitutions on Proteins},
+  volume = {40},
+  issn = {0305-1048},
+  shorttitle = {{{SIFT}} Web Server},
+  doi = {10.1093/nar/gks539},
+  number = {Web Server issue},
+  journal = {Nucleic Acids Research},
+  author = {Sim, Ngak-Leng and Kumar, Prateek and Hu, Jing and Henikoff, Steven and Schneider, Georg and Ng, Pauline C.},
+  month = jul,
+  year = {2012},
+  pages = {W452-W457},
+  pmid = {22689647},
+  pmcid = {PMC3394338}
+}
+
+@article{Adzhubei:2010:method,
+  title = {A Method and Server for Predicting Damaging Missense Mutations},
+  volume = {7},
+  copyright = {2010 Nature Publishing Group},
+  issn = {1548-7105},
+  doi = {10.1038/nmeth0410-248},
+  language = {en},
+  number = {4},
+  journal = {Nature Methods},
+  author = {Adzhubei, Ivan A. and Schmidt, Steffen and Peshkin, Leonid and Ramensky, Vasily E. and Gerasimova, Anna and Bork, Peer and Kondrashov, Alexey S. and Sunyaev, Shamil R.},
+  month = apr,
+  year = {2010},
+  keywords = {coding variants,pathogenicity,PolyPhen},
+  pages = {248-249}
+}
+
+@article{Kumar:2009:Predicting,
+  title = {Predicting the Effects of Coding Non-Synonymous Variants on Protein Function Using the {{SIFT}} Algorithm},
+  volume = {4},
+  copyright = {2009 Nature Publishing Group},
+  issn = {1750-2799},
+  doi = {10.1038/nprot.2009.86},
+  language = {en},
+  number = {7},
+  journal = {Nature Protocols},
+  author = {Kumar, Prateek and Henikoff, Steven and Ng, Pauline C.},
+  month = jul,
+  year = {2009},
+  keywords = {coding variants,pathogenicity,SIFT,variant interpretation},
+  pages = {1073-1081}
+}
+
+@article{Zomer:2014:Cardiovascular,
+  title = {Cardiovascular Risk Prediction in a Population with the Metabolic Syndrome: {{Framingham}} vs. {{UKPDS}} Algorithms},
+  volume = {21},
+  issn = {2047-4873},
+  shorttitle = {Cardiovascular Risk Prediction in a Population with the Metabolic Syndrome},
+  doi = {10.1177/2047487312449307},
+  language = {en},
+  number = {3},
+  journal = {European Journal of Preventive Cardiology},
+  author = {Zomer, Ella and Liew, Danny and Owen, Alice and Magliano, Dianna J and Ademi, Zanfina and Reid, Christopher M},
+  month = mar,
+  year = {2014},
+  pages = {384-390}
+}
+
+@article{Dawber:1951:Epidemiological,
+  title = {Epidemiological {{Approaches}} to {{Heart Disease}}: {{The Framingham Study}}},
+  volume = {41},
+  issn = {0002-9572},
+  shorttitle = {Epidemiological {{Approaches}} to {{Heart Disease}}},
+  number = {3},
+  journal = {American Journal of Public Health and the Nations Health},
+  author = {Dawber, Thomas R. and Meadors, Gilcin F. and Moore, Felix E.},
+  month = mar,
+  year = {1951},
+  pages = {279-286},
+  pmid = {14819398},
+  pmcid = {PMC1525365}
+}
+
+@article{Dhaliwal:2009:Central,
+  title = {Central {{Obesity}} and {{Multivariable Cardiovascular Risk}} as {{Assessed}} by the {{Framingham Prediction Scores}}},
+  volume = {103},
+  issn = {0002-9149},
+  doi = {10.1016/j.amjcard.2008.12.048},
+  number = {10},
+  journal = {The American Journal of Cardiology},
+  author = {Dhaliwal, Satvinder S. and Welborn, Timothy A.},
+  month = may,
+  year = {2009},
+  pages = {1403-1407}
+}
+
+@article{Eichler:2007:Prediction,
+  title = {Prediction of First Coronary Events with the {{Framingham}} Score: {{A}} Systematic Review},
+  volume = {153},
+  issn = {0002-8703},
+  shorttitle = {Prediction of First Coronary Events with the {{Framingham}} Score},
+  doi = {10.1016/j.ahj.2007.02.027},
+  number = {5},
+  journal = {American Heart Journal},
+  author = {Eichler, Klaus and Puhan, Milo A. and Steurer, Johann and Bachmann, Lucas M.},
+  month = may,
+  year = {2007},
+  pages = {722-731.e8}
+}
+
+@article{Rodondi:2012:Framingham,
+  title = {Framingham {{Risk Score}} and {{Alternatives}} for {{Prediction}} of {{Coronary Heart Disease}} in {{Older Adults}}},
+  volume = {7},
+  issn = {1932-6203},
+  doi = {10.1371/journal.pone.0034287},
+  language = {en},
+  number = {3},
+  journal = {PLOS ONE},
+  author = {Rodondi, Nicolas and Locatelli, Isabella and Aujesky, Drahomir and Butler, Javed and Vittinghoff, Eric and Simonsick, Eleanor and Satterfield, Suzanne and Newman, Anne B. and Wilson, Peter W. F. and Pletcher, Mark J. and Bauer, Douglas C. and Study, for the Health ABC},
+  month = mar,
+  year = {2012},
+  keywords = {Blood pressure,Cholesterol,Coronary heart disease,Elderly,Geriatrics,Glomerular filtration rate,Health risk analysis,Physical activity},
+  pages = {e34287}
+}
+
+@article{British:1998:Joint,
+  title = {Joint {{British}} Recommendations on Prevention of Coronary Heart Disease in Clinical Practice},
+  volume = {80},
+  copyright = {British Cardiac Society},
+  issn = {1355-6037, 1468-201X},
+  doi = {10.1136/hrt.80.2008.1S},
+  language = {en},
+  number = {suppl 2},
+  journal = {Heart},
+  author = {Association, British Cardiac Society British Hyperlipidaemia Association British Hypertension Society endorsed by the British Diabetic},
+  month = jul,
+  year = {1998},
+  pages = {S1-S29}
+}
+
+@article{Sheridan:2003:Framinghambased,
+  title = {Framingham-Based {{Tools}} to {{Calculate}} the {{Global Risk}} of {{Coronary Heart Disease}}},
+  volume = {18},
+  issn = {0884-8734},
+  doi = {10.1111/j.1525-1497.2003.30107.x},
+  number = {12},
+  journal = {Journal of General Internal Medicine},
+  author = {Sheridan, Stacey and Pignone, Michael and Mulrow, Cynthia},
+  month = dec,
+  year = {2003},
+  pages = {1039-1052},
+  pmid = {14687264},
+  pmcid = {PMC1494957}
+}
+
+@article{Knuiman:1997:Prediction,
+  title = {Prediction of Coronary Heart Disease Mortality in {{Busselton}}, {{Western Australia}}: An Evaluation of the {{Framingham}}, National Health Epidemiologic Follow up Study, and {{WHO ERICA}} Risk Scores.},
+  volume = {51},
+  issn = {0143-005X},
+  shorttitle = {Prediction of Coronary Heart Disease Mortality in {{Busselton}}, {{Western Australia}}},
+  number = {5},
+  journal = {Journal of Epidemiology and Community Health},
+  author = {Knuiman, M W and Vu, H T},
+  month = oct,
+  year = {1997},
+  pages = {515-519},
+  pmid = {9425461},
+  pmcid = {PMC1060537}
+}
+
+@article{Talmud:2010:Utility,
+  title = {Utility of Genetic and Non-Genetic Risk Factors in Prediction of Type 2 Diabetes: {{Whitehall II}} Prospective Cohort Study},
+  volume = {340},
+  copyright = {\textcopyright{} Talmud et al 2010. This is an open-access article distributed under the terms of the Creative Commons Attribution Non-commercial License, which permits use, distribution, and reproduction in any medium, provided the original work is properly cited, the use is non commercial and is otherwise in compliance with the license. See: http://creativecommons.org/licenses/by-nc/2.0/  and  http://creativecommons.org/licenses/by-nc/2.0/legalcode.},
+  issn = {0959-8138, 1468-5833},
+  shorttitle = {Utility of Genetic and Non-Genetic Risk Factors in Prediction of Type 2 Diabetes},
+  doi = {10.1136/bmj.b4838},
+  language = {en},
+  journal = {BMJ},
+  author = {Talmud, Philippa J. and Hingorani, Aroon D. and Cooper, Jackie A. and Marmot, Michael G. and Brunner, Eric J. and Kumari, Meena and Kivim\"aki, Mika and Humphries, Steve E.},
+  month = jan,
+  year = {2010},
+  pages = {b4838},
+  pmid = {20075150}
+}
+
+@article{Empana:2003:Are,
+  title = {Are the {{Framingham}} and {{PROCAM}} Coronary Heart Disease Risk Functions Applicable to Different {{European}} Populations? {{The PRIME Study}}},
+  volume = {24},
+  issn = {0195-668X},
+  shorttitle = {Are the {{Framingham}} and {{PROCAM}} Coronary Heart Disease Risk Functions Applicable to Different {{European}} Populations?},
+  language = {eng},
+  number = {21},
+  journal = {European Heart Journal},
+  author = {Empana, J. P. and Ducimeti\`ere, P. and Arveiler, D. and Ferri\`eres, J. and Evans, A. and Ruidavets, J. B. and Haas, B. and Yarnell, J. and Bingham, A. and Amouyel, P. and Dallongeville, J. and {PRIME Study Group}},
+  month = nov,
+  year = {2003},
+  keywords = {Adult,Aged,Angina Pectoris,Cohort Studies,Coronary Disease,France,Humans,Male,Middle Aged,Myocardial Infarction,Northern Ireland,Predictive Value of Tests,Prognosis,Proportional Hazards Models,Prospective Studies,Risk Assessment,Risk Factors,Sensitivity and Specificity},
+  pages = {1903-1911},
+  pmid = {14585248}
+}
+
+@article{DAgostino:2001:Validation,
+  title = {Validation of the {{Framingham Coronary Heart Disease Prediction Scores}}: {{Results}} of a {{Multiple Ethnic Groups Investigation}}},
+  volume = {286},
+  issn = {0098-7484},
+  shorttitle = {Validation of the {{Framingham Coronary Heart Disease Prediction Scores}}},
+  doi = {10.1001/jama.286.2.180},
+  language = {en},
+  number = {2},
+  journal = {JAMA},
+  author = {D'Agostino, Ralph B. and Grundy, Scott and Sullivan, Lisa M. and Wilson, Peter},
+  month = jul,
+  year = {2001},
+  pages = {180-187}
 }
 
 
