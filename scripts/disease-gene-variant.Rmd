@@ -314,6 +314,9 @@ gwas.CVDs = do.call(rbind,gwas.queries)
 gwas.mi = gwas[grep('[mM]yocardial infarction', gwas$`DISEASE/TRAIT`),] %>%
     `$<-`('DATE', as.Date(.$DATE)) %>%
     `$<-`('RISK_ALLELE_FREQUENCY', as.numeric(.$`RISK ALLELE FREQUENCY`))
+gwas.cad = gwas[which(grepl('coronary artery disease', gwas$`DISEASE/TRAIT`) | grepl('coronary heart disease', gwas$`DISEASE/TRAIT`)),] %>%
+    `$<-`('DATE', as.Date(.$DATE)) %>%
+    `$<-`('RISK_ALLELE_FREQUENCY', as.numeric(.$`RISK ALLELE FREQUENCY`))
 ggplot(gwas.mi) +
     geom_point(mapping = aes_string(x='PVALUE_MLOG',y='RISK_ALLELE_FREQUENCY', color='DATE')) +
     theme(legend.position = 'none')
@@ -329,6 +332,12 @@ count(gwas.mi, CONTEXT)
 gwas.dcm = gwas[grep('[dD]ilated [cC]ardiomyopathy', gwas$`DISEASE/TRAIT`),] %>%
     `$<-`('DATE', as.Date(.$DATE))
 gwas.dcm$`REPORTED GENE(S)`  %>% sapply(strsplit, split = ',') %>% do.call(c, .) %>% trimws() %>% unique()
+```
+
+## Atherosclerosis
+
+```{r}
+gwas.ath = 
 ```
 
 ### Ensembl
