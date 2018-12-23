@@ -334,12 +334,6 @@ gwas.dcm = gwas[grep('[dD]ilated [cC]ardiomyopathy', gwas$`DISEASE/TRAIT`),] %>%
 gwas.dcm$`REPORTED GENE(S)`  %>% sapply(strsplit, split = ',') %>% do.call(c, .) %>% trimws() %>% unique()
 ```
 
-## Atherosclerosis
-
-```{r}
-gwas.ath = 
-```
-
 ### Ensembl
 
 ```{r}
