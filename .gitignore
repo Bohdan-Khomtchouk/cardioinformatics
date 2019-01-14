@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+scripts/**/*.png
+scripts/**.html
+figures/*.ai
