@@ -3,5 +3,6 @@
 .RData
 .Ruserdata
 scripts/**/*.png
-scripts/**.html
+scripts/**/*.pdf
+scripts/**/*.html
 figures/*.ai
