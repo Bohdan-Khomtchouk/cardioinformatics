@@ -4,8 +4,11 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-con <- dbConnect(SQLite(), '../data/GEOmetadb.sqlite')
-pmids_by_query <- readRDS('../data/pmids_by_query.RDS')
+MAINDIR = '../..'
+devtools::load_all(MAINDIR)
+
+con <- dbConnect(SQLite(), file.path(MAINDIR, 'data', 'GEOmetadb.sqlite'))
+pmids_by_query <- readRDS(file.path(MAINDIR, 'data', 'pmids_by_query.RDS'))
 cardio_gsm <- dbGetQuery(con, paste('SELECT gsm.gsm, gsm.source_name_ch1, gsm.organism_ch1, organism_ch2, gpl.gpl, gpl.title as platform, gpl.description as platform_description, technology, gse.gse, gse.submission_date, gse.pubmed_id, gse.title, gse.summary, gse.type as study_type, gsm.type as sample_type, gsm.molecule_ch1',
                                     'FROM gse ',
                                     'JOIN gse_gsm ON gse.gse = gse_gsm.gse',
@@ -28,6 +31,6 @@ tech_gsm_counts %>% group_by(technology) %>% arrange(year) %>% mutate(cumcount =
     ggplot() +
     geom_area(aes(x=year,y=cumcount,fill=technology), alpha=0.9, position='stack') +
     ylab('Cumulative number of assays')
-ggsave(filename = '../figures/assay_count_by_tech-cardio.png', device='png', width=7, height=3)
+ggsave(filename = '4-assay_count_by_tech-cardio.png', device='png', width=7, height=3)
 
 dbDisconnect(con)
