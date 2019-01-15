@@ -5,14 +5,14 @@ library(RSQLite)
 library(ggplot2)
 
 DATADIR = '../../data'
-standardNames = data.table::fread(paste(DATADIR, 'conditionList.tsv', sep = '/'), sep='\t')
+standardNames = data.table::fread(file.path(DATADIR, 'conditionList.tsv'), sep='\t')
 
 ## HPO
-hpo = get_ontology(paste(DATADIR,'hpo/hpo.obo', sep = '/'), extract_tags = 'everything')
-phenotypeAnnotation = data.table::fread(paste(DATADIR, 'hpo/phenotype_annotation.tab', sep='/'),
+hpo = get_ontology(file.path(DATADIR,'hpo/hpo.obo'), extract_tags = 'everything')
+phenotypeAnnotation = data.table::fread(file.path(DATADIR, 'hpo/phenotype_annotation.tab'),
                                         sep='\t',header = FALSE, quote = "",
                                         col.names = c('DB', 'DB_Object_ID', 'DB_Name', 'Qualifier', 'HPO_ID', 'DB_Reference', 'Evidence_Code', 'Onset_Modifier', 'Frequency', 'Sex', 'Modifier', 'Aspect', 'Date_Created', 'Assigned_By'))
-hpo.associations = data.table::fread(paste(DATADIR, 'hpo/ALL_SOURCES_ALL_FREQUENCIES_phenotype_to_genes.txt', sep='/'),
+hpo.associations = data.table::fread(file.path(DATADIR, 'hpo/ALL_SOURCES_ALL_FREQUENCIES_phenotype_to_genes.txt'),
                                      sep = '\t', header=FALSE, quote="") %>%
     set_names(c('HPOTermId', 'HPOTermName', 'GeneId', 'GeneSymbol'))
 hpo.CVDs = standardNames$HPOTermId %>%

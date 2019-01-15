@@ -4,7 +4,7 @@ library(dplyr)
 library(tidyr)
 MAINDIR = '../../'
 devtools::load_all(MAINDIR)
-VAR.CONSEQUENCES = data.table::fread(paste(MAINDIR, 'data', 'ensembl-vep-consequences.tsv', sep ='/'), sep='\t')
+VAR.CONSEQUENCES = data.table::fread(file.path(MAINDIR, 'data', 'ensembl-vep-consequences.tsv'), sep='\t')
 
 # ## Exploratory analysis of GWAS
 # 
@@ -14,7 +14,7 @@ VAR.CONSEQUENCES = data.table::fread(paste(MAINDIR, 'data', 'ensembl-vep-consequ
 # 
 # 
 # ```{r}
-gwas = data.table::fread(paste(MAINDIR, 'data', 'gwas/gwas_catalog_v1.0.2-associations_e93_r2018-08-28.tsv', sep='/'), sep='\t')
+gwas = data.table::fread(file.path(MAINDIR, 'data', 'gwas/gwas_catalog_v1.0.2-associations_e93_r2018-08-28.tsv'), sep='\t')
 # gwas.studies = data.table::fread('../data/gwas/gwas_catalog_v1.0.2-studies_r2018-09-15.tsv', sep='\t')
 # test.pmid = gwas.studies %>% count(PUBMEDID) %>% filter(n > 1) %>% `[[`(1,'PUBMEDID')
 # ```
@@ -101,7 +101,7 @@ context.cnt = dplyr::count(variant.contexts, CONTEXT)
 
 
 #### Distribution of variants in genome
-gwas.queries <- data.table::fread(paste(MAINDIR, 'data', 'conditionList.tsv', sep = '/'), sep='\t')$query %>% unique() %>%
+gwas.queries <- data.table::fread(file.path(MAINDIR, 'data', 'conditionList.tsv'), sep='\t')$query %>% unique() %>%
     lapply(FUN = function(y) {
         gwas[grepl(pattern = y, x = gwas$MAPPED_TRAIT, ignore.case = TRUE) | grepl(pattern = y, x = gwas$`DISEASE/TRAIT`, ignore.case = TRUE),] %>%
             return()

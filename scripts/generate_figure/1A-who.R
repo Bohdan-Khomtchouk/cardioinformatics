@@ -6,7 +6,7 @@ ncd.deaths$Year <- trimws(ncd.deaths$Year) %>% as.numeric()
 ncd.deaths$Total = ncd.deaths$` Both sexes`
 ncd.deaths[ncd.deaths$Causes == 'Malignant neoplasms','Causes'] <- 'Malignant neoplasms (cancer)'
 
-subset(ncd.deaths, Country == 'United States of America') %>%
+p <- subset(ncd.deaths, Country == 'United States of America') %>%
     ggplot(mapping = aes_string(x='Year', y="Total", group='Causes', color='Causes'), data = .) +
     geom_line() +
     geom_point() +
@@ -15,4 +15,4 @@ subset(ncd.deaths, Country == 'United States of America') %>%
     ylab('Number of deaths') +
     guides(color=FALSE)
 
-ggsave('1A-who.png', device='png', width = 7, height = 4.5)
+ggsave('1A-who.png', plot = p, device='png', width = 7, height = 4.5)
