@@ -6,3 +6,4 @@ scripts/**/*.png
 scripts/**/*.pdf
 scripts/**/*.html
 figures/*.ai
+**/~*
