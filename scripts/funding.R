@@ -48,6 +48,6 @@ p <- ggplot(funding.total.melted) +
         geom_text(data = subset(funding.total.melted,Year == '2018'),
               aes(y=value+ 400, label=variable, color=variable, x = Year ),hjust =1)  +
         guides(color = FALSE)
-p
+
 ggsave('1-funding.png', plot = p, device='png', width = 7, height = 4.5)
 
