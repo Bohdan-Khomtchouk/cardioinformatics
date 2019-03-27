@@ -1,0 +1,97 @@
+---
+title: "NIH Funding"
+author: "Trang Tran"
+date: "3/27/2019"
+output: html_document
+---
+
+```{r setup, include = FALSE, message = FALSE}
+library(magrittr)
+library(ggplot2)
+
+convert_amount <- function(amt_array) {
+    sapply(amt_array, function(x) {
+        tryCatch({
+            as.numeric(x)
+        }, error = function(e) {
+            message(sprintf("Cannot convert %s to number", x))
+            # message(e)
+            NA
+        }, warning= function(e) {
+            message(sprintf("Cannot convert %s to number", x))
+            # message(e)
+            NA
+        }) 
+    })
+}
+
+```
+
+```{r}
+c('455', '321', '$12', '12.4', '  123') %>%
+gsub(pattern = '\\D*(\\d+.*)$', replacement = '\\1', x = .) %>% as.numeric()
+```
+
+## Prepare data
+
+### Load data
+
+```{r}
+DATADIR = '../data/nih-funding/cancer-cvd/'
+all_files = list.files(DATADIR)
+all_queries <- all_files %>%
+    lapply(function(f) {
+        tryCatch({
+            data.table::fread(file.path(DATADIR, f), sep=',', nThread = 2)
+        }, warning= function(e) {
+            message(sprintf("Warning at file %s: %s", f, e))
+            # message(e)
+        })
+    }) 
+good.files = sapply(all_queries, function(x) length(x) == 10) %>%
+    which()
+awards.cat <- do.call(rbind, all_queries[good.files])
+```
+
+### Re-format
+
+```{r}
+awards.cat$Amount.str <- awards.cat$Amount
+awards.cat$Amount <- gsub(pattern = "\\D*(\\d+.*)$", replacement = '\\1', x = awards.cat$Amount.str) %>%
+    gsub(pattern = ",", replacement = "", x = .) %>%
+    as.numeric()
+awards.cat <- set_names(awards.cat, c('Category', 'FY', 'FundingIC', 'ProjectNumber', 'SubProjectNumber', 'ProjectTitle', 'PIName', 'OrgName', 'StateCountry', 'Amount', 'Amount.str'))
+```
+
+```{r}
+categories = awards.cat$Category %>% unique()
+awards.unique = reshape2::dcast(awards.cat[,-c('Amount.str')], FY + FundingIC + ProjectNumber + SubProjectNumber + ProjectTitle + PIName + Amount ~ Category, value.var = 'Category')
+for (x in categories) {
+    awards.unique[,x]  <- ifelse(is.na(awards.unique[[x]]), 0, 1)
+}
+str(awards.unique)   
+```
+
+```{r}
+str(awards.cat)
+```
+
+```{r}
+a = array(dimnames = list('fruit' = c('apple', 'dragon', 'kiwi', 'banana'),
+                          'color' = c('red', 'green', 'yellow'),
+                          'acidic' = c('yes', 'no')),
+          dim = c(4,3),
+          data = sample(x = 0:5, size = 4*3, replace = TRUE))
+
+a.melted = reshape2::melt(a)
+a.cast = reshape2::dcast(a.melted, fruit ~ color)
+a.cast = reshape2::dcast(a.melted, color ~ fruit)
+a.cast = reshape2::dcast(a.melted[,c('fruit', 'color')], color ~ fruit, fill = 0)
+
+a = data.frame('fruit' = c('apple', 'apple', 'dragon', 'kiwi', 'banana'),
+               'color' = c('red', 'green', 'pink', 'green', 'yellow'),
+               'category' = c('sweet', 'sour', 'bland', 'sour', 'sweet'))
+reshape2::dcast(a[, c('fruit', 'color')], fruit ~ color )
+reshape2::dcast(a, fruit + color ~ category) %>%
+    `$<-`(., 'sour', !is.na(.[['sour']]))
+```
