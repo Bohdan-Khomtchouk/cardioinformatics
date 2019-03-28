@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include = FALSE, message = FALSE}
 library(magrittr)
 library(ggplot2)
+library(dplyr)
 
 DATADIR = '../data/nih-funding/'
 options(stringsAsFactors = FALSE)
@@ -29,11 +30,6 @@ convert_amount <- function(amt_array) {
 
 nih.cat.cancer = read.table(file.path(DATADIR, 'categories-cancer.txt'), sep = '\t')[[1]]
 nih.cat.cvd = read.table(file.path(DATADIR, 'categories-cvd.txt'), sep = '\t')[[1]]
-```
-
-```{r}
-c('455', '321', '$12', '12.4', '  123') %>%
-gsub(pattern = '\\D*(\\d+.*)$', replacement = '\\1', x = .) %>% as.numeric()
 ```
 
 ## Prepare data
@@ -76,7 +72,29 @@ str(awards.unique)
 ```
 
 ```{r}
-str(awards.cat)
+isCancer = awards.unique[, intersect(nih.cat.cancer, names(awards.unique))] %>% apply(MARGIN = 1, FUN = sum)
+isCVD = awards.unique[, intersect(nih.cat.cvd, names(awards.unique))] %>% apply(MARGIN = 1, FUN = sum)
+funding.cancer = awards.unique[isCancer>0,] %>% group_by(FY) %>% summarize(cancer = sum(Amount))
+funding.cvd = awards.unique[isCVD>0,] %>% group_by(FY) %>% summarize(cvd = sum(Amount))
+funding.total <- merge(x = funding.cancer, y = funding.cvd, by = 'FY') %>%
+    set_names(c('Year', 'cancer', 'cardiovascular diseases'))
+```
+
+```{r}
+sector.colors = c('cardiovascular diseases' = '#f8766d', 'cancer' = '#c77cff')
+funding.total.melted = funding.total %>%
+    reshape2::melt(id.vars = 'Year')
+p <- ggplot(funding.total.melted) +
+    # geom_bar(aes(x = Year, y = value, fill = variable), stat = 'identity', position = 'identity', alpha = 0.3) +
+    geom_line(aes(x = Year, y = value, color = variable)) +
+    geom_point(aes(x = Year, y = value, color = variable)) +
+        xlim(c(2000,2018)) +
+        scale_y_continuous(name = 'NIH Funding (in million dollars)') +
+        scale_color_manual(values = sector.colors) +
+        geom_text(data = subset(funding.total.melted,Year == '2018'),
+              aes(y=value+ 400, label=variable, color=variable, x = Year ),hjust =1)  
+        # guides(color = FALSE)
+p
 ```
 
 ```{r}
