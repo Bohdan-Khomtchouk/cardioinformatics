@@ -9,6 +9,8 @@ output: html_document
 library(magrittr)
 library(ggplot2)
 
+DATADIR = '../data/nih-funding/'
+options(stringsAsFactors = FALSE)
 convert_amount <- function(amt_array) {
     sapply(amt_array, function(x) {
         tryCatch({
@@ -25,6 +27,8 @@ convert_amount <- function(amt_array) {
     })
 }
 
+nih.cat.cancer = read.table(file.path(DATADIR, 'categories-cancer.txt'), sep = '\t')[[1]]
+nih.cat.cvd = read.table(file.path(DATADIR, 'categories-cvd.txt'), sep = '\t')[[1]]
 ```
 
 ```{r}
@@ -37,8 +41,7 @@ gsub(pattern = '\\D*(\\d+.*)$', replacement = '\\1', x = .) %>% as.numeric()
 ### Load data
 
 ```{r}
-DATADIR = '../data/nih-funding/cancer-cvd/'
-all_files = list.files(DATADIR)
+all_files = list.files(file.path(DATADIR, 'cancer-cvd'))
 all_queries <- all_files %>%
     lapply(function(f) {
         tryCatch({
