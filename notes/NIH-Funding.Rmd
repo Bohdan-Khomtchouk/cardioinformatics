@@ -123,5 +123,5 @@ p <- ggplot(funding.total.melted) +
               aes(y=value, label=variable, color=variable, x = Year-0.5 ),hjust =1, vjust = 1)  +
         guides(color = FALSE)
 print(p)
-ggsave('1-funding.png', plot = p, device='png', width = 7, height = 4.5)
+ggsave(sprintf('nih-funding-min-%s.png', MIN_FUNDING), plot = p, device='png', width = 7, height = 4.5)
 ```
