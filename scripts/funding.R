@@ -41,7 +41,6 @@ total.cvd <- funding.cvd[,-1] %>%
     apply(MARGIN = 2, FUN = sum, na.rm = TRUE) %>%
     data.frame(Year = as.numeric(names(.)), Funding = .)
 
-total.cancer <- funding.cancer[]
 funding.total <- merge(x = total.cancer, y = total.cvd, by = 'Year') %>%
     set_names(c('Year', 'cancer', 'cardiovascular diseases'))
 
@@ -59,7 +58,7 @@ p <- ggplot(funding.total.melted) +
         xlim(c(2000,2018)) +
         scale_y_continuous(name = 'NIH Funding (in million dollars)') +
         scale_color_manual(values = sector.colors) +
-        geom_text(data = subset(funding.total.melted,Year == '2018'),
+        geom_text(data = subset(funding.total.melted,Year == '2006'),
               aes(y=value+ 400, label=variable, color=variable, x = Year ),hjust =1)  +
         guides(color = FALSE)
 
