@@ -37,17 +37,22 @@ nih.cat.cvd = read.table(file.path(DATADIR, 'categories-cvd.txt'), sep = '\t')[[
 ### Load data
 
 ```{r}
-all_files = list.files(file.path(DATADIR, 'cancer-cvd'))
+# all_files = list.files(file.path(DATADIR, 'cancer-cvd'))
+all_files = Sys.glob(file.path(DATADIR, 'cancer-cvd', '*', '*.csv'))
 all_queries <- all_files %>%
     lapply(function(f) {
         tryCatch({
-            data.table::fread(file.path(DATADIR, f), sep=',', nThread = 2)
+            data.table::fread(f, sep=',', nThread = 2)
         }, warning= function(e) {
-            message(sprintf("Warning at file %s: %s", f, e))
+            cat(sprintf("Warning at file %s", f))
+            message(e)
             # message(e)
+        }, error = function(e) {
+            cat(sprintf("Error at file %s", f))
+            message(e)
         })
     }) 
-good.files = sapply(all_queries, function(x) length(x) == 10) %>%
+good.files <- sapply(all_queries, function(x) length(x) == 10) %>%
     which()
 awards.cat <- do.call(rbind, all_queries[good.files])
 ```
@@ -62,18 +67,37 @@ awards.cat$Amount <- gsub(pattern = "\\D*(\\d+.*)$", replacement = '\\1', x = aw
 awards.cat <- set_names(awards.cat, c('Category', 'FY', 'FundingIC', 'ProjectNumber', 'SubProjectNumber', 'ProjectTitle', 'PIName', 'OrgName', 'StateCountry', 'Amount', 'Amount.str'))
 ```
 
+### Cleaning up invalid entries
+
+```{r}
+awards.cat <- awards.cat[which(awards.cat$ProjectNumber != ""),]
+```
+
+### Encoding categories
+
 ```{r}
 categories = awards.cat$Category %>% unique()
 awards.unique = reshape2::dcast(awards.cat[,-c('Amount.str')], FY + FundingIC + ProjectNumber + SubProjectNumber + ProjectTitle + PIName + Amount ~ Category, value.var = 'Category')
-for (x in categories) {
-    awards.unique[,x]  <- ifelse(is.na(awards.unique[[x]]), 0, 1)
-}
+# for (x in categories) {
+#     awards.unique[,x]  <- ifelse(is.na(awards.unique[[x]]), 0, 1)
+# }
 str(awards.unique)   
 ```
+
+Sanity check
 
 ```{r}
 isCancer = awards.unique[, intersect(nih.cat.cancer, names(awards.unique))] %>% apply(MARGIN = 1, FUN = sum)
 isCVD = awards.unique[, intersect(nih.cat.cvd, names(awards.unique))] %>% apply(MARGIN = 1, FUN = sum)
+sum(isCancer) + sum(isCVD) == nrow(awards.cat)
+```
+
+### Calculating total funding
+
+```{r}
+MIN_FUNDING = 500
+isCancer = awards.unique[awards.unique$Amount > MIN_FUNDING, intersect(nih.cat.cancer, names(awards.unique))] %>% apply(MARGIN = 1, FUN = sum)
+isCVD = awards.unique[awards.unique$Amount > MIN_FUNDING, intersect(nih.cat.cvd, names(awards.unique))] %>% apply(MARGIN = 1, FUN = sum)
 funding.cancer = awards.unique[isCancer>0,] %>% group_by(FY) %>% summarize(cancer = sum(Amount))
 funding.cvd = awards.unique[isCVD>0,] %>% group_by(FY) %>% summarize(cvd = sum(Amount))
 funding.total <- merge(x = funding.cancer, y = funding.cvd, by = 'FY') %>%
@@ -89,30 +113,10 @@ p <- ggplot(funding.total.melted) +
     geom_line(aes(x = Year, y = value, color = variable)) +
     geom_point(aes(x = Year, y = value, color = variable)) +
         xlim(c(2000,2018)) +
-        scale_y_continuous(name = 'NIH Funding (in million dollars)') +
+        scale_y_continuous(name = 'NIH Funding (dollars)') +
         scale_color_manual(values = sector.colors) +
-        geom_text(data = subset(funding.total.melted,Year == '2018'),
-              aes(y=value+ 400, label=variable, color=variable, x = Year ),hjust =1)  
-        # guides(color = FALSE)
+        geom_text(data = subset(funding.total.melted,Year == '2009'),
+              aes(y=value, label=variable, color=variable, x = Year-0.01 ),hjust =1, vjust = -1)  +
+        guides(color = FALSE)
 p
-```
-
-```{r}
-a = array(dimnames = list('fruit' = c('apple', 'dragon', 'kiwi', 'banana'),
-                          'color' = c('red', 'green', 'yellow'),
-                          'acidic' = c('yes', 'no')),
-          dim = c(4,3),
-          data = sample(x = 0:5, size = 4*3, replace = TRUE))
-
-a.melted = reshape2::melt(a)
-a.cast = reshape2::dcast(a.melted, fruit ~ color)
-a.cast = reshape2::dcast(a.melted, color ~ fruit)
-a.cast = reshape2::dcast(a.melted[,c('fruit', 'color')], color ~ fruit, fill = 0)
-
-a = data.frame('fruit' = c('apple', 'apple', 'dragon', 'kiwi', 'banana'),
-               'color' = c('red', 'green', 'pink', 'green', 'yellow'),
-               'category' = c('sweet', 'sour', 'bland', 'sour', 'sweet'))
-reshape2::dcast(a[, c('fruit', 'color')], fruit ~ color )
-reshape2::dcast(a, fruit + color ~ category) %>%
-    `$<-`(., 'sour', !is.na(.[['sour']]))
 ```
