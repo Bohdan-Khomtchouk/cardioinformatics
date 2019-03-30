@@ -73,7 +73,9 @@ awards.cat <- set_names(awards.cat, c('Category', 'FY', 'FundingIC', 'ProjectNum
 awards.cat <- awards.cat[which(awards.cat$ProjectNumber != ""),]
 ```
 
-### Encoding categories
+## Analysis
+
+### Cancer vs CVD funding
 
 ```{r}
 categories = awards.cat$Category %>% unique()
@@ -92,10 +94,10 @@ isCVD = awards.unique[, intersect(nih.cat.cvd, names(awards.unique))] %>% apply(
 sum(isCancer) + sum(isCVD) == nrow(awards.cat)
 ```
 
-### Calculating total funding
+Calculating total funding
 
 ```{r}
-MIN_FUNDING = 500
+MIN_FUNDING = 100
 isCancer = awards.unique[awards.unique$Amount > MIN_FUNDING, intersect(nih.cat.cancer, names(awards.unique))] %>% apply(MARGIN = 1, FUN = sum)
 isCVD = awards.unique[awards.unique$Amount > MIN_FUNDING, intersect(nih.cat.cvd, names(awards.unique))] %>% apply(MARGIN = 1, FUN = sum)
 funding.cancer = awards.unique[isCancer>0,] %>% group_by(FY) %>% summarize(cancer = sum(Amount))
@@ -103,6 +105,8 @@ funding.cvd = awards.unique[isCVD>0,] %>% group_by(FY) %>% summarize(cvd = sum(A
 funding.total <- merge(x = funding.cancer, y = funding.cvd, by = 'FY') %>%
     set_names(c('Year', 'cancer', 'cardiovascular diseases'))
 ```
+
+The trends of funding for CVD and cancer research by NIH is shown below, total funding are summed from awards $>\$100$
 
 ```{r}
 sector.colors = c('cardiovascular diseases' = '#f8766d', 'cancer' = '#c77cff')
@@ -115,8 +119,9 @@ p <- ggplot(funding.total.melted) +
         xlim(c(2000,2018)) +
         scale_y_continuous(name = 'NIH Funding (dollars)') +
         scale_color_manual(values = sector.colors) +
-        geom_text(data = subset(funding.total.melted,Year == '2009'),
-              aes(y=value, label=variable, color=variable, x = Year-0.01 ),hjust =1, vjust = -1)  +
+        geom_text(data = subset(funding.total.melted,Year == '2008'),
+              aes(y=value, label=variable, color=variable, x = Year-0.5 ),hjust =1, vjust = 1)  +
         guides(color = FALSE)
-p
+print(p)
+ggsave('1-funding.png', plot = p, device='png', width = 7, height = 4.5)
 ```
