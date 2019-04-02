@@ -1,5 +1,7 @@
 # cardioinformatics
 
+[![DOI](https://zenodo.org/badge/144916854.svg)](https://zenodo.org/badge/latestdoi/144916854)
+
 [Citation coming soon]
 
 ## Reproducing figures
