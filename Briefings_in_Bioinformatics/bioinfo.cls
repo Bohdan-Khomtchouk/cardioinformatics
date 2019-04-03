@@ -259,7 +259,7 @@
   {%
   \def\@oddfoot{{
         \hbox to \textwidth{\helvetica
-        \fontsize{7}{9}\fontshape{n}\selectfont \copyright\space The Author \@copyrightyear. Published by Oxford University Press. All rights reserved. For permissions, please e-mail: journals.permissions@oup.com%
+        \fontsize{7}{9}\fontshape{n}\selectfont \copyright\space Khomtchouk et al., 2019.%
           \hfill\small\helveticabold\thepage}%
         }}%
   \def\@evenfoot{{
