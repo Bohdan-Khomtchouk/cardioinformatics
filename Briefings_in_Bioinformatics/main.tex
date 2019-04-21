@@ -20,6 +20,11 @@
 \newcommand{\comment}[1]{\textcolor{red}{[#1]}}
 \newcommand{\todo}[1]{\colorbox{yellow}{\parbox{1\linewidth}{#1}}}
 
+\newcounter{example}[subsection]
+\newenvironment{example}[1][]{\refstepcounter{example}\par\medskip
+\noindent \textbf{Figure~\theexample. #1} \rmfamily}{\medskip}
+
+
 \begin{document}
 	\firstpage{1}
 	
@@ -219,24 +224,28 @@ If all the heritability has been accounted for, the squared correlation between 
 
 \section*{Figures}
 
-\begin{figure*}
-	\centering
-	%	\includegraphics[width=1\linewidth]{figure1}
-	\caption[The status of cardiovascular disease research]{The status of cardiovascular disease research. 
-		\textbf{(A)} Number of deaths by Non-Communicable Diseases in the US and \textbf{(B)} funding by the National Institutes of Health (NIH) for research on cancer and cardiovascular diseases \textsuperscript{a}. \textbf{(C)} PubMed queries reveal a large body of CVD research \textsuperscript{b}, out of which only a small percentage involve bioinformatics \textsuperscript{c}. \textbf{(D)} Relative to the total pool of bioinformatics papers (in any field), there are far more cancer papers that utilize bioinformatics methods than CVD papers that utilize such methods.\\
+\begin{example}
+	abc
+\end{example}
+	
+\begin{example}	[The status of cardiovascular disease research]
+	{ 
+		\textbf{(A)} Number of deaths by Non-Communicable Diseases in the US and \textbf{(B)} funding by the National Institutes of Health (NIH) for research on cancer and cardiovascular diseases \textsuperscript{a}. \textbf{(C)} PubMed queries reveal a large body of CVD research \textsuperscript{b}, out of which only a small percentage involve bioinformatics \textsuperscript{c}. \textbf{(D)} Relative to the total pool of bioinformatics papers (in any field), there are far more cancer papers that utilize bioinformatics methods than CVD papers that utilize such methods.\\ \newline
+			\footnotesize
 		* Since all the queries are based on the manual MeSH catalog, 2018 tallies will lag behind the true volume of publication. \\
 		\textsuperscript{a} Research funding is calculated by summing up all the amounts of NIH awards larger than \$100. "Cancer" funding is calculated from projects being categorized as \protect\textit{Brain Cancer, Breast Cancer, Cancer, Cancer Genomics, Cervical Cancer, Colo-Rectal Cancer, HPV and/or Cervical Cancer Vaccines, Liver Cancer, Lung Cancer, Lymphoma, Neuroblastoma, Ovarian Cancer, Pancreatic Cancer, Pediatric Cancer, Prostate Cancer, Uterine Cancer, Vaginal Cancer}; and "Cardiovascular diseases" funding from {\protect\textit{Aging, Cardiovascular, Cerebrovascular, Congenital Heart Disease, Heart Disease, Heart Disease - Coronary Heart Disease, Hypertension, Pediatric Cardiomyopathy, Stroke}}. Categorization was done by NIH starting in 2008, through the Research, Condition, and Disease Categorization (RCDC) system. Data was downloaded from the NIH Research Portfolio Online Reporting Tool \citep{NationalInstituteofHealth:2018:Estimates}.\\
 		\textsuperscript{b,c} Queries are all based on MeSH terms; "bioinformatics" publications are those categorized under the MeSH terms "bioinformatics" or "genomics", and CVD under "cardiovascular diseases". The MeSH Database entry for "cardiovascular disease" includes many types of cardiovascular abnormalities that may occur in organs outside the immediate circulatory system, highlighting the complex disease nature of CVD. Exact queries are available in the source code.
 	}
 	\label{fig:figure1}
-\end{figure*}
+\end{example}
 
-\begin{figure*}
-%		\includegraphics[width=1.\linewidth]{hpo-gene-count}
-	\caption{The number of genes associated with \emph{``Abnormality of the cardiovascular system"} (HP:0001626) as reported in the Human Phenotype Ontology \citep{Kohler:2014:Human},
-	with phenotype annotations pooled from OMIM \citep{McKusick:2018:OMIM} , Orphanet \citep{INSERM:1997:Orphanet}  and DECIPHER \citep{Firth:2009:DECIPHER}.}
+\paragraph{Figure}
 	\label{fig:hpo_gene_count}	
-\end{figure*}
+%		\includegraphics[width=1.\linewidth]{hpo-gene-count}
+	{The number of genes associated with \emph{``Abnormality of the cardiovascular system"} (HP:0001626) as reported in the Human Phenotype Ontology \citep{Kohler:2014:Human},
+	with phenotype annotations pooled from OMIM \citep{McKusick:2018:OMIM} , Orphanet \citep{INSERM:1997:Orphanet}  and DECIPHER \citep{Firth:2009:DECIPHER}.}
+
+
 	
 \begin{figure}
 %		\includegraphics[width=1\linewidth]{variant_contexts}
