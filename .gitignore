@@ -7,3 +7,4 @@ scripts/**/*.pdf
 scripts/**/*.html
 figures/*.ai
 **/~*
+data/*
