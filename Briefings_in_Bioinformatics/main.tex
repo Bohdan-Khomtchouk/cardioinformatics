@@ -224,9 +224,6 @@ If all the heritability has been accounted for, the squared correlation between 
 
 \section*{Figures}
 
-\begin{example}
-	abc
-\end{example}
 	
 \begin{example}	[The status of cardiovascular disease research]
 	{ 
@@ -239,34 +236,37 @@ If all the heritability has been accounted for, the squared correlation between 
 	\label{fig:figure1}
 \end{example}
 
-\paragraph{Figure}
-	\label{fig:hpo_gene_count}	
+
+\begin{example}[The number of genes associated with CVD.]
 %		\includegraphics[width=1.\linewidth]{hpo-gene-count}
-	{The number of genes associated with \emph{``Abnormality of the cardiovascular system"} (HP:0001626) as reported in the Human Phenotype Ontology \citep{Kohler:2014:Human},
-	with phenotype annotations pooled from OMIM \citep{McKusick:2018:OMIM} , Orphanet \citep{INSERM:1997:Orphanet}  and DECIPHER \citep{Firth:2009:DECIPHER}.}
-
+	{CVD is defined to include all phenotypes under the term \emph{``Abnormality of the cardiovascular system"} (HP:0001626) in the Human Phenotype Ontology \citep{Kohler:2014:Human}. Annotations of each phenotype was pooled from OMIM \citep{McKusick:2018:OMIM} , Orphanet \citep{INSERM:1997:Orphanet}  and DECIPHER \citep{Firth:2009:DECIPHER}.}
+	\label{fig:hpo_gene_count}
+\end{example}
 
 	
-\begin{figure}
+\begin{example}
 %		\includegraphics[width=1\linewidth]{variant_contexts}
-	\caption{Distribution of SNPs that have been associated with a phenotypic trait in the human genome. The associations are downloaded from NHGRI-EBI GWAS Catalog in which only those with p-value less than $10^{-5}$ were retained.}
-	\label{fig:variant_context}
-\end{figure}
+	[Distribution of SNPs that have been associated with a phenotypic trait.] {The associations are downloaded from NHGRI-EBI GWAS Catalog in which only those with p-value less than $10^{-5}$ were retained.}
+		\label{fig:variant_context}
+\end{example}
 	
-\begin{figure*}
+\begin{example}[Molecular assays on Gene Expression Omnibus.]
 %		\includegraphics[width=1\linewidth]{assay-count-cardio}
-	\caption[]{(\textbf{A}) The cumulative number of molecular assays (i.e. unique combinations of biosample, study and platform) deposited in GEO by cardiovascular research. (\textbf{B}) Breakdown of high-throughput sequencing assays by the type of study. Expression profiling by high-throughput sequencing, i.e. mRNA-seq assays, are often coupled with another profiling technique, for example, to provide functional read-out of transcription factor binding profiled by ChIP-seq.
-		\label{fig:geo-assay}\\
+		{(\textbf{A}) The cumulative number of molecular assays (i.e. unique combinations of biosample, study and platform) deposited in GEO by cardiovascular research. (\textbf{B}) Breakdown of high-throughput sequencing assays by the type of study. Expression profiling by high-throughput sequencing, i.e. mRNA-seq assays, are often coupled with another profiling technique, for example, to provide functional read-out of transcription factor binding profiled by ChIP-seq.
+\\ \newline
 		Note that to avoid excessive over-counting of irrelevant samples such as those from plants or unrelated model organisms, we only counted samples deposited with a PubMed ID pointing to a cardiovascular study. Surveys were done on the GEOmetadb database \citep{Zhu:2008:GEOmetadb} updated on 2018/11/17.}
-\end{figure*} 
+		\label{fig:geo-assay}
+\end{example}
+
 	
-\begin{figure*}
+\begin{example}
+	[Multi-omics data]
 %	\includegraphics[widt⁄h=0.9\linewidth]{trans-omics-data-sets.png}
-	\caption{ (\textbf{A}) The multiple layers of omics data that are now accessible to researchers. Genome/exome, transcriptome, proteome, metabolome, as well as the microbiome and chemical compounds in the exposome can be profiled by assays on a single class of molecules (DNA, RNA, proteins or small molecules), while the other layers depend on the ability to capture DNA-protein or RNA-protein interactions. The phenome is less well-defined as phenotypic measures vary greatly from physical measurements to lab tests, from descriptive to quantitative traits. Sources of comprehensive phenotypic data comparable to the other omics can be obtained, for example, from electronic health records.
+	{(\textbf{A}) The multiple layers of omics data that are now accessible to researchers. Genome/exome, transcriptome, proteome, metabolome, as well as the microbiome and chemical compounds in the exposome can be profiled by assays on a single class of molecules (DNA, RNA, proteins or small molecules), while the other layers depend on the ability to capture DNA-protein or RNA-protein interactions. The phenome is less well-defined as phenotypic measures vary greatly from physical measurements to lab tests, from descriptive to quantitative traits. Sources of comprehensive phenotypic data comparable to the other omics can be obtained, for example, from electronic health records.
 	Beyond the genome, omics datasets become highly complicated, due to the variation across tissues and cell types.
 	(\textbf{B}) Large omics datasets that are (or will be) available for CVD research. For each dataset, the number of samples being assayed across multiple omics are indicated on the right. This number is often smaller than the total number of samples/participants in a given project, because not every sample is run on multiple assays.}
 	\label{fig:trans-omics}
-\end{figure*} 
+\end{example} 
 	
 	
 \end{document}
