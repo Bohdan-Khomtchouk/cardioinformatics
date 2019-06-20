@@ -1,12 +1,13 @@
-\documentclass[letter]{bioinfo}
-\copyrightyear{2018} \pubyear{2018}
+\documentclass[letter]{bib}
+\copyrightyear{2019} \pubyear{2019}
 \usepackage{soul} %highlight stuff
 
 %bibliography magic
 \usepackage[numbers,sort&compress]{natbib}
-% \usepackage{cite}
 \setlength{\bibsep}{\baselineskip} %dbl space between citations
 
+%\usepackage{inputenc}
+%\inputencoding{utf8}
 \usepackage{hyperref}
 \access{Advance Access Publication Date: (under review)}
 \appnotes{Review article}
@@ -15,6 +16,12 @@
 \newcommand{\comment}[1]{\textcolor{red}{[#1]}}
 \newcommand{\todo}[1]{\colorbox{yellow}{\parbox{1\linewidth}{#1}}}
 
+\newcounter{example}[subsection]
+\newenvironment{example}[1][]{\refstepcounter{example}\par\medskip
+\noindent \textbf{Figure~\theexample. #1} \rmfamily}{\medskip}
+\newcounter{extable}[subsection]
+\newenvironment{extable}[1][]{\refstepcounter{extable}\par\medskip
+	\noindent \textbf{Table~\theextable. #1} \rmfamily}{\medskip}
 
 \begin{document}
 	\firstpage{1}
@@ -53,17 +60,6 @@ heart disease is still the dominant cause of death globally for both genders \ci
 
 The share of bioinformatics research has remained modest among these CVD outputs at least relative to comparable work done in cancer biology (Figure~\ref{fig:figure1}D). While bioinformatics is at the center of precision medicine \citep{Gomez-Lopez:2017:Precision} and cardiovascular research is involved in several existing precision medicine initiatives \citep{Houser:2016:American,czbiohub:2018:Chan}, the field of cardioinformatics is still in its early days with ample opportunities to benefit from cutting-edge data science techniques and machine learning (ML) methodologies, as has been the case in precision oncology. Even now, the application of ML is already being recognized as an indispensable component of the practice of cardiology in the future \citep{Shameer:2017:Translational,Shameer:2018:Machine} and, therefore, given the availability of increasingly performant ML implementations \citep{MLPerf:2018:MLPerf}, cardioinformatics is better positioned to tackle domain-specific research questions by developing clinical applications to enhance compute-intensive tasks such as those found in medical imaging, CVD risk prediction modeling, among other active research areas. In general, efficient implementations of advanced computational algorithms that optimize for time, cost, and accuracy measures across broad domains of biological data science, such as single-cell sequencing \citep{Becht:2018:Evaluation} (e.g., to investigate cellular heterogeneity in transcription \citep{Wirka:2018:Advancesa}) or long-read mapping \citep{Li:2018:Minimap2} (e.g., to reconstruct full-length isoform transcripts in high resolution \citep{Wirka:2018:Advancesa}), will find increasingly more adoption in CVD research throughout the next few years as journals begin gearing up for the release of special issues dedicated exclusively to performance benchmarking of new and existing software tools.  In addition, the availability of open-access benchmarking data and guidelines to evaluate ML methods across a broad range of application areas including biomedical studies, signal processing and image classification, will catalyze the precipitation of the most appropriate bioinformatics software tools for any given research task \citep{Olson:2017:PMLB,Weber:2018:Essential}.  Taken together, programmatic need for bioinformatics benchmarking and awareness of state-of-the-art tools for performing CVD research will bridge across multiple areas of expertise (e.g., single-cell sequencing technologies, long-read mapping, 3D genome visualization, etc.), making cardioinformatics research a truly multi-disciplinary initiative for dissecting the molecular mechanisms behind complex CVD traits.   
 
-\begin{figure*}[!tpb]
-	\centering
-	\includegraphics[width=1\linewidth]{figure1}
-	\caption[The status of cardiovascular disease research]{The status of cardiovascular disease research. 
-	\textbf{(A)} Number of deaths by Non-Communicable Diseases in the US and \textbf{(B)} funding by the National Institutes of Health (NIH) for research on cancer and cardiovascular diseases \textsuperscript{a}. \textbf{(C)} PubMed queries reveal a large body of CVD research \textsuperscript{b}, out of which only a small percentage involve bioinformatics \textsuperscript{c}. \textbf{(D)} Relative to the total pool of bioinformatics papers (in any field), there are far more cancer papers that utilize bioinformatics methods than CVD papers that utilize such methods.\\
-	* Since all the queries are based on the manual MeSH catalog, 2018 tallies will lag behind the true volume of publication. \\
-	\textsuperscript{a} Research funding is calculated by summing up all the amounts of NIH awards larger than \$100. "Cancer" funding is calculated from projects being categorized as \protect\textit{Brain Cancer, Breast Cancer, Cancer, Cancer Genomics, Cervical Cancer, Colo-Rectal Cancer, HPV and/or Cervical Cancer Vaccines, Liver Cancer, Lung Cancer, Lymphoma, Neuroblastoma, Ovarian Cancer, Pancreatic Cancer, Pediatric Cancer, Prostate Cancer, Uterine Cancer, Vaginal Cancer}; and "Cardiovascular diseases" funding from {\protect\textit{Aging, Cardiovascular, Cerebrovascular, Congenital Heart Disease, Heart Disease, Heart Disease - Coronary Heart Disease, Hypertension, Pediatric Cardiomyopathy, Stroke}}. Categorization was done by NIH starting in 2008, through the Research, Condition, and Disease Categorization (RCDC) system. Data was downloaded from the NIH Research Portfolio Online Reporting Tool \citep{NationalInstituteofHealth:2018:Estimates}.\\
-	\textsuperscript{b,c} Queries are all based on MeSH terms; "bioinformatics" publications are those categorized under the MeSH terms "bioinformatics" or "genomics", and CVD under "cardiovascular diseases". The MeSH Database entry for "cardiovascular disease" includes many types of cardiovascular abnormalities that may occur in organs outside the immediate circulatory system, highlighting the complex disease nature of CVD. Exact queries are available in the source code.
-	}
-	\label{fig:figure1}
-\end{figure*}
 
 
 
@@ -80,13 +76,7 @@ More recently, the Knowledge Portal Framework, an infrastructure sponsored by th
 	In addition to these various portals anchored on the results of population genetic association studies, CVD knowledge bases such as HeartBioPortal \citep{Khomtchouk:2019:HeartBioPortal} have begun organizing and integrating the large volume of publicly available gene expression data with genetic association content, motivated by the stimulus that transcriptomic data provide powerful insights into the effects of genetic variation on gene expression and alternative splicing in both health and disease.  Other knowledge portals such as COPaKB \citep{Zong:2013:Integration} and large-scale initiatives such as HeartBD2K \citep{HeartBD2K} have taken a parallel focus on CVD proteomics datasets \citep{Lau:2016:large}.  Such integrative multilevel efforts to dissect the molecular mechanisms behind complex disease traits now also extend beyond academia into biotech startup companies, non-profits, and other initiatives such as SVAI, Quiltomics, Omicsoft, Sage Bionetworks, Omics Data Automation, Occamzrazor, NextBio, BenevolentAI, Insitro, Researchably, and others -- several of which have recently been effectively integrated into the workflow of larger biotech companies such as Illumina and Qiagen.  Parallel to these academic and industry initiatives, several government-led genomic sequencing programs to collect a nation's data have appeared over the years, setting the stage for centralized databases serving disease prevention, health management and discovery. Among those programs are the recently completed \textit{100K Genomes Project} in the UK \citep{Caulfield:2017:100K}, the ongoing \textit{100K Wellness Pioneer Project} in China \citep{Kalia:2017:China}, NIH's \textit{All of Us Research Program} \citep{NIH:2018:All} and the Department of Veterans Affairs Million Veteran Program \citep{Gaziano:2016:Million} in the US, many of which contain vast quantities of population-wide race/ethnic group-specific cardiovascular disease data.  
 
 
-	\begin{figure*}[!tpb]
-		\includegraphics[width=1.\linewidth]{hpo-gene-count}
-		\caption{The number of genes associated with \emph{``Abnormality of the cardiovascular system"} (HP:0001626) as reported in the Human Phenotype Ontology \citep{Kohler:2014:Human},
-			 with phenotype annotations pooled from OMIM \citep{McKusick:2018:OMIM} , Orphanet \citep{INSERM:1997:Orphanet}  and DECIPHER \citep{Firth:2009:DECIPHER}.}
-		\label{fig:hpo_gene_count}	
-	\end{figure*}
-	
+
 	
 	\section*{Complexity of CVDs}  % the problems
 	\subsection*{The number of genetic actors}
@@ -108,13 +98,9 @@ If all the heritability has been accounted for, the squared correlation between 
 \subsubsection*{From SNPs to structural variations}
 
 	
-	Genome-wide association studies have been predominantly conducted on single-nucleotide polymorphisms (SNPs) thanks to the availability of easy-to-produce SNP microarrays. Such technologies have clearly enriched our knowledge base of the effect of single nucleotide variants, while leaving the effect of structural variations poorly understood. There are now 660 million SNPs documented in the dbSNP database \citep{NCBI:2018:dbSNP}, compared to 4.6 million structural variations in the DGVa (Database of Genomic Variants archive \citep{EMBL-EBI:2018:Database}, which also includes studies annotated by the NCBI-hosted database of structural variants, dbVar \citep{NCBI:2018:dbVar}).  Structural variation (SV) databases such as dbVar and DGVa are in fact storing each study-publication individually instead of cataloging structural variations into data entries. Although the current knowledge base of structural variations is not sufficient to create reference entries of SV, the map of SV from 1000 Genomes Project \citep{Sudmant:2015:integrated} has enabled further studies of the role of SV in cardiac diseases, suggesting the potential impact of SV on the transcriptional regulation of cardiac genes expressed in the heart \citep{Haas:2018:Genomic}. As envisioned, structural variations might be one of the promising areas to look for the missing heritability in CVD \citep{Eichler:2010:Missing}.  In fact, the relative lack of SV investigation in CVD has been recognized as one of the key issues that confound the attribution of causality in linking genetic variants to CVD phenotypes \cite{Macrae:2017:Closing}.  To this end, ongoing projects like TOPMed contain a Structural Variant Working Group to call copy-number variants (CNVs) within TOPMed, and they have begun incorporating large-scale multi-ancestry studies spanning diverse types of sequencing data from both European and non-European race/ethnic groups.  Most recently, the gnomAD browser \citep{Lek:2016:Analysis} added 500,000 structural variants from 15,000 genomes, with full VCF and BED files available for download \citep{Collins:2019:Open}.  
-	\begin{figure}[!tpb]
-		\includegraphics[width=1\linewidth]{variant_contexts}
-		\caption{Distribution of SNPs that have been associated with a phenotypic trait in the human genome. The associations are downloaded from NHGRI-EBI GWAS Catalog in which only those with p-value less than $10^{-5}$ were retained.}
-		\label{fig:variant_context}
-	\end{figure}
+	Genome-wide association studies have been predominantly conducted on single-nucleotide polymorphisms (SNPs) thanks to the availability of easy-to-produce SNP microarrays. Such technologies have clearly enriched our knowledge base of the effect of single nucleotide variants, while leaving the effect of structural variations poorly understood. There are now 660 million SNPs documented in the dbSNP database \citep{NCBI:2018:dbSNP}, compared to 4.6 million structural variations in the DGVa (Database of Genomic Variants archive \citep{EMBL-EBI:2018:Database}, which also includes studies annotated by the NCBI-hosted database of structural variants, dbVar \citep{NCBI:2018:dbVar}).  Structural variation (SV) databases such as dbVar and DGVa are in fact storing each study-publication individually instead of cataloging structural variations into data entries. Although the current knowledge base of structural variations is not sufficient to create reference entries of SV, the map of SV from 1000 Genomes Project \citep{Sudmant:2015:integrated} has enabled further studies of the role of SV in cardiac diseases, suggesting the potential impact of SV on the transcriptional regulation of cardiac genes expressed in the heart \citep{Haas:2018:Genomic}. As envisioned, structural variations might be one of the promising areas to look for the missing heritability in CVD \citep{Eichler:2010:Missing}.  In fact, the relative lack of SV investigation in CVD has been recognized as one of the key issues that confound the attribution of causality in linking genetic variants to CVD phenotypes \citep{Macrae:2017:Closing}.  To this end, ongoing projects like TOPMed contain a Structural Variant Working Group to call copy-number variants (CNVs) within TOPMed, and they have begun incorporating large-scale multi-ancestry studies spanning diverse types of sequencing data from both European and non-European race/ethnic groups.  Most recently, the gnomAD browser \citep{Lek:2016:Analysis} added 500,000 structural variants from 15,000 genomes, with full VCF and BED files available for download \citep{Collins:2019:Open}.  
 	
+
 
 \subsubsection*{From coding to noncoding regions}	
 	As array-based genotyping was gradually replaced by next-generation sequencing, the cost of sequencing an exome, i.e. the protein-coding part of a genome, became much more affordable and enabled the collection of more than 60,000 exomes \citep{Lek:2016:Analysis}. Using this dataset, \cite{Walsh:2017:Reassessment} found that many "pathogenic" genetic variants associated with various cardiomyopathies are equally common in clinical cases as in the control population. Genes that were consistently included on genetic testing panels for DCM such as MYBPC3, MYH6, SCN5A, etc. turned out to be less penetrant than previously thought, in consideration of their frequency in the control population. The rationale for prioritizing the sequencing of exome over that of the entire genome, besides the lower cost, was a regularly cited statement that the exome harbors 85\% of disease-causing variants \citep{Antonarakis:2001:nature} which turned out to be an outdated estimate from 1995. In our own survey of the NHGRI-EBI GWAS Catalog \citep{MacArthur:2017:new}, a large fraction of variants tend to occur in non-protein coding regions such as intronic, intergenic, and splice junctions (Figure \ref{fig:variant_context}). The distribution of CVD-associated variants is similar to that of variants associated with all traits. Previous studies also asserted the prevalence of regulatory regions among variants associated with cardiometabolic risk \citep{Franzen:2016:Cardiometabolic}, as well as many other complex traits \citep{Pickrell:2014:Joint}. As an unprecedented amount of whole-genome sequencing data become available from large-scale genomic projects such as \textit{The 1000 Genomes Project} \citep{1000G:2015:global}, \textit{UK10K} \citep{TheUK10KConsortium:2015:UK10K}, \textit{The 100,000 Genomes Project} \citep{Caulfield:2017:100K}, The \textit{100K Wellness Pioneer Project} in China \citep{Kalia:2017:China}, \textit{All of Us Research Program} \citep{NIH:2018:All}, TOPMed \citep{NHLBI:2014:TransOmics}, and CCDG \citep{NHGRI:2016:CCDG}, we are poised to learn more about this dark matter in the human genome and how it works in complex diseases.
@@ -152,59 +138,18 @@ If all the heritability has been accounted for, the squared correlation between 
 	In addition to the central repositories for established and popular experimental methods, smaller databases with narrower focus are also budding. For instance, chromatin structure data from 3C, 4C, 5C and Hi-C experiments have been collected in dedicated databases such as 3CDB \citep{Yun:2016:3CDB} and 4DGenome \citep{Teng:2015:4DGenome}. Also, noncoding RNAs are being added into databases such as lncRNAdb \citep{Quek:2015:lncRNAdb}, NONCODE \citep{Fang:2018:NONCODEV5}, and LNCipedia \citep{Volders:2018:LNCipedia}.
 	
 	
-			\begin{table}[]
-	\processtable{The subject count aggregated from studies deposited in dbGaP, consented for General Research Use (GRU)
-		\label{tab:dbgapSubject}}
-{\begin{tabular}{l l l}
-			\toprule
-			& \textbf{CVD} &  \textbf{All}                         \\ \midrule
-			16s rRNA (NGS)                 &     0 &      92 \\
-			CNV Genotypes                  &     0 &   48972 \\
-			Chromatin (NGS)                &     0 &     139 \\
-			Genomic Sequence Amplicon (NGS)&     0 &       8 \\
-			Methylation (CpG)              &     0 &     657 \\
-			Methylome sequencing           &     0 &     152 \\
-			QTL Results                    &     0 &     281 \\
-			RNA Seq (NGS)                  &   333 &    1498 \\
-			SNP Genotypes (Array)          &  6658 &  113597 \\
-			SNP Genotypes (NGS)            &  4277 &   11786 \\
-			SNP Genotypes (PCR)            &     0 &      10 \\
-			SNP Genotypes (imputed)        &     0 &   29693 \\
-			SNP/CNV Genotypes (NGS)        &     0 &     936 \\
-			SNP/CNV Genotypes (imputed)    &     0 &    9291 \\
-			SNV (.MAF)                     &     0 &       2 \\
-			SNV Aggregate (.MAF)           &     0 &     570 \\
-			Targeted Genome (NGS)          &     0 &    9918 \\
-			Whole Exome (NGS)              &  5518 &   12771 \\
-			Whole Genome (NGS)             &     0 &    1245 \\
-			mRNA Expression (Array)        &     0 &     798 \\
-			miRNA (NGS)                        & 0 &   228 \\ \hline
-			Total subject count in data consented for GRU & 16786 & 242644 \\ \hline
-			All consent groups & 584884 & Unknown \\	\hline
-		\end{tabular}}{NGS: Next-generation sequencing\\ QTL: Quantitative Trait Loci}
-	\end{table}
+
 	
 	Such abundance and diversity of data promises valuable insights once the data is aggregated across studies within a given omics domain (e.g., RNA-seq), or across multiple omics domains (e.g., RNA-seq, ChIP-seq, ATAC-seq, etc.). Efforts to aggregate genomic data (both individual and summary-level statistics) have resulted in valuable collections such as The Cancer Genome Atlas \citep{TCGA:2013:Cancer} for genomics and functional genomics data in cancer, or ExAC and gnomAD for exome and genome sequencing data \citep{Lek:2016:Analysis}. For instance, aggregated exomes/genomes such as ExAC/gnomAD have been a valuable resource for estimating the allele frequencies of the general population as well as within various race/ethnic groups. With the upcoming wave of trans-omics data spanning diverse populations and sequencing types (Figure \ref{fig:trans-omics}B), data harmonization will become a more pressing problem for cardioinformatics. Some early solutions have started to be proposed, e.g., Biochat for GEO metadata \citep{Khomtchouk:2018:Biochat} or OmicsDI for diverse datasets spanning genomics, transcriptomics, proteomics and metabolomics \citep{Perez-Riverol:2017:Discovering}.
 	
-	\begin{figure*}[!tpb]
-		\includegraphics[width=1\linewidth]{assay-count-cardio}
-		\caption[]{(\textbf{A}) The cumulative number of molecular assays (i.e. unique combinations of biosample, study and platform) deposited in GEO by cardiovascular research. (\textbf{B}) Breakdown of high-throughput sequencing assays by the type of study. Expression profiling by high-throughput sequencing, i.e. mRNA-seq assays, are often coupled with another profiling technique, for example, to provide functional read-out of transcription factor binding profiled by ChIP-seq. \label{fig:geo-assay}\\ Note that to avoid excessive over-counting of irrelevant samples such as those from plants or unrelated model organisms, we only counted samples deposited with a PubMed ID pointing to a cardiovascular study. Surveys were done on the GEOmetadb database \citep{Zhu:2008:GEOmetadb} updated on 2018/11/17.}
-	\end{figure*} 
-	
+
 	While the issues above are generic for all types of research aiming to re-use public data, we believe CVD research benefits even more by expanding beyond traditional methods. Most use of high-throughput data in CVD research has been largely limited to the very first layer of omics data (Figure \ref{fig:trans-omics}A), i.e. genome/exome. Whole-exome and whole-genome sequencing data have been slowly incorporated into conventional GWAS, bringing more ascertainment to earlier findings \citep{Cohen:2006:Sequence,Dewey:2016:Inactivating,CARDIoGRAM:2016:Coding,NHLBI:2014:LossofFunction}. When deeper phenotype data such as blood lipid tests and diagnosis (ICD) codes became available, phenome-wide association studies (PheWAS) emerged \citep{Denny:2013:Systematic}, triggering a new line of biomedical research that coupled electronic health records (EHRs) with omics data, enabling powerful analyses, as discussed by  \cite{Denaxas:2015:Big, Wu:2017:Omic} and exemplified by \cite{Dewey:2016:Distribution,Li:2018:Decoding}.  In general, deeper phenotyping enables better clinical phenomapping, i.e., the stratification of different CVDs into etiologically distinct subtypes such that it becomes possible to define disease throughout its temporal trajectory, thereby allowing the measurement of fundamental underlying traits such as subclinical vascular abnormalities before they evolve into the classical syndrome (i.e., the full-blown clinical indication/manifestation of disease) \citep{Cranley:2018:New}.  Such phenotype parsing approaches may address some of the significant unexplained heritability for various CVDs.    
 
 
-    	\begin{figure*}[!tpb]
-	\includegraphics[width=0.9\linewidth]{trans-omics-data-sets.png}
-		\caption{ (\textbf{A}) The multiple layers of omics data that are now accessible to researchers. Genome/exome, transcriptome, proteome, metabolome, as well as the microbiome and chemical compounds in the exposome can be profiled by assays on a single class of molecules (DNA, RNA, proteins or small molecules), while the other layers depend on the ability to capture DNA-protein or RNA-protein interactions. The phenome is less well-defined as phenotypic measures vary greatly from physical measurements to lab tests, from descriptive to quantitative traits. Sources of comprehensive phenotypic data comparable to the other omics can be obtained, for example, from electronic health records.
-		Beyond the genome, omics datasets become highly complicated, due to the variation across tissues and cell types.
-		(\textbf{B}) Large omics datasets that are (or will be) available for CVD research. For each dataset, the number of samples being assayed across multiple omics are indicated on the right. This number is often smaller than the total number of samples/participants in a given project, because not every sample is run on multiple assays.}
-		\label{fig:trans-omics}
-	\end{figure*} 
-	
+
 	
 	Besides existing data, new recent research programs have started to put more focus on high-throughput assays that result in a comprehensive cross-section of biological molecules (DNA, RNA and protein) and their interactions. For instance, the Multi-Ethnic Study of Atherosclerosis (MESA) medical research study \citep{Bild:2002:MultiEthnic} within TOPMed includes WGS, RNA-seq, metabolomics, proteomics, and methylomics data across a variety of multi-ethnic communities (white, Hispanic, African-American, and Asian).  Specifically, MESA investigates the characteristics of subclinical cardiovascular disease (disease detected non-invasively before it has produced clinical signs and symptoms) and the risk factors that predict progression to clinically overt cardiovascular disease or progression of the subclinical disease.  Some traditional CVD risk factors include hyperlipidemia, hypertension, diabetes mellitus, metabolic syndrome, and chronic kidney disease \citep{Leopold:2018:Emerging}.  Likewise, TOPMed is generating a second modest size multi-omic resource involving RNA-seq, metabolomics, and methylomics in a subset of participants of the Women's Health Initiative (WHI) study \citep{NHLBI:1991:Women} who have undergone whole genome sequencing already.  
-	 Figure \ref{fig:trans-omics} highlights the large datasets that are (or will be) available for cardiovascular research. It is clear that assays for DNA sequences, including whole-genome sequencing and whole-exome sequencing, are still dominant among these studies. However, a modest number of multi-omics experiments are planned to be assayed for transcriptome, methylome, and metabolome, as in the MESA and WHI studies. The availability of these datasets, especially at the individual-level, is critical to correlate the variations across multiple omics and bridge the gap from genotype to phenotype.  In general, the analysis of these trans-omics datasets is a fascinating problem -- although the computational approaches envisioned from the early days of gene expression profiling, i.e. differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways \citep{Claverie:1999:Computational} can still bring fruitful analysis \citep{Santolini:2018:personalized}, cardioinformatics is clearly steering towards the integration of multiple omics layers (Figure \ref{fig:trans-omics}). Although the potential of data integration had been recognized as early as a decade ago (\cite{Hawkins:2010:Nextgeneration}), leading to the development of many data integration strategies \citep{Ritchie:2015:Methods} such as gene expression and summary-level associations of SNPs and phenotypes from GWAS studies, only recently have these successful data integration strategies begun to emerge in CVD research \citep{Gusev:2016:Integrative}. Such approaches, usually referred to as transcriptome-wide association studies (TWAS), are now adopted more widely \citep{Klarin:2018:Genetics}.  In addition, systems-level approaches that leverage network analysis methods suggest that covariation between molecules (modeled as the reorganization of network nodes and edges) can be more instructive than the differential expression of individual markers, e.g., for conceptualizing molecular changes that occur in the emergence of high glucose levels in the prediabetic state \cite{Trachana:2018:Taking,Lau:2018:Omics}.  Since diabetes is a major risk factor for atherosclerosis, which is the most common disease in the CVD sphere, re-casting such physiological phenomena in a new light as tipping points and bifurcations of a network with multiple alternative stable states addresses a blind spot of the disease-oriented paradigm of clinical research and practice, which by definition precludes detailed knowledge about early presentations in subclinical populations \cite{Lau:2018:Omics}.  One well-known success story of early detection of a subclinical prediabetic state was the result of a longitudinal multiomics study that monitored the transcriptome, proteome, and metabolome of a single individual over 14 months, ultimately helping the individual avoid the clinical indication (diabetes) by early adjustment in diet \citep{Chen:2012:Personal}.  Other successful examples of multiomics studies conducted on longitudinal personal omics profiles in single individuals to provide constant monitoring and preventative intervention include the MyConnectome study \citep{Poldrack:2015:Long-term}, P100 Wellness study \citep{Price:2017:Wellness}, and the Personalized Nutrition study \citep{Zeevi:2015:Personalized}, which were covered in a recent editorial \cite{Lau:2018:Omics} in the context of CVD-related traits such as blood pressure, QT interval, postprandial glycemic response, etc.  In general, computationally integrating diverse stores of data such as physiological and environmental information with other omics layers such as genomes, metabolomes, and microbiomes can help identify subclinical imbalances or elevated disease risk in otherwise healthy individuals \cite{Lau:2018:Omics}, heralding in an era of preventative healthcare/medicine.  Historically, although the first draft of the human genome project had brought a lot of hope and excitement about potential advancements in the diagnosis and treatment of cardiac diseases -- such as the ability to identify disease genes within the associated loci, to improve risk estimation based on more precise genotypes, or to personalize the prediction of drug effects on a patient \citep{Komajda:2001:heart} -- it seems that a collection of the first population-scale "drafts" of the whole "multi-ome" will ultimately be required for gaining a deeper understanding of the phenotypic manifestations of CVD across different race/ethnic groups.  A recent cardiac hypertrophy study in mice \citep{Lau:2018:integrated} highlighted the utility of conducting multi-omics investigations for discovering additional disease gene candidates not apparent from studying each omics data type separately in the context of CVD pathogenesis.  In humans, large-scale studies such as the MyHeartCounts \citep{McConnell:2017:Feasibility} and global physical activity study of nearly 800,000 individuals across 111 countries \citep{Althoff:2017:Large} demonstrated the feasibility of consenting and engaging large populations using smartphone technology, suggesting the potential to create a similar population-wide intercontinental network for multi-omics participation in the near future.  All in all, the ability to combine data from every omics layer depicted in Figure \ref{fig:trans-omics}, either at the summary-level or the individual-level, opens up ample opportunities for cardioinformatics to expand and augment the understanding of cardiovascular disease etiology.
+	 Figure \ref{fig:trans-omics} highlights the large datasets that are (or will be) available for cardiovascular research. It is clear that assays for DNA sequences, including whole-genome sequencing and whole-exome sequencing, are still dominant among these studies. However, a modest number of multi-omics experiments are planned to be assayed for transcriptome, methylome, and metabolome, as in the MESA and WHI studies. The availability of these datasets, especially at the individual-level, is critical to correlate the variations across multiple omics and bridge the gap from genotype to phenotype.  In general, the analysis of these trans-omics datasets is a fascinating problem -- although the computational approaches envisioned from the early days of gene expression profiling, i.e. differential gene expression analysis, co-expression analysis and gene clustering with subsequent identification of enriched biological pathways \citep{Claverie:1999:Computational} can still bring fruitful analysis \citep{Santolini:2018:personalized}, cardioinformatics is clearly steering towards the integration of multiple omics layers (Figure \ref{fig:trans-omics}). Although the potential of data integration had been recognized as early as a decade ago (\citep{Hawkins:2010:Nextgeneration}), leading to the development of many data integration strategies \citep{Ritchie:2015:Methods} such as gene expression and summary-level associations of SNPs and phenotypes from GWAS studies, only recently have these successful data integration strategies begun to emerge in CVD research \citep{Gusev:2016:Integrative}. Such approaches, usually referred to as transcriptome-wide association studies (TWAS), are now adopted more widely \citep{Klarin:2018:Genetics}.  In addition, systems-level approaches that leverage network analysis methods suggest that covariation between molecules (modeled as the reorganization of network nodes and edges) can be more instructive than the differential expression of individual markers, e.g., for conceptualizing molecular changes that occur in the emergence of high glucose levels in the prediabetic state \citep{Trachana:2018:Taking,Lau:2018:Omics}.  Since diabetes is a major risk factor for atherosclerosis, which is the most common disease in the CVD sphere, re-casting such physiological phenomena in a new light as tipping points and bifurcations of a network with multiple alternative stable states addresses a blind spot of the disease-oriented paradigm of clinical research and practice, which by definition precludes detailed knowledge about early presentations in subclinical populations \citep{Lau:2018:Omics}.  One well-known success story of early detection of a subclinical prediabetic state was the result of a longitudinal multiomics study that monitored the transcriptome, proteome, and metabolome of a single individual over 14 months, ultimately helping the individual avoid the clinical indication (diabetes) by early adjustment in diet \citep{Chen:2012:Personal}.  Other successful examples of multiomics studies conducted on longitudinal personal omics profiles in single individuals to provide constant monitoring and preventative intervention include the MyConnectome study \citep{Poldrack:2015:Long-term}, P100 Wellness study \citep{Price:2017:Wellness}, and the Personalized Nutrition study \citep{Zeevi:2015:Personalized}, which were covered in a recent editorial \citep{Lau:2018:Omics} in the context of CVD-related traits such as blood pressure, QT interval, postprandial glycemic response, etc.  In general, computationally integrating diverse stores of data such as physiological and environmental information with other omics layers such as genomes, metabolomes, and microbiomes can help identify subclinical imbalances or elevated disease risk in otherwise healthy individuals \citep{Lau:2018:Omics}, heralding in an era of preventative healthcare/medicine.  Historically, although the first draft of the human genome project had brought a lot of hope and excitement about potential advancements in the diagnosis and treatment of cardiac diseases -- such as the ability to identify disease genes within the associated loci, to improve risk estimation based on more precise genotypes, or to personalize the prediction of drug effects on a patient \citep{Komajda:2001:heart} -- it seems that a collection of the first population-scale "drafts" of the whole "multi-ome" will ultimately be required for gaining a deeper understanding of the phenotypic manifestations of CVD across different race/ethnic groups.  A recent cardiac hypertrophy study in mice \citep{Lau:2018:integrated} highlighted the utility of conducting multi-omics investigations for discovering additional disease gene candidates not apparent from studying each omics data type separately in the context of CVD pathogenesis.  In humans, large-scale studies such as the MyHeartCounts \citep{McConnell:2017:Feasibility} and global physical activity study of nearly 800,000 individuals across 111 countries \citep{Althoff:2017:Large} demonstrated the feasibility of consenting and engaging large populations using smartphone technology, suggesting the potential to create a similar population-wide intercontinental network for multi-omics participation in the near future.  All in all, the ability to combine data from every omics layer depicted in Figure \ref{fig:trans-omics}, either at the summary-level or the individual-level, opens up ample opportunities for cardioinformatics to expand and augment the understanding of cardiovascular disease etiology.
 	
 	
 	\subsection*{Augmented intelligence to advance cardiology}
@@ -234,7 +179,7 @@ If all the heritability has been accounted for, the squared correlation between 
 	
 	BBK is a co-founder of Quiltomics, and Research Associate at the VA Palo Alto Health Care System (Million Veterans Program).  OG is a co-founder of EpiCypher, Inc. and Athelas Therapeutics, Inc.  The other authors report no conflicts.\vspace*{-12pt} 
 	
-	%\bibliographystyle{natbib}
+	\bibliographystyle{unsrtnat}
 	%\bibliographystyle{achemnat}
 	%\bibliographystyle{plainnat}
 	%\bibliographystyle{abbrv}
@@ -243,6 +188,61 @@ If all the heritability has been accounted for, the squared correlation between 
 	\bibliographystyle{unsrtnat}
 	\bibliography{cardio}
 	
+\cleardoublepage
+
+\section*{Figures}
+
 	
+\begin{example}	[The status of cardiovascular disease research]
+	{ 
+		\textbf{(A)} Number of deaths by Non-Communicable Diseases in the US and \textbf{(B)} funding by the National Institutes of Health (NIH) for research on cancer and cardiovascular diseases \textsuperscript{a}. \textbf{(C)} PubMed queries reveal a large body of CVD research \textsuperscript{b}, out of which only a small percentage involve bioinformatics \textsuperscript{c}. \textbf{(D)} Relative to the total pool of bioinformatics papers (in any field), there are far more cancer papers that utilize bioinformatics methods than CVD papers that utilize such methods.\\ \newline
+			\footnotesize
+		* Since all the queries are based on the manual MeSH catalog, 2018 tallies will lag behind the true volume of publication. \\
+		\textsuperscript{a} Research funding is calculated by summing up all the amounts of NIH awards larger than \$100. "Cancer" funding is calculated from projects being categorized as \protect\textit{Brain Cancer, Breast Cancer, Cancer, Cancer Genomics, Cervical Cancer, Colo-Rectal Cancer, HPV and/or Cervical Cancer Vaccines, Liver Cancer, Lung Cancer, Lymphoma, Neuroblastoma, Ovarian Cancer, Pancreatic Cancer, Pediatric Cancer, Prostate Cancer, Uterine Cancer, Vaginal Cancer}; and "Cardiovascular diseases" funding from {\protect\textit{Aging, Cardiovascular, Cerebrovascular, Congenital Heart Disease, Heart Disease, Heart Disease - Coronary Heart Disease, Hypertension, Pediatric Cardiomyopathy, Stroke}}. Categorization was done by NIH starting in 2008, through the Research, Condition, and Disease Categorization (RCDC) system. Data was downloaded from the NIH Research Portfolio Online Reporting Tool \citep{NationalInstituteofHealth:2018:Estimates}.\\
+		\textsuperscript{b,c} Queries are all based on MeSH terms. The MeSH Database entry for "cardiovascular disease" includes many types of cardiovascular abnormalities that may occur in organs outside the immediate circulatory system, highlighting the complex disease nature of CVD. Exact queries are:	 \texttt{"cardiovascular diseases"[MeSH Terms]} for cardiovascular disease, \texttt{(*cancer[MeSH Terms])} for cancer, \texttt{bioinformatics[MeSH Terms] OR genomics[MeSH Terms]} for bioinformatics, \texttt{(bioinformatics[MeSH Terms] OR genomics[MeSH Terms]) AND ("cardiovascular diseases"[MeSH Terms])} for cardioinformatics, and \texttt{(bioinformatics[MeSH Terms] OR genomics[MeSH Terms]) AND (*cancer[MeSH Terms])} for cancer informatics.
+%		'cardioinformatics' = '(bioinformatics[MeSH Terms] OR genomics[MeSH Terms]) AND ("cardiovascular diseases"[MeSH Ter
+%		'cancer informatics' = '(bioinformatics[MeSH Terms] OR genomics[MeSH Terms]) AND (*cancer[MeSH Terms])',
+%		'cancer' = '(*cancer[MeSH Terms])'
+	}
+	\label{fig:figure1}
+\end{example}
+
+
+\begin{example}[The number of genes associated with CVD.]
+%		\includegraphics[width=1.\linewidth]{hpo-gene-count}
+	{CVD is defined to include all phenotypes under the term \emph{``Abnormality of the cardiovascular system"} (HP:0001626) in the Human Phenotype Ontology \citep{Kohler:2014:Human}. Annotations of each phenotype was pooled from OMIM \citep{McKusick:2018:OMIM} , Orphanet \citep{INSERM:1997:Orphanet}  and DECIPHER \citep{Firth:2009:DECIPHER}.}
+	\label{fig:hpo_gene_count}
+\end{example}
+
+	
+\begin{example}
+%		\includegraphics[width=1\linewidth]{variant_contexts}
+	[Distribution of SNPs that have been associated with a phenotypic trait.] {The associations are downloaded from NHGRI-EBI GWAS Catalog in which only those with p-value less than $10^{-5}$ were retained.}
+		\label{fig:variant_context}
+\end{example}
+	
+\begin{example}[Molecular assays on Gene Expression Omnibus.]
+%		\includegraphics[width=1\linewidth]{assay-count-cardio}
+		{(\textbf{A}) The cumulative number of molecular assays (i.e. unique combinations of biosample, study and platform) deposited in GEO by cardiovascular research. (\textbf{B}) Breakdown of high-throughput sequencing assays by the type of study. Expression profiling by high-throughput sequencing, i.e. mRNA-seq assays, are often coupled with another profiling technique, for example, to provide functional read-out of transcription factor binding profiled by ChIP-seq.
+\\ \newline
+		Note that to avoid excessive over-counting of irrelevant samples such as those from plants or unrelated model organisms, we only counted samples deposited with a PubMed ID pointing to a cardiovascular study. Surveys were done on the GEOmetadb database \citep{Zhu:2008:GEOmetadb} updated on 2018/11/17.}
+		\label{fig:geo-assay}
+\end{example}
+
+	
+\begin{example}
+	[Multi-omics data]
+%	\includegraphics[widt⁄h=0.9\linewidth]{trans-omics-data-sets.png}
+	{(\textbf{A}) The multiple layers of omics data that are now accessible to researchers. Genome/exome, transcriptome, proteome, metabolome, as well as the microbiome and chemical compounds in the exposome can be profiled by assays on a single class of molecules (DNA, RNA, proteins or small molecules), while the other layers depend on the ability to capture DNA-protein or RNA-protein interactions. The phenome is less well-defined as phenotypic measures vary greatly from physical measurements to lab tests, from descriptive to quantitative traits. Sources of comprehensive phenotypic data comparable to the other omics can be obtained, for example, from electronic health records.
+	Beyond the genome, omics datasets become highly complicated, due to the variation across tissues and cell types.
+	(\textbf{B}) Large omics datasets that are (or will be) available for CVD research. For each dataset, the number of samples being assayed across multiple omics are indicated on the right. This number is often smaller than the total number of samples/participants in a given project, because not every sample is run on multiple assays.}
+	\label{fig:trans-omics}
+\end{example} 
+
+\section*{Tables}
+\begin{extable}[The subject count aggregated from studies deposited in dbGaP, consented for General Research Use (GRU)]
+	\label{tab:dbgapSubject}
+\end{extable}
+
 	
 \end{document}
