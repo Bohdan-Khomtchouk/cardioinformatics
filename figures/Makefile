@@ -1,5 +1,4 @@
 default: fig2 fig3 fig4 fig5 
-	ln -sf hpo-gene-count.png figure1.png
 fig2:
 	ln -sf hpo-gene-count.png figure2.png
 fig3:
