@@ -1,0 +1,32 @@
+\documentclass[12pt,letter]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{lscape}
+\begin{document}
+
+
+\begin{landscape}
+	\begin{table}[]
+		\caption{List of available resources for cardioinformatics research}
+	\label{tab:resources}
+%		\resizebox{\textwidth}{!}{%
+			\begin{tabular}{lp{6cm}ll}
+\hline
+\textbf{Type}               & \textbf{Name}                                                                   & \textbf{URL}                                   & \textbf{Reference}                              \\ \hline
+Knowledge portal   & Cardiovascular Disease Knowledge Portal                                & http://www.broadcvdi.org/             & \cite{Broad:2018:Cardiovascular}      \\ \hline
+Knowledge portal   & Cerebrovascular Disease Knowledge Portal                               & http://www.cerebrovascularportal.org/ & \cite{Crawford:2018:Cerebrovascular}  \\ \hline
+Knowledge portal   & HeartBioPortal                                                         & https://heartbioportal.com/           & \cite{Khomtchouk:2019:HeartBioPortal} \\ \hline
+Analytics platform & AHA Precision Medicine Platform                                        & https://precision.heart.org/          & \cite{Kass-Hout:2018:American}        \\ \hline
+Analytics platform & DataSTAGE                                                              & https://datastage.io/                 & In planning                            \\ \hline
+Review paper       & Cloud computing for genomic data analysis and collaboration            &                                       & \cite{Langmead:2018:Cloud}            \\ \hline
+Review paper       & Human genotype–phenotype databases: aims, challenges and opportunities &                                       & \cite{Brookes:2015:Human}             \\ \hline
+Review paper       & Methods of integrating data to uncover genotype–phenotype interactions &                                       & \cite{Ritchie:2015:Methods}           \\ \hline
+\end{tabular}
+	\end{table}
+\end{landscape}
+
+\bibliographystyle{plain}
+\bibliography{cardio}
+\end{document}
