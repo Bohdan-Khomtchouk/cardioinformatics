@@ -6,5 +6,5 @@ fig3:
 fig4:
 	ln -sf assay-count-cardio.png figure4.png
 fig5:
-	ln -sf trans-omics-data-sets.png figure4.png
+	ln -sf trans-omics-data-sets.png figure5.png
 
