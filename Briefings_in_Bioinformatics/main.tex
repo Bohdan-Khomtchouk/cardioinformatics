@@ -172,6 +172,13 @@ If all the heritability has been accounted for, the squared correlation between 
     	\item Cardioinformatics: \texttt{(bioinformatics[MeSH Terms] OR genomics[MeSH Terms]) AND ("cardiovascular diseases"[MeSH Terms])}
     	\item Cancer informatics: \texttt{(bioinformatics[MeSH Terms] OR genomics[MeSH Terms]) AND (*cancer[MeSH Terms])}
     \end{enumerate}
+	
+	All queries were appended with filtering term to reduce the count of non-primary research items. The filtering term is
+	
+	{
+	AND (hasabstract[text] AND English[lang]))) NOT (("autobiography"[Publication Type] OR "biography"[Publication Type] OR "corrected and republished article"[Publication Type] OR "duplicate publication"[Publication Type] OR "electronic supplementary materials"[Publication Type] OR "interactive tutorial"[Publication Type] OR "interview"[Publication Type] OR "lectures"[Publication Type] OR "legal cases"[Publication Type] OR "legislation"[Publication Type] OR "meta analysis"[Publication Type] OR "news"[Publication Type] OR "newspaper article"[Publication Type] OR "patient education handout"[Publication Type] OR "published erratum"[Publication Type] OR "retracted publication"[Publication Type] OR "retraction of publication"[Publication Type] OR "review"[Publication Type] OR "scientific integrity review"[Publication Type] OR "support of research"[Publication Type] OR "video audio media"[Publication Type] OR "webcasts"[Publication Type]))
+}
+
     The MeSH Database entry for "cardiovascular disease" includes many types of cardiovascular abnormalities that may occur in organs outside the immediate circulatory system.
     
     
