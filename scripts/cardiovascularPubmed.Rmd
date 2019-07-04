@@ -45,15 +45,17 @@ queries <- c('cardiovascular diseases' = '"cardiovascular diseases"[MeSH Terms]'
              'cancer' = '(*cancer[MeSH Terms])'
               )
 
-# Reviewer's queries
-queries['bioinformatics_b'] = 'bioinformatics OR (computational biology) OR (machine learning) OR (systems biology) OR (systems medicine) OR (precision medicine)'
-queries['cardioinformatics_b'] = glue::glue('({queries["cardiovascular diseases"]}) AND ({queries["bioinformatics_b"]})')
-queries['cancer informatics_b'] = glue::glue('({queries["cancer"]}) AND ({queries["bioinformatics_b"]})')
 
 for (i in 1:length(queries)) {
     queries[i] = paste('((', queries[i], 'AND (hasabstract[text] AND English[lang]))) NOT (("autobiography"[Publication Type] OR "biography"[Publication Type] OR "corrected and republished article"[Publication Type] OR "duplicate publication"[Publication Type] OR "electronic supplementary materials"[Publication Type] OR "interactive tutorial"[Publication Type] OR "interview"[Publication Type] OR "lectures"[Publication Type] OR "legal cases"[Publication Type] OR "legislation"[Publication Type] OR "meta analysis"[Publication Type] OR "news"[Publication Type] OR "newspaper article"[Publication Type] OR "patient education handout"[Publication Type] OR "published erratum"[Publication Type] OR "retracted publication"[Publication Type] OR "retraction of publication"[Publication Type] OR "review"[Publication Type] OR "scientific integrity review"[Publication Type] OR "support of research"[Publication Type] OR "video audio media"[Publication Type] OR "webcasts"[Publication Type]))'
 )
 }
+
+# Reviewer's queries
+queries['bioinformatics_b'] = 'bioinformatics OR (computational biology) OR (machine learning) OR (systems biology) OR (systems medicine) OR (precision medicine)'
+queries['cardioinformatics_b'] = glue::glue('("cardiovascular diseases") AND ({queries["bioinformatics_b"]})')
+queries['cancer informatics_b'] = glue::glue('("*cancer") AND ({queries["bioinformatics_b"]})')
+
 ```
 
 Random check if query results are expected
