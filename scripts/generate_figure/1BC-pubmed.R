@@ -17,6 +17,7 @@ get_pmids <- function(query) {
 }
 
 heartConditions = read.table('../../data/conditionList.tsv', sep='\t', header = TRUE)
+endYear = format(Sys.time(), "%Y") %>% as.integer()
 heartPubmed = list()
 
 ## Pubmed
@@ -36,7 +37,7 @@ for (i in 1:length(queries)) {
 
 #### Publication on Cardiovascular diseases over the years
 
-relativePubmed <- data.frame('year' = c(1990:2018)) %>%
+relativePubmed <- data.frame('year' = c(1990:endYear)) %>%
     `$<-`('all', sapply(.[['year']], function(x) { return(count_year(x, ''))})) %>%
     `$<-`('cardiovascular diseases', sapply(.[['year']], function(x) { return(count_year(x, queries['cardiovascular diseases']))})) %>%
     `$<-`('bioinformatics', sapply(.[['year']], function(x) {return(count_year(x, queries['bioinformatics']))})) %>%
@@ -58,14 +59,14 @@ plot_pubcount <- function(data, yearsToPlot, varsToPlot) {
             scale_fill_manual(values=sector.colors) +
             theme(axis.text.x = element_text(hjust=1, angle=45), legend.position = c(0.15, 0.85)) +
             guides(fill=guide_legend(title=""))
-    if (2018 %in% yearsToPlot)
-        p <- p + annotate("text", x=2018, y=max(subset(data, year == 2018, varsToPlot))*1.1, label="*", size=7)
+    if (endYear %in% yearsToPlot)
+        p <- p + annotate("text", x=endYear, y=max(subset(data, year == endYear, varsToPlot))*1.1, label="*", size=7)
     return(p)    
 }
 
 
 #### Cardiovascular disease vs bioinformatics/genomics research since 2000 (when bioinformatics research starts to gather enough publication to be visible)
-yearsToPlot = 2000:2018
+yearsToPlot = 2000:endYear
 plot_pubcount(relativePubmed, yearsToPlot, varsToPlot = c('bioinformatics', 'cardioinformatics', 'cardiovascular diseases') )
 ggsave('1B-pubmed-cardio.png', device = 'png', width = 7, height=5)
 relativePubmed <- relativePubmed %>%
