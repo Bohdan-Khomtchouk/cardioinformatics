@@ -46,7 +46,7 @@ queries <- c('cardiovascular diseases' = '"cardiovascular diseases"[MeSH Terms]'
               )
 
 # Reviewer's queries
-queries['bioinformatics_b'] = 'bioinformatics OR (computational biology) OR (machine learning) OR (system biology) OR (system medicine) OR (precision medicine)'
+queries['bioinformatics_b'] = 'bioinformatics OR (computational biology) OR (machine learning) OR (systems biology) OR (systems medicine) OR (precision medicine)'
 queries['cardioinformatics_b'] = glue::glue('({queries["cardiovascular diseases"]}) AND ({queries["bioinformatics_b"]})')
 queries['cancer informatics_b'] = glue::glue('({queries["cancer"]}) AND ({queries["bioinformatics_b"]})')
 
