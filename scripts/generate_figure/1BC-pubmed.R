@@ -41,8 +41,9 @@ relativePubmed <- data.frame('year' = c(1990:endYear)) %>%
     `$<-`('all', sapply(.[['year']], function(x) { return(count_year(x, ''))})) %>%
     `$<-`('cardiovascular diseases', sapply(.[['year']], function(x) { return(count_year(x, queries['cardiovascular diseases']))})) %>%
     `$<-`('bioinformatics', sapply(.[['year']], function(x) {return(count_year(x, queries['bioinformatics']))})) %>%
-    `$<-`('cardioinformatics',  sapply(.[['year']], function(x) {return(count_year(x, queries['cardioinformatics']))}))
-
+    `$<-`('cardioinformatics',  sapply(.[['year']], function(x) {return(count_year(x, queries['cardioinformatics']))})) %>%
+    `$<-`('cancer informatics',  sapply(.[['year']], function(x) {return(count_year(x, queries['cancer informatics']))})) %>%
+    `$<-`('cancer',  sapply(.[['year']], function(x) {return(count_year(x, queries['cancer']))}))
 
 sector.colors = c('cardiovascular diseases' = '#fbb4ae', 'cancer' = '#fbb4ae', 'bioinformatics' = '#fed9a6', 'cardioinformatics' = '#b3cde3', 'cancer informatics' = '#ccebc5' )
 sector.orders = relativePubmed[relativePubmed$year == 2016, -1] %>% as.numeric() %>% order(decreasing = T) %>% `[`(names(relativePubmed)[-1], .)
@@ -68,14 +69,11 @@ plot_pubcount <- function(data, yearsToPlot, varsToPlot) {
 #### Cardiovascular disease vs bioinformatics/genomics research since 2000 (when bioinformatics research starts to gather enough publication to be visible)
 yearsToPlot = 2000:endYear
 plot_pubcount(relativePubmed, yearsToPlot, varsToPlot = c('bioinformatics', 'cardioinformatics', 'cardiovascular diseases') )
-ggsave('1B-pubmed-cardio.png', device = 'png', width = 7, height=5)
-relativePubmed <- relativePubmed %>%
-    `$<-`('cancer informatics',  sapply(.[['year']], function(x) {return(count_year(x, queries['cancer informatics']))})) %>%
-    `$<-`('cancer',  sapply(.[['year']], function(x) {return(count_year(x, queries['cancer']))}))
+ggsave('1C-pubmed-cardio.png', device = 'png', width = 7, height=5)
 
 plot_pubcount(relativePubmed, yearsToPlot = yearsToPlot, varsToPlot = c('cancer', 'bioinformatics', 'cancer informatics') ) +
     guides(fill=guide_legend(title=""))
-ggsave('1C-pubmed-cancer.png', device = 'png', width = 7, height=5)
+ggsave('1E-pubmed-cancer.png', device = 'png', width = 7, height=5)
 
 plot_pubcount(relativePubmed, yearsToPlot = yearsToPlot, varsToPlot = c('bioinformatics', 'cancer informatics', 'cardioinformatics') )
-ggsave('pubmed-cardioinfo-vs-cancerinfo.png', device = 'png', width = 7, height=5)
+ggsave('1D-pubmed-cardioinfo-vs-cancerinfo.png', device = 'png', width = 7, height=5)
