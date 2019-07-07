@@ -2,13 +2,19 @@ OLDVERSION=../bib-submission/main.tex
 CURVERSION=main.tex
 DIFFVER=diff-main.tex
 main:
-	xelatex -synctex=1 -interaction=nonstopmodei ${CURVERSION}
-all: main table diff
+	xelatex -synctex=1 -interaction=nonstopmode ${CURVERSION}
+	bibtex main.aux
+	xelatex -synctex=1 -interaction=nonstopmode ${CURVERSION}
+	xelatex -synctex=1 -interaction=nonstopmode ${CURVERSION}
+all: main diff table
 table:
 	pdflatex -synctex=1 -interaction=nonstopmode table-resources.tex
 	pdflatex -synctex=1 -interaction=nonstopmode table-dbgapSubject.tex
 diff:
 	latexdiff ${OLDVERSION} ${CURVERSION} > ${DIFFVER}
+	xelatex -synctex=1 -interaction=nonstopmode ${DIFFVER}
+	bibtex diff-main.aux
+	xelatex -synctex=1 -interaction=nonstopmode ${DIFFVER}
 	xelatex -synctex=1 -interaction=nonstopmode ${DIFFVER}
 clean:
 	rm -rf annot.log annot.pdf annot.blg annot.bbl annot.aux annot.bcf annot.run.xml
