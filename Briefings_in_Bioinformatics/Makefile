@@ -1,8 +1,12 @@
 OLDVERSION=../bib-submission/main.tex
 CURVERSION=main.tex
 DIFFVER=diff-main.tex
-all:
+main:
 	xelatex -synctex=1 -interaction=nonstopmodei ${CURVERSION}
+all: main table diff
+table:
+	pdflatex -synctex=1 -interaction=nonstopmode table-resources.tex
+	pdflatex -synctex=1 -interaction=nonstopmode table-dbgapSubject.tex
 diff:
 	latexdiff ${OLDVERSION} ${CURVERSION} > ${DIFFVER}
 	xelatex -synctex=1 -interaction=nonstopmode ${DIFFVER}
