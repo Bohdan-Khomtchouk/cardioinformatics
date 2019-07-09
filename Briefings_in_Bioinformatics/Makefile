@@ -2,8 +2,8 @@ OLDVERSION_PREFIX=../bib-submission/main.tex
 CURVERSION_PREFIX=main
 DIFFVER_PREFIX=diff-main.tex
 table:
-	pdflatex -synctex=1 -interaction=nonstopmode table-resources.tex
-	pdflatex -synctex=1 -interaction=nonstopmode table-dbgapSubject.tex
+	pdflatex -synctex=1 -interaction=nonstopmode table-resources.tex; bibtex table-resources; pdflatex table-resources.tex
+	pdflatex -synctex=1 -interaction=nonstopmode table-dbgapSubject.tex; bibtex table-dbgapSubject; pdflatex table-dbgapSubject.tex
 main:
 	xelatex -synctex=1 -interaction=nonstopmode $(CURVERSION_PREFIX).tex
 	bibtex $(CURVERSION_PREFIX)
