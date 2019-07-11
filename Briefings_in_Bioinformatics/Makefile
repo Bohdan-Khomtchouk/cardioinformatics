@@ -1,18 +1,25 @@
 OLDVERSION_PREFIX=../bib-submission/main.tex
 CURVERSION_PREFIX=main
 DIFFVER_PREFIX=diff-main.tex
-table:
-	pdflatex -synctex=1 -interaction=nonstopmode table-resources.tex; bibtex table-resources; pdflatex table-resources.tex
-	pdflatex -synctex=1 -interaction=nonstopmode table-dbgapSubject.tex; bibtex table-dbgapSubject; pdflatex table-dbgapSubject.tex
 main:
 	xelatex -synctex=1 -interaction=nonstopmode $(CURVERSION_PREFIX).tex
 	bibtex $(CURVERSION_PREFIX)
-	xelatex $(CURVERSION_PREFIX).tex
+	xelatex -synctex=1 -interaction=nonstopmode $(CURVERSION_PREFIX).tex
+	xelatex -synctex=1 -interaction=nonstopmode $(CURVERSION_PREFIX).tex
 all: main diff table
+table: table1 table2
+table1:
+	xelatex -synctex=1 -interaction=nonstopmode table-resources.tex
+	bibtex table-resources
+	xelatex -synctex=1 -interaction=nonstopmode table-resources.tex
+	xelatex -synctex=1 -interaction=nonstopmode table-resources.tex
+table2:
+	pdflatex -synctex=1 -interaction=nonstopmode table-dbgapSubject.tex
 diff:
 	latexdiff $(OLDVERSION_PREFIX) $(CURVERSION_PREFIX).tex > $(DIFFVER_PREFIX)
 	xelatex -synctex=1 -interaction=nonstopmode $(DIFFVER_PREFIX)
 	bibtex diff-main.aux
+	xelatex -synctex=1 -interaction=nonstopmode $(DIFFVER_PREFIX)
 	xelatex -synctex=1 -interaction=nonstopmode $(DIFFVER_PREFIX)
 clean:
 	rm -rf annot.log annot.pdf annot.blg annot.bbl annot.aux annot.bcf annot.run.xml
