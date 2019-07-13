@@ -22,7 +22,7 @@ diff:
 	xelatex -synctex=1 -interaction=nonstopmode $(DIFFVER_PREFIX)
 	xelatex -synctex=1 -interaction=nonstopmode $(DIFFVER_PREFIX)
 clean:
-	rm -rf annot.log annot.pdf annot.blg annot.bbl annot.aux annot.bcf annot.run.xml
-	rm -rf main.log main.pdf main.blg main.bbl main.aux main.synctex* 
-	rm -rf diff-main.log diff-main.pdf diff-main.blg diff-main.bbl diff-main.aux diff-main.synctex* 
-	rm -rf table-*.log table-*.pdf table-*.blg table-*.bbl table-*.aux table-*.synctex* 
+	rm -rf annot.log annot.pdf annot.blg annot.bbl annot.aux annot.bcf annot.run.xml annot.out
+	rm -rf main.log main.pdf main.blg main.bbl main.aux main.synctex*  main.out
+	rm -rf diff-main.log diff-main.pdf diff-main.blg diff-main.bbl diff-main.aux diff-main.synctex*  diff-main.out
+	rm -rf table-*.log table-*.pdf table-*.blg table-*.bbl table-*.aux table-*.synctex*  table-*.out
