@@ -1,5 +1,7 @@
 WORKDIR=Briefings_in_Bioinformatics
-BIBDIR=bib-submission-r1
+# BIBDIR=bib-submission-r1
+BIBDIR=bib-submission-r2
+
 submission:
 	mkdir -p $(BIBDIR)/figures;
 	cp supp/* $(BIBDIR)/;
@@ -10,4 +12,3 @@ submission:
 	tar -czf $(BIBDIR).tar.gz $(BIBDIR)
 clean:
 	rm -rf $(BIBDIR) $(BIBDIR).tar.gz
-    

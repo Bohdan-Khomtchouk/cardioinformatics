@@ -1,4 +1,4 @@
-OLDVERSION_PREFIX=../bib-submission/main.tex
+OLDVERSION_PREFIX=../bib-submission-r1/main.tex
 CURVERSION_PREFIX=main
 DIFFVER_PREFIX=diff-main.tex
 main:
