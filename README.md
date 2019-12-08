@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/144916854.svg)](https://zenodo.org/badge/latestdoi/144916854)
 
-*Khomtchouk BB, *Tran DT, Vand KA, Might M, Gozani O, Assimes TL: “Cardioinformatics: the nexus of bioinformatics and precision cardiology." Briefings in Bioinformatics. 2019, bbz119. (* indicates joint-first author) doi: 10.1093/bib/bbz119 
+\*Khomtchouk BB, \*Tran DT, Vand KA, Might M, Gozani O, Assimes TL: “Cardioinformatics: the nexus of bioinformatics and precision cardiology." _Briefings in Bioinformatics_. 2019, bbz119. (\* indicates joint-first author) doi: 10.1093/bib/bbz119 
 
 ## Reproducing figures
 
